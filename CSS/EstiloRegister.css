@@ -1,0 +1,19 @@
+#formInsertar label.error{
+            display: block;
+            text-align: right;
+            font-size: 1em;
+            color: hsl(220, 93%, 33%);
+            font-weight: bold;
+            margin-left: 220px;
+            font-size: 0.8em;
+            }
+            
+            
+#form label.error{
+            display: block;
+            font-size: 1em;
+            color: black;
+            text-shadow: 1px 1px 1px yellow;
+            font-weight: bold;
+            font-size: 1em;
+            }
