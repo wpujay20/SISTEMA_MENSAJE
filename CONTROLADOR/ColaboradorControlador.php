@@ -244,39 +244,73 @@ switch ($opciones) {
             $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
 
             if($estado>0){
+
+            if ($estado > 0) {
                 $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
-                 echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
+                echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
             }
 
 
             break;
         }
+    }
 
-     case 8: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-            $msj = $_REQUEST['msj'];
-            if($msj==1){
+     case 8:
+     {
 
-               $_SESSION['id_informe'] = $_REQUEST['id_informe'];
-               echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
+      $msj = $_REQUEST['msj'];
+            if ($msj == 1) {
 
-            } else{
+                $_SESSION['id_informe'] = $_REQUEST['id_informe'];
+                echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
+            } else {
 
                 $ColaboradorDAO = new ColaboradorDAO();
                 $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
                 unset($_SESSION['id_informe']);
 
-                if($estado>0){
-                     echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
+                if ($estado > 0) {
+                    echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
+                }
+            }
+
+            break;
+     }
+
+    case 9: {
+            $del = $_REQUEST['del'];
+            if ($del == 1) {
+
+                $_SESSION['id_informe'] = $_REQUEST['id_informe'];
+                echo '<script src="../JAVASCRIPT/(Colaborador)_Eliminar_informe.js"></script> ';
+
+            } else {
+
+                $infDAO = new InformesDAO();
+                $actDAO=new ActividadesDAO();
+                $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
+                $estado = $infDAO->EliminarInforme_por_ID($_SESSION['id_informe']);
+                unset($_SESSION['id_informe']);
+                var_dump($estado);
+                if ($estado ==true) {
+                    echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
+                }else{
+                    echo '<script src="../JAVASCRIPT/(Colaborador)ErrorGeneral.js"></script> ';
+
                 }
             }
 
             break;
         }
         //Wilson: ir a modificar  Informe
-    case 9:
-
-             echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
+    case 10:
+    {
+        echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
              break;
+    }
+
+
+
 
 
 }

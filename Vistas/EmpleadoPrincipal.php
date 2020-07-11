@@ -87,6 +87,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                 <td><?php echo $indice['nom_estado_inf'] ?> </td>
 
                                                 <?php if($indice['nom_estado_inf']=='Generado'){ ?>
+<?php <<<<<<< HEAD>>>>>>> ae8e3dbc417f08f8442ff39cc51bdb9d8f3737fa ?>
 
                                                 <td><a href="#" class="btn btn-danger"> Eliminar </a></td>
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=9
@@ -99,6 +100,13 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                     &periodoHoras=<?php echo $indice['periodo_horas'] ?>
                                                     &estado=<?php echo $indice['nom_estado_inf'] ?>" class="btn btn-success"> Editar </a></td>
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
+
+
+
+                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?del=1&op=9&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-danger"> Eliminar </a></td>
+                                                <td><a href="#" class="btn btn-success"> Editar </a></td>
+                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
+
 
                                                 <?php } else { echo "<td></td><td></td><td></td>";}?>
                                                 </tr>
