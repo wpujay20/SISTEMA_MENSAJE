@@ -22,13 +22,13 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Validate css-->
-        <link href="../CSS/EstiloRegister.css" rel="stylesheet">	
+        <link href="../CSS/EstiloRegister.css" rel="stylesheet">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <!--datables CSS basico-->
         <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.css"/>
-        <!--datables estilo bootstrap 4 CSS-->  
+        <!--datables estilo bootstrap 4 CSS-->
         <link rel="stylesheet"  type="text/css" href="../datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
         <style>
             .Ocultar_div{
@@ -39,12 +39,12 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
         <title>Menú</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="../JAVASCRIPT/Validacion_de_Campos_VISIBLES_INVISIBLES.js"></script>
-        <script src="../jquery/jquery-3.3.1.min.js"></script>  
+        <script src="../jquery/jquery-3.3.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../JAVASCRIPT/(Colaborador)_Redaccion_Completa.js" type="text/javascript"></script>
 
 
-    </head> 
+    </head>
     <body>
 
         <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=3" method="post">
@@ -86,7 +86,7 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                             <option value="rechazado"> rechazado</option>
                             <option value="publicado"> publicado</option>
                             <option value="archivado"> archivado </option>
-                        </select> 
+                        </select>
                     </div>
 
 
@@ -125,13 +125,13 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
 
                 </div>
 
-                <div class="modal-footer"> 
-                            
+                <div class="modal-footer">
+
                     <input type="submit" value="Agregar Actividad" id="boton" class="btn btn-warning">
                 </div>
             </div>
 
-        </form> 
+        </form>
 
 
         <form name="formActividades" id="formActividades" action="../CONTROLADOR/ColaboradorControlador.php?op=2" method="post">
@@ -147,12 +147,12 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                     <div style="max-width: 1350px;" class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="table-responsive">        
+                                <div class="table-responsive">
                                     <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                             <tr>
                                                 <th class="th-sm" scope="col">ID_actividad</th>
                                                 <th class="th-sm" scope="col">Nombre</th>
-                                                <th class="th-sm" scope="col">Rubro</th>               
+                                                <th class="th-sm" scope="col">Rubro</th>
                                                 <th class="th-sm" scope="col">Descripcion Del Rubro</th>
                                                 <th class="th-sm" scope="col" >Accion</th>
 
@@ -170,8 +170,8 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                                                     <td><?php echo $indice['nomb_rubro'] ?> </td>
                                                     <td><?php echo $indice['desc_rubro'] ?></td>
 
-                                                    <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=6&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro=<?php echo $indice['id_rubro'];?>" 
-                                                           class="btn btn-danger"> Eliminar </a></td>  
+                                                    <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=6&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro=<?php echo $indice['id_rubro'];?>"
+                                                           class="btn btn-danger"> Eliminar </a></td>
                                                 </tr>
 
                                             <?php
@@ -183,16 +183,16 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                                                     <?php } ?>
 
             </div>
         </form>
 
-        
-        
-        
+
+
+
 
         <form name="formProductos" id="formActividades" action="../CONTROLADOR/ColaboradorControlador.php?op=2" method="post">
             <div style="padding: 0px 200px 100px 200px ; ">
@@ -207,12 +207,12 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                     <div style="max-width: 1350px;" class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="table-responsive">        
+                                <div class="table-responsive">
                                     <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                             <tr>
                                                 <th class="th-sm" scope="col">ID_actividad</th>
                                                 <th class="th-sm" scope="col">Nombre</th>
-                                                <th class="th-sm" scope="col">Rubro</th>               
+                                                <th class="th-sm" scope="col">Rubro</th>
                                                 <th class="th-sm" scope="col">Descripcion Del Rubro</th>
                                                 <th class="th-sm" scope="col">Titulo_Producto</th>
                                                 <th class="th-sm" scope="col">Autor_Producto</th>
@@ -236,8 +236,8 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                                                     <td><?php echo $indice['pro_autor'] ?></td>
                                                     <td><?php echo $indice['pro_estado'] ?> </td>
 
-                                                   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro_productos=<?php echo $indice['id_rubro_productos'];?>" 
-                                                           class="btn btn-danger"> Eliminar </a></td>  
+                                                   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro_productos=<?php echo $indice['id_rubro_productos'];?>"
+                                                           class="btn btn-danger"> Eliminar </a></td>
 
 
                                                 </tr>
@@ -252,12 +252,12 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                             </div>
                         </div>
 
-                    </div> 
+                    </div>
 
 <?php } ?>
 
-        <div class="modal-footer"> 
-            <a href="../CONTROLADOR/ColaboradorControlador.php?op=4" class="btn btn-secondary"> Cancelar Informe </a>    
+        <div class="modal-footer">
+            <a href="../CONTROLADOR/ColaboradorControlador.php?op=4" class="btn btn-secondary"> Cancelar Informe </a>
             <a href="#" id="generar" class="btn btn-success btn-lg"> Generar Informe </a>
         </div>
             </div>

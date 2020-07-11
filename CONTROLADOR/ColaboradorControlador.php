@@ -93,7 +93,7 @@ switch ($opciones) {
 
 
             $insertarPeriodo = $informesDAO->registrarPeriodoInforme($PeriodoBean, $informesBean);
-
+            var_dump($insertarPeriodo);
             if ($insertarPeriodo > 0) {
                 $insertarIinforme = $informesDAO->registrarInformeNormal($informesBean);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
@@ -204,8 +204,7 @@ switch ($opciones) {
 
 
             $eliminacion_de_Actividades = $ActividadesDAO->EliminarActividadesPor_ID_informe($id_informe);
-
-
+            var_dump($eliminacion_de_Actividades);
             if ($eliminacion_de_Actividades > 0) {
 
                 $InformesDAO->EliminarInforme_por_ID($id_informe);

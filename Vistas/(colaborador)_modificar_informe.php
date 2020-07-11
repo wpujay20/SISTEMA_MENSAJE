@@ -39,38 +39,38 @@ if (!isset($_SESSION["nombre"])) {
 <body>
 	<center>
 		<h1>Modificación de Informe</h1>
-		 <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php echo $id_tipo_actividad;?>" method="post">
+		 <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php // echo $id_tipo_actividad;?>" method="post">
 
             <div style="padding: 30px 200px 100px 200px ; ">
 
                 <div class="modal-header">
 
-                    <strong> <h4 style="color: green;"class="modal-title" id="exampleModalLabel">Menu de Redaccion de informes de actividades <?php echo $nombre;?></h4></strong>
+                    <strong> <h4 style="color: green;"class="modal-title" id="exampleModalLabel">Menu de Redaccion de informes de actividades <?php // echo $nombre;?></h4></strong>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Titulo del Informe:</label>
-                        <input  name="titulo" type="text" class="form-control" id="titulo">
+                        <input  name="titulo" type="text" class="form-control" value="<?php echo $titulo?>" id="titulo">
                     </div>
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Inicio)</label>
-                        <input name="fecha_ini"  type="date" class="form-control" id="fecha_ini">
+                        <input name="fecha_ini"  type="date" class="form-control"value="<?php echo $periofoIni?>" id="fecha_ini">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Final)</label>
-                        <input name="fecha_fin"  type="date" class="form-control" id="fecha_fin">
+                        <input name="fecha_fin"  type="date" class="form-control"value="<?php echo $periodoFin?>" id="fecha_fin">
                     </div>
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Horas Dedicadas</label>
-                        <input  name="horas" type="text" class="form-control" id="horas">
+                        <input  name="horas" type="text" class="form-control" value="<?php echo $periodoHoras?>" id="horas">
                     </div>
 
                     <div class="form-group" >
                         <label>Aqui puede redactar su informe </label>
-                        <textarea  style="height: 200px;" name="descripcion_informe" class="form-control" id="descripcion_informe"></textarea>
+                        <textarea  style="height: 200px;" name="descripcion_informe" class="form-control" value="<?php echo $titulo?>" id="descripcion_informe"></textarea>
                     </div>
 
                 </div>
