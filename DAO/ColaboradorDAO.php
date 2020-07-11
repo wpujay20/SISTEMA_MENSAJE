@@ -10,7 +10,7 @@ class ColaboradorDAO {
     public function Listar_Informes_de_Colaborador($id_trabajador) {
         $instanciaCompartida = ConexionBD::getInstance();
         $sql = "
-            SELECT *  FROM informe as inf 
+            SELECT *  FROM informe as inf
                 INNER JOIN colaborador as col on col.id_colaborador=inf.id_colaborador
                 INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
                 INNER JOIN area as area on area.id_area=col.id_area
@@ -27,26 +27,54 @@ class ColaboradorDAO {
     public function Registrar_Colaborador(AreasBean $AreasBean, TrabajadorBean $TrabajadorBean) {
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "INSERT INTO colaborador(id_area, id_trabajador) 
+        $sql = "INSERT INTO colaborador(id_area, id_trabajador)
                 VALUES ($AreasBean->id_area,$TrabajadorBean->ID_trabajador)";
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 
         return $estado;
     }
 
-    
+
      public function Enviar_a_Jefatura($id_informe) {
-         
+
        $instanciaCompartida = ConexionBD::getInstance();
        $sql = "UPDATE informe SET id_estado_inf = 2 WHERE id_informe = $id_informe";
        $estado = $instanciaCompartida->EjecutarConEstado($sql);
-                
+
 
         return $estado;
     }
-    
-    
-    
-    
-    
+
+    // Wilson:
+    public function ListarInformePorID($id_informe){
+        try {
+              $instanciaCompartida = ConexionBD::getInstance();
+             $sql = "SELECT * FROM informe as info WHERE info.id_informe =$id_informe ";
+             $rs = $instanciaCompartida->ejecutar($sql);
+             $array = $instanciaCompartida->obtener_filas($rs);
+
+             return $array;
+
+        } catch (Exception $e) {
+
+        }
+    }
+    //Wilson:
+    public function ListarDetalleInformePorID($id_informe){
+        try {
+             $instanciaCompartida = ConexionBD::getInstance();
+             $sql = "SELECT * FROM actividad as ac WHERE ac.id_actividad =$id_informe";
+             $rs = $instanciaCompartida->ejecutar($sql);
+             $array = $instanciaCompartida->obtener_filas($rs);
+
+             return $array;
+        } catch (Exception $e) {
+
+        }
+    }
+
+
+
+
+
 }

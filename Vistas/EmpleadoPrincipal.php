@@ -20,7 +20,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
 
         <!--datables CSS basico-->
         <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.css"/>
-        <!--datables estilo bootstrap 4 CSS-->  
+        <!--datables estilo bootstrap 4 CSS-->
         <link rel="stylesheet"  type="text/css" href="../datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
 
         <title>Menú</title>
@@ -28,10 +28,10 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../JAVASCRIPT/Opcion_Cerrar_Sesion.js"></script>
-        
- 
 
-    </head> 
+
+
+    </head>
     <body>
         <div style="height:50px">
             <div class="card-body">
@@ -44,7 +44,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
 
             <!-- Tabla Informes -->
             <!--Ejemplo tabla con DataTables-->
-            <div style="padding-bottom:20px; height:50px;text-align: center">    
+            <div style="padding-bottom:20px; height:50px;text-align: center">
                 <h3>Menu Principal Colaborador</h3>
             </div>
 
@@ -52,12 +52,12 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
             <div style="max-width: 1350px;" class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="table-responsive">        
+                        <div class="table-responsive">
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
                                         <th class="th-sm" scope="col">ID_inf</th>
                                         <th class="th-sm" scope="col">Titulo</th>
-                                        <th class="th-sm" scope="col">Area</th>               
+                                        <th class="th-sm" scope="col">Area</th>
                                         <th class="th-sm" scope="col">Fecha_Inf</th>
                                         <th class="th-sm" scope="col">Periodo</th>
                                         <th class="th-sm" scope="col">Horas dedicadas</th>
@@ -82,16 +82,24 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                 <td><?php echo $indice['inf_titulo_col'] ?></td>
                                                 <td><?php echo $indice['area_nombre'] ?> </td>
                                                 <td><?php echo $indice['inf_fecha'] ?></td>
-                                                <td><?php echo $indice['periodo_fin'] . " hasta " . $indice['periodo_ini'] ?></td>
+                                                <td><?php echo $indice['periodo_ini'] . " hasta " . $indice['periodo_fin'] ?></td>
                                                 <td><?php echo $indice['periodo_horas'] ?></td>
                                                 <td><?php echo $indice['nom_estado_inf'] ?> </td>
-                                                
+
                                                 <?php if($indice['nom_estado_inf']=='Generado'){ ?>
-                                                
-                                                <td><a href="#" class="btn btn-danger"> Eliminar </a></td>  
-                                                <td><a href="#" class="btn btn-success"> Editar </a></td>
-                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>   
-                                                
+
+                                                <td><a href="#" class="btn btn-danger"> Eliminar </a></td>
+                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=9
+                                                    &id_informe=<?php echo $indice['id_informe']?>
+                                                    &titulo=<?php echo $indice['inf_titulo_col'] ?>
+                                                    &area=<?php echo $indice['area_nombre'] ?>
+                                                    &fecha=<?php echo $indice['inf_fecha'] ?>
+                                                    &periofoIni=<?php echo $indice['periodo_ini']?>
+                                                    &periodoFin=<?php $indice['periodo_fin']?>
+                                                    &periodoHoras=<?php echo $indice['periodo_horas'] ?>
+                                                    &estado=<?php echo $indice['nom_estado_inf'] ?>" class="btn btn-success"> Editar </a></td>
+                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
+
                                                 <?php } else { echo "<td></td><td></td><td></td>";}?>
                                                 </tr>
 
@@ -105,12 +113,8 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
             <br>
-
-
-
-
             <!-- Modal PARA SELCECCIONAR QUE ACTIVIDADES DESEAMOS REDACTAR -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -150,9 +154,9 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
         <script src="../bootstrap/js/bootstrap.min.js"></script>
 
         <!-- datatables JS -->
-        <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
+        <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 
-        <script type="text/javascript" src="../jquery/main.js"></script>  
+        <script type="text/javascript" src="../jquery/main.js"></script>
 
     </body>
 </html>

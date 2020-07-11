@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-echo' <script src="../jquery/jquery-3.3.1.min.js"></script>  
+echo' <script src="../jquery/jquery-3.3.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">';
 
@@ -55,7 +55,7 @@ switch ($opciones) {
 
     case 2: {
 
-            //ESTOS SON LOS RECURSOS PARA LA INSERCION DE ACTIVIDADES A UN INFORME EN ESPECIFICO 
+            //ESTOS SON LOS RECURSOS PARA LA INSERCION DE ACTIVIDADES A UN INFORME EN ESPECIFICO
             unset($_SESSION['tipo_Actividad']);
             unset($_SESSION['Lista_Actividades_Agregadas']);
             unset($_SESSION['Lista_Actividades_Productos']);
@@ -222,59 +222,63 @@ switch ($opciones) {
 
 
     case 6: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PERSONALIZADOS
-        
+
             $id_actividad = $_REQUEST['id_actividad'];
             $id_informe = $_SESSION['id_ultimo_informe'];
-          
+
             $ActividadesDAO = new ActividadesDAO();
             $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
             echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
 
             break;
         }
-        
+
     case 7: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-        
+
             $id_actividad = $_REQUEST['id_actividad'];
             $id_informe = $_SESSION['id_ultimo_informe'];
             $id_rubro_productos = $_REQUEST['id_rubro_productos'];
-          
+
             $ActividadesDAO = new ActividadesDAO();
             $RubrosDAO = new RubrosDAO();
             $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
-            
+
             if($estado>0){
                 $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
                  echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
             }
-            
+
 
             break;
         }
-        
+
      case 8: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-         
             $msj = $_REQUEST['msj'];
             if($msj==1){
-                
+
                $_SESSION['id_informe'] = $_REQUEST['id_informe'];
                echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
-               
+
             } else{
-            
+
                 $ColaboradorDAO = new ColaboradorDAO();
                 $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
                 unset($_SESSION['id_informe']);
-                
+
                 if($estado>0){
                      echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
                 }
             }
 
             break;
-        }  
-        
- 
+        }
+        //Wilson: ir a modificar  Informe
+    case 9:
+
+             echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
+             break;
+
+
 }
 ?>
 <a href=""></a>
