@@ -38,7 +38,7 @@
                                         </label>
                                         <input id="password" type="password" class="form-control" name="password" required data-eye>
                                         <div class="invalid-feedback">
-                                            La Contraseña es requerida
+                                            La Contraseña es requerida holis
                                         </div>
                                     </div>
 
