@@ -72,7 +72,7 @@ class InformesDAO {
             $rs = $instanciaCompartida->ejecutar($sql);
             $lista = $instanciaCompartida->obtener_filas($rs);
             
-            $instanciaCompartida->setArray(null);
+            //$instanciaCompartida->setArray(null);
 
         return $lista;
     }
@@ -94,7 +94,7 @@ class InformesDAO {
             $rs = $instanciaCompartida->ejecutar($sql);
             $lista = $instanciaCompartida->obtener_filas($rs);
             
-            $instanciaCompartida->setArray(null);
+            //$instanciaCompartida->setArray(null);
         
         return $lista;
     }

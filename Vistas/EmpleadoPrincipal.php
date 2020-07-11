@@ -87,7 +87,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                 <td><?php echo $indice['nom_estado_inf'] ?> </td>
 
                                                 <?php if($indice['nom_estado_inf']=='Generado'){ ?>
-<?php <<<<<<< HEAD>>>>>>> ae8e3dbc417f08f8442ff39cc51bdb9d8f3737fa ?>
+
 
                                                 <td><a href="#" class="btn btn-danger"> Eliminar </a></td>
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=9

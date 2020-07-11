@@ -185,10 +185,18 @@ switch ($opciones) {
 
             $InformesDAO = new InformesDAO();
             
-            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            
-            echo '<script> document.location.href="../Vistas/(Jefe)_Visualizar_Informes.php";</script>'; 
+            //$_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            //$_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            $inf1=$InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            $inf2=$InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            if($inf1!=null && $inf2!=null){
+                $_SESSION['lista_informes_sin_productos']=$inf1;
+                $_SESSION['lista_informes_con_productos']=$inf2;
+                echo '<script> document.location.href="../Vistas/(Jefe)_Visualizar_Informes.php";</script>';
+            }
+             else{
+                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script> '; 
+             }
 
             
             

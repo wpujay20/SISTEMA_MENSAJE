@@ -5,6 +5,8 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
 }
+//var_dump($informesConProductos);
+//var_dump($informesSinProductos);
 ?>
 
 <!doctype html>
@@ -85,67 +87,72 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                                         <th class="" scope="col">Nombre</th>
                                         <th class="" scope="col">Rubro</th>               
                                         <th class="" scope="col">Descripcion Del Rubro</th>
-                                      
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $i=0;
+                                    $i = 0;
                                     foreach ($informesSinProductos as $indice):
                                         ?>
                                         <tr>
                                             <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
-                                            <td><?php echo $informesSinProductos[$i]['nomb_rubro'] ;?> </td>
-                                            <td><?php echo $informesSinProductos[$i]['desc_rubro'] ;?></td>
-                                           
-                                        <?php  $i++;
-                                    endforeach;
-                                    ?>
-                                </tbody>
-                            </table>
+                                            <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
+                                            <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
 
-                        </div>
-
-                 <div class="form-group">
-                            <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
-
-                            <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
-                                    <tr>
-                                        <th class="" scope="col">Nombre</th>
-                                        <th class="" scope="col">Rubro</th>               
-                                        <th class="" scope="col">Titulo del producto</th>
-                                        <th class="" scope="col">Autor del producto</th>
-                                        <th class="" scope="col">Estado del producto</th>
-                                      
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $i=0;
-                                    foreach ($informesConProductos as $indice):
+                                            <?php
+                                            $i++;
+                                        endforeach;
                                         ?>
-                                        <tr>
-                                            <td><?php echo $informesConProductos[$i]['act_nombre']; ?></td>
-                                            <td> Productos  </td>
-                                            <td><?php echo $informesConProductos[$i]['pro_titulo'] ;?></td>
-                                            <td><?php echo $informesConProductos[$i]['pro_autor'] ;?></td>
-                                            <td><?php echo $informesConProductos[$i]['pro_estado'] ;?></td>
-                                           
-                                        <?php  $i++;
-                                    endforeach;
-                                    ?>
                                 </tbody>
                             </table>
 
                         </div>
-                        
+                        <?php
+                        $i = 0;
+
+                        foreach ($informesConProductos as $indice):
+                            if ($informesConProductos[$i]['id_rubro_productos'] != null) {
+                                ?>
+                                <div class="form-group">
+                                    <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
+
+                                    <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
+                                            <tr>
+                                                <th class="" scope="col">Nombre</th>
+                                                <th class="" scope="col">Rubro</th>               
+                                                <th class="" scope="col">Titulo del producto</th>
+                                                <th class="" scope="col">Autor del producto</th>
+                                                <th class="" scope="col">Estado del producto</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td><?php echo $informesConProductos[$i]['act_nombre']; ?></td>
+                                                <td> Productos  </td>
+                                                <td><?php echo $informesConProductos[$i]['pro_titulo']; ?></td>
+                                                <td><?php echo $informesConProductos[$i]['pro_autor']; ?></td>
+                                                <td><?php echo $informesConProductos[$i]['pro_estado']; ?></td>
+
+                                                <?php
+                                                $i++;
+                                            }
+                                        endforeach;
+                                        ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                         <div>
-                            
+
                             <a href="../CONTROLADOR/Jefe_Controlador.php?op=3" style="margin: 10px 0px 20px 1170px" class="btn btn-secondary">Volver a Gestion</a>
                         </div>
-                        
-                        
-                        
+
+
+
                     </div>
                 </div>
             </div>  
