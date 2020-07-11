@@ -243,16 +243,11 @@ switch ($opciones) {
             $RubrosDAO = new RubrosDAO();
             $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
 
-            if($estado>0){
-
             if ($estado > 0) {
                 $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
                 echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
             }
-
-
             break;
-        }
     }
 
      case 8:
