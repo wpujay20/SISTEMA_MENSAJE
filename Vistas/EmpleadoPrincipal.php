@@ -89,7 +89,8 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                 <?php if($indice['nom_estado_inf']=='Generado'){ ?>
 
 
-                                                <td><a href="#" class="btn btn-danger"> Eliminar </a></td>
+
+                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?del=1&op=9&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-danger"> Eliminar </a></td>
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=9
                                                     &id_informe=<?php echo $indice['id_informe']?>
                                                     &titulo=<?php echo $indice['inf_titulo_col'] ?>
@@ -99,12 +100,9 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                     &periodoFin=<?php $indice['periodo_fin']?>
                                                     &periodoHoras=<?php echo $indice['periodo_horas'] ?>
                                                     &estado=<?php echo $indice['nom_estado_inf'] ?>" class="btn btn-success"> Editar </a></td>
-                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
 
 
 
-                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?del=1&op=9&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-danger"> Eliminar </a></td>
-                                                <td><a href="#" class="btn btn-success"> Editar </a></td>
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
 
 
