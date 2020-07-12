@@ -80,13 +80,15 @@ if (!isset($_SESSION)) {
                                         <td><?php echo $indice['nombre']?></td>
                                         <td><?php echo $indice['apellido']?></td>
                                         <td><?php echo $indice['dni']?></td>
-                                        <td><?php echo $indice['nom_estado_inf']?> </td>
-                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe']?>"> Visualizar </a></td>
-                                        <td> <a href="#" class="btn btn-primary"> Archivar </a></td>                                      
-
+                                        <td><?php echo $indice['nom_estado_inf']?></td>
+                                        <td><a href="../CONTROLADOR/RRHH_Controlador.php?op=1&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-info"> Visualizar </a></td>
+                                        <td></td>
+                                        <?php
+                                        if($indice['nom_estado_inf']!="Archivado"){
+                                        ?>
+                                        <td> <a href="../CONTROLADOR/RRHH_Controlador.php?op=2&msj=1&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Archivar </a></td>
                                     </tr>
-                                    
-                                    <?php endforeach;}?>
+                                        <?php }endforeach; }?>
                                    
                                 </tbody>
                             </table>

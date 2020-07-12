@@ -4,9 +4,11 @@ session_start();
 if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_informes_sin_productos'])) {
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
+    $detalleInforme=$_SESSION['lista_detalle_informes'];
 }
 //var_dump($informesConProductos);
 //var_dump($informesSinProductos);
+//var_dump($detalleInforme);
 ?>
 
 <!doctype html>
@@ -35,7 +37,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
         <div style="height:50px">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver"> Volver al Menu Prncipal </a>
+                <a href="../CONTROLADOR/UsuariosControlador.php?op=3" class="btn btn btn-info" id="volver"> Volver al Menu Principal </a>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
 
                 <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
@@ -52,6 +54,27 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
             <div style="max-width: 1350px;" class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="form-group">
+                            <label  style="font-weight: bold">Titulo General :</label>
+                            <p> 
+                                <?php echo $detalleInforme[1]['titulo_desc']; ?> 
+                            </p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label  style="font-weight: bold">Asunto :</label>
+                            <p> 
+                                <?php echo $detalleInforme[1]['asunto_det']; ?> 
+                            </p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label  style="font-weight: bold">Descripcion del Detalle :</label>
+                            <p> 
+                                <?php echo $detalleInforme[1]['desc_det']; ?> 
+                            </p>
+                        </div>
+                        
                         <div class="form-group">
                             <label  style="font-weight: bold">Titulo de Informe :</label>
                             <p> 
@@ -78,7 +101,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                                 <?php echo "Desde el " . $informesSinProductos[0]['periodo_ini'] . " hasta el " . $informesSinProductos[0]['periodo_fin']; ?> 
                             </p>
                         </div>
-
+                        
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
 
@@ -145,13 +168,6 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                             </table>
 
                         </div>
-
-                        <div>
-
-                            <a href="../CONTROLADOR/Jefe_Controlador.php?op=3" style="margin: 10px 0px 20px 1170px" class="btn btn-secondary">Volver a Gestion</a>
-                        </div>
-
-
 
                     </div>
                 </div>

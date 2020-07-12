@@ -42,7 +42,7 @@ class InformesDAO {
 
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "DELETE FROM informe WHERE id_informe=$id_informe";
+        $sql = "UPDATE informe SET id_estado_inf='Archivado' WHERE id_informe=$id_informe";
 
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 
@@ -100,5 +100,12 @@ class InformesDAO {
         $rs=$instanciaCompartida->ejecutar($sql);
         $lista=$instanciaCompartida->obtener_filas($rs);
         return $lista;
+    }
+    
+    public function Archivar_Inf($id_informe){
+        $instanciaCompartida=ConexionBD::getInstance();
+        $sql="UPDATE INFORME SET id_estado_inf=5 WHERE id_informe=$id_informe";
+        $estado=$instanciaCompartida->EjecutarConEstado($sql);
+        return $estado;
     }
 }
