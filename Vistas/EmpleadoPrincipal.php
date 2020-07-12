@@ -85,23 +85,12 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                 <td><?php echo $indice['periodo_ini'] . " hasta " . $indice['periodo_fin'] ?></td>
                                                 <td><?php echo $indice['periodo_horas'] ?></td>
                                                 <td><?php echo $indice['nom_estado_inf'] ?> </td>
-
                                                 <?php if($indice['nom_estado_inf']=='Generado'){ ?>
 
-
-
                                                  <td><a href="../CONTROLADOR/ColaboradorControlador.php?del=1&op=9&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-danger"> Eliminar </a></td>
-                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=9
+                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=10
                                                     &id_informe=<?php echo $indice['id_informe']?>
-                                                    &titulo=<?php echo $indice['inf_titulo_col'] ?>
-                                                    &area=<?php echo $indice['area_nombre'] ?>
-                                                    &fecha=<?php echo $indice['inf_fecha'] ?>
-                                                    &periofoIni=<?php echo $indice['periodo_ini']?>
-                                                    &periodoFin=<?php $indice['periodo_fin']?>
-                                                    &periodoHoras=<?php echo $indice['periodo_horas'] ?>
-                                                    &estado=<?php echo $indice['nom_estado_inf'] ?>" class="btn btn-success"> Editar </a></td>
-
-
+                                                    " class="btn btn-success"> Editar </a></td>
 
                                                 <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
 

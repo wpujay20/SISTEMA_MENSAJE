@@ -299,9 +299,20 @@ switch ($opciones) {
         //Wilson: ir a modificar  Informe
     case 10:
     {
+        $id_informe = $_REQUEST['id_informe'];
+        $ColaboradorDAO = new ColaboradorDAO();
+        $ListaXid=$ColaboradorDAO->ListarInformePorID($id_informe);
+        $_SESSION['ListaXid']= $ListaXid;
         echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
              break;
     }
+    case 11:
+    {
+
+
+    }
+
+        break;
 
 
 
