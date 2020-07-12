@@ -61,7 +61,6 @@ if (!isset($_SESSION)) {
                                         <th class="th-sm" scope="col">Estado</th>
                                         <th class="th-sm" scope="col" >Acciones</th>
                                         <th class="th-sm" scope="col" >Acciones</th>
-                                        <th class="th-sm" scope="col" >Acciones</th>
 
 
                                     </tr>
@@ -82,8 +81,7 @@ if (!isset($_SESSION)) {
                                         <td><?php echo $indice['apellido']?></td>
                                         <td><?php echo $indice['dni']?></td>
                                         <td><?php echo $indice['nom_estado_inf']?> </td>
-                                        <td><a href="#" class="btn btn-danger"> Visualizar </a></td>  
-                                        <td><a href="#" class="btn btn-success"> Rechazar </a></td>
+                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe']?>"> Visualizar </a></td>
                                         <td> <a href="#" class="btn btn-primary"> Archivar </a></td>                                      
 
                                     </tr>
@@ -102,7 +100,7 @@ if (!isset($_SESSION)) {
 
 
             <!-- Modal PARA SELCECCIONAR QUE ACTIVIDADES DESEAMOS REDACTAR -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -121,7 +119,7 @@ if (!isset($_SESSION)) {
             </div>
 
 
-        </div>
+        </div>-->
 
 
 

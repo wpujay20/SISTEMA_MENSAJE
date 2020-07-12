@@ -4,7 +4,6 @@ session_start();
 if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_informes_sin_productos'])) {
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
-    
 }
 //var_dump($informesConProductos);
 //var_dump($informesSinProductos);
@@ -148,8 +147,12 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                         </div>
 
                         <div>
+
                             <a href="../CONTROLADOR/Jefe_Controlador.php?op=3" style="margin: 10px 0px 20px 1170px" class="btn btn-secondary">Volver a Gestion</a>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>  

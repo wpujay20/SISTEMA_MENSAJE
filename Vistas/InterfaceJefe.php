@@ -165,8 +165,8 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR']==null){
                                                             
                                                             <tr>
                                                                 <td></td>
-                                                                <td> <input type="text"  class="form-control" id="nombre_rubro" name="nombre_rubro" ></td>
-                                                                <td> <textarea class="form-control" name="descripcion" id="descripcion"></textarea></td>
+                                                                <td> <input type="text"  class="form-control" required="" id="nombre_rubro" name="nombre_rubro" ></td>
+                                                                <td> <textarea class="form-control" required="" name="descripcion" id="descripcion"></textarea></td>
                                                                 
                                                                 <td> <input type="submit" class="btn btn-success" value="Agregar Rubro"></td>
                                                             </tr>
