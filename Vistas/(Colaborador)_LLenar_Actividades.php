@@ -36,7 +36,7 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
             }
         </style>
 
-        <title>Menú</title>
+        <title>Registro de Actividades</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="../JAVASCRIPT/Validacion_de_Campos_VISIBLES_INVISIBLES.js"></script>
         <script src="../jquery/jquery-3.3.1.min.js"></script>
@@ -61,12 +61,12 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
 
                     <div id="actividades" class="form-group" >
                         <label>Ingrese la Actividad </label>
-                        <input  name="actividad" type="text" class="form-control" id="actividad">
+                        <input  name="actividad" type="text" class="form-control" id="actividad" >
                     </div>
 
 
                     <div id="contenedor_de_checkbox_pro" class="form-group" > <!--  **************CHECKBOX  ***************************************************-->
-                        <input type="checkbox"  value="si" id="si" name="toogle_productos" >
+                        <input type="checkbox"  value="si" id="si" name="toogle_productos"  >
                         <label style="color: green; font-weight: bold;">Marcar solo si la actividad pertenece al rubro productos </label>
                     </div>
 

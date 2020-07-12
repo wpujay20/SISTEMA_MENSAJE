@@ -10,13 +10,13 @@ class ColaboradorDAO {
     public function Listar_Informes_de_Colaborador($id_trabajador) {
         $instanciaCompartida = ConexionBD::getInstance();
         $sql = "
-            SELECT *  FROM informe as inf
-                INNER JOIN colaborador as col on col.id_colaborador=inf.id_colaborador
-                INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
-                INNER JOIN area as area on area.id_area=col.id_area
-                INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf
-                INNER JOIN periodo as per on per.id_periodo=inf.id_periodo
-                WHERE trab.id_trabajador=$id_trabajador
+                SELECT *  FROM informe as inf
+                    INNER JOIN colaborador as col on col.id_colaborador=inf.id_colaborador
+                    INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
+                    INNER JOIN area as area on area.id_area=col.id_area
+                    INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf
+                    INNER JOIN periodo as per on per.id_periodo=inf.id_periodo
+                    WHERE trab.id_trabajador=$id_trabajador
             ";
         $rs = $instanciaCompartida->ejecutar($sql);
         $array = $instanciaCompartida->obtener_filas($rs);
@@ -49,7 +49,9 @@ class ColaboradorDAO {
     public function ListarInformePorID($id_informe){
         try {
               $instanciaCompartida = ConexionBD::getInstance();
-             $sql = "SELECT * FROM informe as info WHERE info.id_informe =$id_informe ";
+              $sql = "SELECT inf.id_informe, inf.inf_titulo_col,inf.inf_descripcion,per.id_periodo,per.periodo_ini,per.periodo_fin,per.periodo_horas FROM informe as inf INNER JOIN periodo as per
+                    on inf.id_periodo = per.id_periodo
+                    WHERE inf.id_informe=$id_informe";
              $rs = $instanciaCompartida->ejecutar($sql);
              $array = $instanciaCompartida->obtener_filas($rs);
 
@@ -63,7 +65,9 @@ class ColaboradorDAO {
     public function ListarDetalleInformePorID($id_informe){
         try {
              $instanciaCompartida = ConexionBD::getInstance();
-             $sql = "SELECT * FROM actividad as ac WHERE ac.id_actividad =$id_informe";
+             $sql="SELECT inf.id_informe, inf.inf_titulo_col,inf.inf_descripcion,per.id_periodo,per.periodo_ini,per.periodo_fin,per.periodo_horas FROM informe as inf INNER JOIN periodo as per
+                    on inf.id_periodo = per.id_periodo
+                    WHERE inf.id_informe=$id_informe";
              $rs = $instanciaCompartida->ejecutar($sql);
              $array = $instanciaCompartida->obtener_filas($rs);
 
