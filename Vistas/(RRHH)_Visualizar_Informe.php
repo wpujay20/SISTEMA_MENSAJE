@@ -8,7 +8,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
 }
 //var_dump($informesConProductos);
 //var_dump($informesSinProductos);
-//var_dump($detalleInforme);
+var_dump($detalleInforme);
 ?>
 
 <!doctype html>
