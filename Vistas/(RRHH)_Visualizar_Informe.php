@@ -8,7 +8,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
 }
 //var_dump($informesConProductos);
 //var_dump($informesSinProductos);
-//var_dump($detalleInforme);
+var_dump($detalleInforme);
 ?>
 
 <!doctype html>
@@ -51,29 +51,41 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
             </div>
             <!-- TIENES PENSADO AVANZAR LA VISUALIZACION DE LOS INFORMES , ASI COMO EL MINI MENU DE ENVIO A RR.HH Y EL SPRITN ESTARA TERMINADO -->
             <!--Ejemplo tabla con DataTables-->
+            <?php
+            $s=0;
+            foreach($detalleInforme as $det):?>
+            
             <div style="max-width: 1350px;" class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                        <?php if(!empty($detalleInforme[$s]['titulo_desc'])){ ?>
                         <div class="form-group">
                             <label  style="font-weight: bold">Titulo General :</label>
                             <p> 
-                                <?php echo $detalleInforme[1]['titulo_desc']; ?> 
+                                <?php echo $detalleInforme[$s]['titulo_desc'];?> 
                             </p>
                         </div>
+                        <?php } ?>
                         
+                        <?php if(!empty($detalleInforme[$s]['asunto_det'])){?>
                         <div class="form-group">
                             <label  style="font-weight: bold">Asunto :</label>
                             <p> 
-                                <?php echo $detalleInforme[1]['asunto_det']; ?> 
+                                <?php echo $detalleInforme[$s]['asunto_det']; ?> 
                             </p>
                         </div>
+                        <?php }?>
                         
+                        <?php if(!empty($detalleInforme[$s]['desc_det'])) {?>
                         <div class="form-group">
                             <label  style="font-weight: bold">Descripcion del Detalle :</label>
                             <p> 
-                                <?php echo $detalleInforme[1]['desc_det']; ?> 
+                                <?php echo $detalleInforme[$s]['desc_det']; ?> 
                             </p>
                         </div>
+                        <?php } ?>
+                        
+                        <?php $s++; endforeach;?>
                         
                         <div class="form-group">
                             <label  style="font-weight: bold">Titulo de Informe :</label>
