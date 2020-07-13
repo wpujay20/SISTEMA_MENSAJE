@@ -1,14 +1,17 @@
 <?php
 session_start();
 
-if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_informes_sin_productos'])) {
+
+
+if ($_SESSION['lista_informes_con_productos'] == null || !isset($_SESSION['lista_informes_con_productos'])) {
+    $informesConProductos = null;
+} else {
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
-    $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
-    $detalleInforme=$_SESSION['lista_detalle_informes'];
 }
-//var_dump($informesConProductos);
-//var_dump($informesSinProductos);
-var_dump($detalleInforme);
+if (isset($_SESSION['lista_informes_sin_productos']) && isset($_SESSION['lista_detalle_informes'])) {
+    $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
+    $detalleInforme = $_SESSION['lista_detalle_informes'];
+}
 ?>
 
 <!doctype html>
@@ -52,41 +55,45 @@ var_dump($detalleInforme);
             <!-- TIENES PENSADO AVANZAR LA VISUALIZACION DE LOS INFORMES , ASI COMO EL MINI MENU DE ENVIO A RR.HH Y EL SPRITN ESTARA TERMINADO -->
             <!--Ejemplo tabla con DataTables-->
             <?php
-            $s=0;
-            foreach($detalleInforme as $det):?>
-            
-            <div style="max-width: 1350px;" class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <?php if(!empty($detalleInforme[$s]['titulo_desc'])){ ?>
-                        <div class="form-group">
-                            <label  style="font-weight: bold">Titulo General :</label>
-                            <p> 
-                                <?php echo $detalleInforme[$s]['titulo_desc'];?> 
-                            </p>
-                        </div>
-                        <?php } ?>
-                        
-                        <?php if(!empty($detalleInforme[$s]['asunto_det'])){?>
-                        <div class="form-group">
-                            <label  style="font-weight: bold">Asunto :</label>
-                            <p> 
-                                <?php echo $detalleInforme[$s]['asunto_det']; ?> 
-                            </p>
-                        </div>
-                        <?php }?>
-                        
-                        <?php if(!empty($detalleInforme[$s]['desc_det'])) {?>
-                        <div class="form-group">
-                            <label  style="font-weight: bold">Descripcion del Detalle :</label>
-                            <p> 
-                                <?php echo $detalleInforme[$s]['desc_det']; ?> 
-                            </p>
-                        </div>
-                        <?php } ?>
-                        
-                        <?php $s++; endforeach;?>
-                        
+            $s = 0;
+            foreach ($detalleInforme as $det):
+                ?>
+
+                <div style="max-width: 1350px;" class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <?php if (!empty($detalleInforme[$s]['titulo_desc'])) { ?>
+                                <div class="form-group">
+                                    <label  style="font-weight: bold">Titulo General :</label>
+                                    <p> 
+                                        <?php echo $detalleInforme[$s]['titulo_desc']; ?> 
+                                    </p>
+                                </div>
+                            <?php } ?>
+
+                            <?php if (!empty($detalleInforme[$s]['asunto_det'])) { ?>
+                                <div class="form-group">
+                                    <label  style="font-weight: bold">Asunto :</label>
+                                    <p> 
+                                        <?php echo $detalleInforme[$s]['asunto_det']; ?> 
+                                    </p>
+                                </div>
+                            <?php } ?>
+
+                            <?php if (!empty($detalleInforme[$s]['desc_det'])) { ?>
+                                <div class="form-group">
+                                    <label  style="font-weight: bold">Descripcion del Detalle :</label>
+                                    <p> 
+                                        <?php echo $detalleInforme[$s]['desc_det']; ?> 
+                                    </p>
+                                </div>
+                            <?php } ?>
+
+                            <?php
+                            $s++;
+                        endforeach;
+                        ?>
+
                         <div class="form-group">
                             <label  style="font-weight: bold">Titulo de Informe :</label>
                             <p> 
@@ -113,7 +120,7 @@ var_dump($detalleInforme);
                                 <?php echo "Desde el " . $informesSinProductos[0]['periodo_ini'] . " hasta el " . $informesSinProductos[0]['periodo_fin']; ?> 
                             </p>
                         </div>
-                        
+
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
 
@@ -129,41 +136,43 @@ var_dump($detalleInforme);
                                     <?php
                                     $i = 0;
                                     foreach ($informesSinProductos as $indice):
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
-                                            <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
-                                            <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
-                                        </tr>
+                                        if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
+                                                <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
+                                                <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
+                                            </tr>
                                             <?php
-                                            $i++;
-                                        endforeach;
-                                        ?>
+                                        }
+                                        $i++;
+                                    endforeach;
+                                    ?>
                                 </tbody>
                             </table>
 
                         </div>
                         <?php
-                        $i = 0;
+                        if (!isset($informesConProductos) || $informesConProductos == null) {
+                            echo "<center>Este informe no registra actividades de Rubro Productos</center>";
+                        } else {
+                            $i = 0;
+                            ?>
+                            <div class="form-group">
+                                <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
 
-                        foreach ($informesConProductos as $indice):
-                            if ($informesConProductos[$i]['id_rubro_productos'] != null) {
-                                ?>
-                                <div class="form-group">
-                                    <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
+                                <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
+                                        <tr>
+                                            <th class="" scope="col">Nombre</th>
+                                            <th class="" scope="col">Rubro</th>               
+                                            <th class="" scope="col">Titulo del producto</th>
+                                            <th class="" scope="col">Autor del producto</th>
+                                            <th class="" scope="col">Estado del producto</th>
 
-                                    <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
-                                            <tr>
-                                                <th class="" scope="col">Nombre</th>
-                                                <th class="" scope="col">Rubro</th>               
-                                                <th class="" scope="col">Titulo del producto</th>
-                                                <th class="" scope="col">Autor del producto</th>
-                                                <th class="" scope="col">Estado del producto</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($informesConProductos as $indice): ?>
                                             <tr>
                                                 <td><?php echo $informesConProductos[$i]['act_nombre']; ?></td>
                                                 <td> Productos  </td>
@@ -173,8 +182,9 @@ var_dump($detalleInforme);
 
                                                 <?php
                                                 $i++;
-                                            }
-                                        endforeach;
+
+                                            endforeach;
+                                        }
                                         ?>
                                 </tbody>
                             </table>

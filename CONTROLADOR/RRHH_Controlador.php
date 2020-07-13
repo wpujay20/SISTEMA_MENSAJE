@@ -9,7 +9,7 @@ echo' <script src="../jquery/jquery-3.3.1.min.js"></script>
 
 
 require_once '../DAO/InformesDAO.php';
-require_once '../UTILS/ConexionBD.php';
+
 
 $opciones = $_REQUEST['op'];
 switch ($opciones) {
@@ -17,23 +17,18 @@ switch ($opciones) {
             unset($_SESSION['lista_informes_sin_productos']);
             unset($_SESSION['lista_informes_con_productos']);
             unset($_SESSION['lista_detalle_informes']);
+            
             $id_informe = $_REQUEST['id_informe'];
 
             $InformesDAO = new InformesDAO();
 
-            //$_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            //$_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            $inf1 = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            $inf2 = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            $inf3 = $InformesDAO->Detalle_Inf($id_informe);
-            if ($inf1 != null && $inf2 != null && $inf3 != null) {
-                $_SESSION['lista_informes_sin_productos'] = $inf1;
-                $_SESSION['lista_informes_con_productos'] = $inf2;
-                $_SESSION['lista_detalle_informes'] = $inf3;
-                echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
-            } else {
-                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script> ';
-            }
+            
+             $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+             $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+             $_SESSION['lista_detalle_informes']       = $InformesDAO->Detalle_Inf($id_informe);
+
+               echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
+
 
             break;
         }

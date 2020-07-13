@@ -5,7 +5,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
 }
-var_dump($informesConProductos);
+//var_dump($informesConProductos);
 //var_dump($informesSinProductos);
 ?>
 
@@ -95,7 +95,7 @@ var_dump($informesConProductos);
                                     $i = 0;
                                     foreach ($informesSinProductos as $indice):
                                         if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
                                                 <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
@@ -131,17 +131,17 @@ var_dump($informesConProductos);
                                         <tr>
                                             <?php
                                             $a = 0;
-                                            foreach ($informesConProductos as $indice):
-                                                if ($informesConProductos[$a]['nomb_rubro'] == "Productos") {
+                                            foreach ($informesConProductos as $ind):
+                                                
+                                                if ($informesConProductos[$a]['id_rubro_productos'] != null && $informesConProductos[$a]['nomb_rubro'] == "Productos" ) {
                                                     ?>
-                                                    <td> <?php echo $informesConProductos[$a]['act_nombre'] ; ?> </td> 
-                                                    <td> <?php echo $informesConProductos[$a]['nomb_rubro'] ; ?> </td> 
-                                                    <td> <?php echo $informesConProductos[$a]['pro_titulo'] ; ?> </td> 
-                                                    <td> <?php echo $informesConProductos[$a]['pro_autor'] ; ?> </td> 
-                                                    <td> <?php echo $informesConProductos[$a]['pro_estado'] ; ?> </td> 
+                                                    <td> <?php echo $informesConProductos[$a]['act_nombre'];?> </td> 
+                                                    <td> <?php echo $informesConProductos[$a]['nomb_rubro'];?> </td> 
+                                                    <td> <?php echo $informesConProductos[$a]['pro_titulo'];?> </td> 
+                                                    <td> <?php echo $informesConProductos[$a]['pro_autor']; ?> </td> 
+                                                    <td> <?php echo $informesConProductos[$a]['pro_estado'];?> </td> 
                                                     <?php
-                                               $a++; 
-                                               
+                                                     $a++;
                                                 }
                                                 
                                             endforeach;
