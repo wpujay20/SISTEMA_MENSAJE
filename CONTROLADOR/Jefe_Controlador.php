@@ -87,7 +87,8 @@ switch ($opciones) {
 
     case 3: {
 //PERMITE LISTAR LOS INFROMES QUE SE VAN CONSOLIDAR
-
+            unset($_SESSION['lista_informes_con_productos']);
+            unset($_SESSION['lista_informes_sin_productos']);
             unset($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']);
 
             $JefeDAO = new JefeDAO();

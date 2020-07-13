@@ -122,7 +122,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                                             <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
                                             <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
                                             <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
-
+                                        </tr>
                                             <?php
                                             $i++;
                                         endforeach;
