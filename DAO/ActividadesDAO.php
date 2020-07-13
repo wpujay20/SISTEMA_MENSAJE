@@ -98,7 +98,7 @@ class ActividadesDAO {
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = " SELECT * FROM actividad as act
-                 INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro 
+                 INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro
                  WHERE act.id_informe= $ActividadBean->id_informe and rub.id_rubro<>5";
 
 
@@ -108,20 +108,20 @@ class ActividadesDAO {
         return $lista;
     }
 
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function ListarActividadesSegunInformeProductos(ActividadesBean $ActividadBean) {
 
         try {
@@ -130,7 +130,7 @@ class ActividadesDAO {
             $cn = mysqli_connect("localhost", "root", "", "bdinformes");
             mysqli_set_charset($cn, "utf8");
 
-            $sql2 = " SELECT * FROM rubro_productos as pro 
+            $sql2 = " SELECT * FROM rubro_productos as pro
                         INNER JOIN actividad as act on act.id_rubro_productos=pro.id_rubro_productos
                         INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro
                         where act.id_informe=$ActividadBean->id_informe";
@@ -159,8 +159,8 @@ class ActividadesDAO {
 
         return $estado;
     }
-    
-    
+
+
 
     public function EliminarActividadesPor_ID_Actividad($id_actividad) {
 
@@ -172,4 +172,25 @@ class ActividadesDAO {
 
         return $estado;
     }
+///___________________________funciones para editar____________________________________________________________________________________________
+    public function ListarActividadesSegunInformeProductos2($id_informe) {
+
+            try {
+                 $instanciacompartida = ConexionBD::getInstance();
+                $sql = " SELECT act.id_actividad, act.act_nombre,rub.id_rubro,rub.nomb_rubro,rub.desc_rubro,pro.id_rubro_productos,pro.pro_titulo,pro.pro_autor,pro.pro_estado FROM rubro_productos as pro
+                        INNER JOIN actividad as act on act.id_rubro_productos=pro.id_rubro_productos
+                        INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro
+                        where act.id_informe=$id_informe";
+
+                  $res = $instanciacompartida->EjecutarConEstado($sql);
+                   $lista = $instanciacompartida->obtener_filas($res);
+
+
+                return $lista;
+            } catch (Exception $ex) {
+                echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+            }
+        }
+
 }
+

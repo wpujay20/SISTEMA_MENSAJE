@@ -1,10 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION["nombre"])) {
+if (empty($_SESSION["nombre"])) {
     echo '<script> document.location.href="../index.php";</script>';
 }else{
    $ListaXid=$_SESSION['ListaXid'];
 
+// if (!empty($_SESSION['Lista_Activi_Productos'])) {
+
+$Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
+ var_dump( $Lista_Actividades_Productos);
+
+
+// }
 
 ?>
 
@@ -35,20 +42,23 @@ if (!isset($_SESSION["nombre"])) {
         <script src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
+	   <center>
 
-	<center>
-		<h1>Modificación de Informe</h1>
+            <?php foreach ($ListaXid as $info  ) { ?>
+                <div class=" ">
+                    <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe <?php echo $info['inf_titulo_col']?></h4></strong>
+                </div>
+	   </center>
 
+        <div class="d-flex">
+        <div class="col-sm-4">
 		 <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php // echo $id_tipo_actividad;?>" method="post">
-		</center>
-		 	<?php foreach ($ListaXid as $info  ) { ?>
+
+
 		 		<input type="hidden" name="id" value="<?php echo $info['id_informe']?>">
 
-            <div style="/*padding: 30px 200px 100px 200px*/ ;  " class="container">
+            <div style="/*padding: 30px 200px 100px 200px*/ ;  " class=" ">
 
-                <div class="modal-header">
-                    <strong> <h4 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe <?php echo $info['inf_titulo_col']?></h4></strong>
-                </div>
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -90,44 +100,148 @@ if (!isset($_SESSION["nombre"])) {
             	 <?php	}?>
 
         </form>
-        <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+          </div>
+          </div>
+
+    <div class="d-flex">
+
+        <div class="col-sm-12 ">
+            <br><br>
+         <form name="formActividades" id="formActividades" action="../CONTROLADOR/ColaboradorControlador.php?op=2" method="post">
+            <div style="padding: /*0px 200px 10px 200px */; ">
+                <h5> Actividades Registradas hasta el momento</h5>
+
+                                <?php
+                                if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
+                                    echo "<center>Aun no tienes actividades asignadas a este informe. Agrega unas arriba</center>";
+                                } else {
+                                    ?>
+
+                    <div style="max-width: 1350px;" class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
+                                            <tr>
+                                                <th class="th-sm" scope="col">ID_actividad</th>
+                                                <th class="th-sm" scope="col">Nombre</th>
+                                                <th class="th-sm" scope="col">Rubro</th>
+                                                <th class="th-sm" scope="col">Descripcion Del Rubro</th>
+                                                <th class="th-sm" scope="col" >Accion</th>
 
 
 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                <?php
+                                foreach ($listaActividadesAgregadas as $indice):
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $indice['id_actividad'] ?></td>
+                                                    <td><?php echo $indice['act_nombre'] ?></td>
+                                                    <td><?php echo $indice['nomb_rubro'] ?> </td>
+                                                    <td><?php echo $indice['desc_rubro'] ?></td>
+
+                                                    <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=6&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro=<?php echo $indice['id_rubro'];?>"
+                                                           class="btn btn-danger"> Eliminar </a></td>
+                                                </tr>
+
+                                            <?php
+                                        endforeach;
+                                        ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                                    <?php } ?>
+
+            </div>
+        </form>
+
+
+
+
+
+
+
+        <form name="formProductos" id="formActividades" action="../CONTROLADOR/ColaboradorControlador.php?op=2" method="post">
+            <div style="padding: /*0px 200px 100px 200px*/ ; ">
+                <h5> Actividades Registradas del Rubro Producto hasta el momento</h5>
+
+<?php
+if (!isset($Lista_Actividades_Productos) ||  is_null( $Lista_Actividades_Productos)) {
+    echo "<center>Aun no tienes actividades del Rubro Productos asignadas a este informe.</center>";
+} else {
+
+
+    ?>
+
+                    <div style="max-width: 1350px;" class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
+                                            <tr>
+                                                <th class="th-sm" scope="col">ID_actividad</th>
+                                                <th class="th-sm" scope="col">Nombre</th>
+                                                <th class="th-sm" scope="col">Rubro</th>
+                                                <th class="th-sm" scope="col">Descripcion Del Rubro</th>
+                                                <th class="th-sm" scope="col">Titulo_Producto</th>
+                                                <th class="th-sm" scope="col">Autor_Producto</th>
+                                                <th class="th-sm" scope="col">Estado_Producto</th>
+                                                <th class="th-sm" scope="col" >Accion</th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+    <?php
+    foreach ($Lista_Actividades_Productos as $indice):
+        ?>
+                                                <tr>
+                                                    <td><?php echo $indice['id_actividad'] ?></td>
+                                                    <td><?php echo $indice['act_nombre'] ?></td>
+                                                    <td><?php echo $indice['nomb_rubro'] ?> </td>
+                                                    <td><?php echo $indice['desc_rubro'] ?></td>
+                                                    <td><?php echo $indice['pro_titulo'] ?></td>
+                                                    <td><?php echo $indice['pro_autor'] ?></td>
+                                                    <td><?php echo $indice['pro_estado'] ?> </td>
+
+                                                 <!--   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro_productos=<?php//echo $indice['id_rubro_productos'];?>"class="btn btn-danger"> Eliminar </a></td> -->
+                                                    <td><a href="#"class="btn btn-danger"> Eliminar </a></td>
+                                                   <td><a href="#"class="btn btn-warning"> Editar </a></td>
+
+
+
+                                                </tr>
+
+        <?php
+    endforeach;
+    ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+<?php } ?>
     </div>
+</form>
+</div>
+</div>
 
 
 
-<?php }?>
+<?php  }?>
     <!-- datatables JS -->
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 

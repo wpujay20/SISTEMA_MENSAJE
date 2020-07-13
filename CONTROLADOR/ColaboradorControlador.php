@@ -299,11 +299,23 @@ switch ($opciones) {
         //Wilson: ir a modificar  Informe
     case 10:
     {
+
         $id_informe = $_REQUEST['id_informe'];
         $ColaboradorDAO = new ColaboradorDAO();
+         $ActividadesDAO = new ActividadesDAO();
+            $ProductosDAO = new ProductosDAO();
+            $RubrosDAO = new RubrosDAO();
         $ListaXid=$ColaboradorDAO->ListarInformePorID($id_informe);
+
+
+
+        // $_SESSION['Lista_Actividades_Agregadas'] = $ActividadesDAO->ListarActividadesSegunInforme($ActividadesBean);
+        $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+        // $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
+
+
         $_SESSION['ListaXid']= $ListaXid;
-        echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
+         echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
              break;
     }
     case 11:
