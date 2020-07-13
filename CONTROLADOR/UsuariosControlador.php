@@ -54,8 +54,10 @@ switch ($opciones) {
 
     case 3: {
             
-             unset($_SESSION['LISTA_INFORMES_RR_HH']);
-             
+            unset($_SESSION['LISTA_INFORMES_RR_HH']);
+            unset($_SESSION['lista_informes_sin_productos']);
+            unset($_SESSION['lista_informes_con_productos']);
+            unset($_SESSION['lista_detalle_informes']);
             $RRHH_DAO = new RRHH_DAO();
             $_SESSION['LISTA_INFORMES_RR_HH']= $RRHH_DAO->Listar_Informes_RR_HH();
             

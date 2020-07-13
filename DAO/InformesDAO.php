@@ -62,50 +62,54 @@ class InformesDAO {
                     INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
                     
                     WHERE inf.id_informe=$id_informe";
-
+        
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
-
-        //$instanciaCompartida->setArray(null);
-
+//        var_export($lista);
+        $instanciaCompartida->setArray(null);
+        
         return $lista;
     }
 
     public function ListarInformeCompleto_ConProductos($id_informe) {
 
         $instanciaCompartida = ConexionBD::getInstance();
-        $sql = "  SELECT *  FROM informe as inf 
-                        INNER JOIN colaborador as col on col.id_colaborador=inf.id_colaborador 
-                        INNER JOIN area as area on col.id_area=area.id_area 
-                        INNER JOIN actividad as act on act.id_informe=inf.id_informe
-                        INNER JOIN rubro_productos as rub on rub.id_rubro_productos =act.id_rubro_productos
-                        INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf 
-                        INNER JOIN periodo as per ON per.id_periodo=inf.id_periodo
-                        INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
-                        WHERE inf.id_informe=$id_informe";
 
+        $sql = "SELECT act.act_nombre, rb.nomb_rubro, inf.id_informe, rub.id_rubro_productos, rub.pro_titulo, rub.pro_autor, rub.pro_estado FROM informe as inf 
+                INNER JOIN actividad as act on act.id_informe=inf.id_informe 
+                INNER JOIN rubro_productos as rub on rub.id_rubro_productos =act.id_rubro_productos 
+                INNER JOIN rubro as rb on rb.id_rubro=act.id_rubro 
+                WHERE inf.id_informe=$id_informe";
+        
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
-
-        //$instanciaCompartida->setArray(null);
+//        var_export($lista);
+        $instanciaCompartida->setArray(null);
 
         return $lista;
     }
-    
-    public function Detalle_Inf($id_informe){
-        $instanciaCompartida=ConexionBD::getInstance();
-        $sql="SELECT * FROM informe as inf "
-                . "INNER JOIN detalle_informe as det on det.id_det_inf=inf.id_det_inf "
-                . "WHERE inf.id_informe=$id_informe";
-        $rs=$instanciaCompartida->ejecutar($sql);
-        $lista=$instanciaCompartida->obtener_filas($rs);
+
+    public function Detalle_Inf($id_informe) {
+        
+        $instanciaCompartida = ConexionBD::getInstance();
+        
+        $sql = "SELECT * FROM informe as inf 
+                INNER JOIN detalle_informe as det on det.id_det_inf=inf.id_det_inf 
+                WHERE inf.id_informe=$id_informe";
+       
+        $rs = $instanciaCompartida->ejecutar($sql);
+        $lista = $instanciaCompartida->obtener_filas($rs);
+//        var_export($lista);
+        $instanciaCompartida->setArray(null);
         return $lista;
     }
-    
-    public function Archivar_Inf($id_informe){
-        $instanciaCompartida=ConexionBD::getInstance();
-        $sql="UPDATE INFORME SET id_estado_inf=5 WHERE id_informe=$id_informe";
-        $estado=$instanciaCompartida->EjecutarConEstado($sql);
+
+    public function Archivar_Inf($id_informe) {
+        $instanciaCompartida = ConexionBD::getInstance();
+        $sql = "UPDATE INFORME SET id_estado_inf=5 WHERE id_informe=$id_informe";
+        $estado = $instanciaCompartida->EjecutarConEstado($sql);
+
         return $estado;
     }
+
 }

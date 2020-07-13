@@ -87,7 +87,8 @@ switch ($opciones) {
 
     case 3: {
 //PERMITE LISTAR LOS INFROMES QUE SE VAN CONSOLIDAR
-
+            unset($_SESSION['lista_informes_con_productos']);
+            unset($_SESSION['lista_informes_sin_productos']);
             unset($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']);
 
             $JefeDAO = new JefeDAO();
@@ -184,7 +185,9 @@ switch ($opciones) {
 
     case 8: {
 //VISUALIZACION DE INFORMES ESPECIFICOS POR SU ID- YA SEA DE PRODUCTOS O NO
-
+            unset($_SESSION['lista_informes_con_productos']);
+            unset($_SESSION['lista_informes_sin_productos']);
+            
             $id_informe = $_REQUEST['id_informe'];
 
             $InformesDAO = new InformesDAO();
@@ -193,6 +196,7 @@ switch ($opciones) {
             //$_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
             $inf1 = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
             $inf2 = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            
             if ($inf1 != null && $inf2 != null) {
                 $_SESSION['lista_informes_sin_productos'] = $inf1;
                 $_SESSION['lista_informes_con_productos'] = $inf2;
