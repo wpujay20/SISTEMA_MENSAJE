@@ -28,6 +28,8 @@ class RRHH_DAO {
             INNER join trabajador as trab on trab.id_trabajador=jef.id_trabajador
             INNER join area as area on area.id_area=jef.id_area
             INNER join estado_informe as est on inf.id_estado_inf=est.id_estado_inf
+            INNER join actividad as act on act.id_informe=inf.id_informe
+            INNER join tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
             where (inf.id_estado_inf=4) or (inf.id_estado_inf=5)";
 
             

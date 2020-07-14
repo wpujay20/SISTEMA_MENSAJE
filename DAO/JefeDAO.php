@@ -54,6 +54,7 @@ class JefeDAO {
             INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf 
             INNER JOIN periodo as per ON per.id_periodo=inf.id_periodo
             INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
+            INNER JOIN tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
             WHERE area.id_area = " . $_SESSION['id_area'] . "
             AND inf.id_estado_inf  BETWEEN 2 AND 4
             GROUP by inf.id_informe
@@ -77,6 +78,7 @@ class JefeDAO {
             INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf 
             INNER JOIN periodo as per ON per.id_periodo=inf.id_periodo
             INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
+            INNER JOIN tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
             WHERE area.id_area = " . $_SESSION['id_area'] . "
             AND inf.id_estado_inf BETWEEN 2 and 3
             GROUP by inf.id_informe"

@@ -12,6 +12,7 @@ if (isset($_SESSION['lista_informes_sin_productos']) && isset($_SESSION['lista_d
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
     $detalleInforme = $_SESSION['lista_detalle_informes'];
 }
+//var_export($detalleInforme);
 ?>
 
 <!doctype html>

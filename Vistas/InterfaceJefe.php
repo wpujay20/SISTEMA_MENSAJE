@@ -60,10 +60,11 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR']==null){
                         <div class="table-responsive">        
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
-                                        <th class="th-sm" scope="col" >ID_informe</th>
-                                        <th class="th-sm" scope="col" >Nombres_Colaborador</th>
-                                        <th class="th-sm" scope="col" >Apellidos_Colaborador</th>
-                                        <th class="th-sm" scope="col" >DNI</th>
+                                        <th class="th-sm" scope="col" >ID_Inf</th>
+                                        <th class="th-sm" scope="col" >Nombres Colaborador</th>
+                                        <th class="th-sm" scope="col" >Apellidos Colaborador</th>
+<!--                                        <th class="th-sm" scope="col" >DNI</th>-->
+                                        <th class="th-sm" scope="col">Tipo_de_Actividad</th>
                                         <th class="th-sm" scope="col">Titulo</th>
                                         <th class="th-sm" scope="col">Area</th>               
                                         <th class="th-sm" scope="col">Fecha</th>
@@ -84,7 +85,8 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR']==null){
                                                 <td><?php echo $indice['id_informe'] ?></td>
                                                 <td><?php echo $indice['nombre'] ?> </td>
                                                 <td><?php echo $indice['apellido'] ?> </td>
-                                                <td><?php echo $indice['dni'] ?> </td>
+<!--                                                <td><?php //echo $indice['dni'] ?> </td>-->
+                                                <td><?php echo $indice['nomb_tipo_act'] ?></td>
                                                 <td><?php echo $indice['inf_titulo_col'] ?></td>
                                                 <td><?php echo $indice['area_nombre'] ?> </td>
                                                 <td><?php echo $indice['inf_fecha'] ?></td>

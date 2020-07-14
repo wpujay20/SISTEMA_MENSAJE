@@ -187,39 +187,23 @@ switch ($opciones) {
 //VISUALIZACION DE INFORMES ESPECIFICOS POR SU ID- YA SEA DE PRODUCTOS O NO
             unset($_SESSION['lista_informes_con_productos']);
             unset($_SESSION['lista_informes_sin_productos']);
-            
+
             $id_informe = $_REQUEST['id_informe'];
 
             $InformesDAO = new InformesDAO();
-
-            //$_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            //$_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            $inf1 = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            $inf2 = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            
-            if ($inf1 != null && $inf2 != null) {
-                $_SESSION['lista_informes_sin_productos'] = $inf1;
-                $_SESSION['lista_informes_con_productos'] = $inf2;
-                echo '<script> document.location.href="../Vistas/(Jefe)_Visualizar_Informes.php";</script>';
-            } else {
-                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script> ';
-            }
+            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            echo '<script> document.location.href="../Vistas/(Jefe)_Visualizar_Informes.php";</script>';
 
             break;
         }
-    case 9:{//VISUALIZACION DE INFORMES PARA RRHH
+    case 9: {//VISUALIZACION DE INFORMES PARA RRHH
             $id_informe = $_REQUEST['id_informe'];
             $InformesDAO = new InformesDAO();
-            $inf1 = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            $inf2 = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            if ($inf1 != null && $inf2 != null) {
-                $_SESSION['lista_informes_sin_productos'] = $inf1;
-                $_SESSION['lista_informes_con_productos'] = $inf2;
-                echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
-            } else {
-                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script> ';
-            }
-    }    
+            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
+        }
 }
 ?>
 <a href=""
