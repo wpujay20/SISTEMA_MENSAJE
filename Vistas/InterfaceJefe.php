@@ -9,7 +9,7 @@ if (isset($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR'])) {
 if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR']==null){
         $InformesJEFE=null;
  }
-
+ 
 ?>
 <!doctype html>
 <html lang="es">

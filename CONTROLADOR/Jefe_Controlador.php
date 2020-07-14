@@ -147,6 +147,16 @@ switch ($opciones) {
 
 //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
 
+//RESTRICCION DE HORA DE ENVIO
+//            date_default_timezone_set('America/Lima');
+//            $date = getdate();
+//            if($date['weekday']=='Friday' && $date['hours']>=20){
+//                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script>';
+//            }else{
+//            
+//                //AQUI VA LA ACCION A REALIZARSE SI AUN NO EXPIRA LA HORA DE ENVIO
+//            
+//            }
             $id_informe = $_REQUEST['id_informe'];
             $Titulo = $_REQUEST['Titulo'];
             $Asunto = $_REQUEST['Asunto'];
@@ -175,9 +185,6 @@ switch ($opciones) {
                     echo '<script> document.location.href="../CONTROLADOR/Jefe_Controlador.php?op=3";</script>';
                 }
             }
-
-
-
             break;
         }
 

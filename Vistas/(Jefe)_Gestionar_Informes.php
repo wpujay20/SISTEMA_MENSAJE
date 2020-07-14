@@ -102,8 +102,6 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                                                 <?php } ?>
 
                                             </tr>
-
-
                                         <?php endforeach;
                                     }
                                     ?>
