@@ -143,22 +143,90 @@ switch ($opciones) {
             break;
         }
 
+//    case 7: {
+//
+////PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
+//            date_default_timezone_set('America/Lima');
+//            //INICIALIZACION DE VARIABLES
+//            $dat1 = null;
+//            $dat2 = null;
+//            //VARIABLES NECESARIAS PARA ENVIAR INFORME -------------
+//            //$datfin = null;
+//            $arg = 'Aprobado';
+//            //------------------------------------------------------
+//            $id_informe = $_REQUEST['id_informe'];
+//            $id_traba=$_SESSION['id_trabajador'];
+//            
+//            $InformesDAO = new InformesDAO();
+//            //OBTENER ARRAY CON LISTA DE FECHAS Y NOMBRES DE ESTADOS DE INFORMES
+//            $dateinf = $InformesDAO->Fecha_Inf($id_traba);
+//            //EXTRAER EL NUMERO DE SEMANA DE LA FECHA ACTUAL
+//            $fecha = date('m/d/Y', strtotime('now'));
+//            $dat2 = strftime("%V", strtotime($fecha));
+//            //RECORRER EL ARRAY DE LA LISTA CON FECHAS Y NOMBRES DE ESTADOS DE INFORMES
+//            foreach ($dateinf as $info):
+//                //EXTRAER EL NUMERO DE SEMANA DE LA FECHA DE LOS INFORMES 1 POR 1
+//                $ars = date('m/d/Y', strtotime($info['inf_fecha']));
+//                $dat1 = strftime("%V", strtotime($ars));
+//                //CONDICIONAL PARA EVALUAR SI HAY NUMERO DE SEMANA IGUALES EN FUNCION AL ESTADO
+//                if ($dat1 == $dat2 && ($info['nom_estado_inf']=='Enviado a RRHH' || $info['nom_estado_inf']=='Archivado')) {
+////                    $arg = $info['nom_estado_inf'];
+//                    $arg=null;
+//                }
+//                //DESTRUIR LAS VARIABLES PARA QUE NO SE ACUMULEN DURANTE EL RECORRIDO
+//                unset($ars);
+//                unset($dat1);
+//            endforeach;
+//            
+////            var_dump($datfin);
+////            var_dump($arg);
+//
+//            if ($arg!=null) {
+//                $date = null;
+//                $date = getdate();
+//
+//                if (($date['weekday'] == 'Friday' || $date['weekday'] == 'Saturday' || $date['weekday'] == 'Sunday') && $date['hours'] >= 20) {
+//                    echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script>';
+//                } else {
+//
+//                    $Titulo = $_REQUEST['Titulo'];
+//                    $Asunto = $_REQUEST['Asunto'];
+//                    $Descripcion = $_REQUEST['Descripcion'];
+//                    $id_jefe = $_SESSION['id_jefe'];
+//
+//
+//                    $JefeDAO = new JefeDAO();
+//                    $DetalleBean = new Detalle_Informe_Bean();
+//
+//                    $DetalleBean->setId_jefe($id_jefe);
+//                    $DetalleBean->setTitulo_desc($Titulo);
+//                    $DetalleBean->setAsunto($Asunto);
+//                    $DetalleBean->setDescripcion($Descripcion);
+//
+//                    $AñadirDetalleInforme = $JefeDAO->AgregarDettale_informe($DetalleBean);
+//
+//
+//                    if ($AñadirDetalleInforme > 0) {
+//
+//                        $informeListo = $JefeDAO->AñadirDetalle($DetalleBean, $id_informe);
+//
+//                        $ActualizarInforme = $JefeDAO->ActualizarInformeOK($id_informe, 2);
+//
+//                        if ($ActualizarInforme > 0) {
+//                            echo '<script> document.location.href="../CONTROLADOR/Jefe_Controlador.php?op=3";</script>';
+//                        }
+//                    }
+//                }
+//            } else {
+//                echo '<script src="../JAVASCRIPT/InformeDiario.js"></script>';
+//            }
+//
+//            break;
+//        }
     case 7: {
 
 //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
 
-//RESTRICCION DE HORA DE ENVIO
-//            $date=null;
-//            date_default_timezone_set('America/Lima');
-//            $date = getdate();
-//            if($date['weekday']=='Friday' && $date['hours']>=20){
-//                echo '<script src="../JAVASCRIPT/(Jefe)ErrorGeneral.js"></script>';
-//            }else{
-//            
-//                //AQUI VA LA ACCION A REALIZARSE SI AUN NO EXPIRA LA HORA DE ENVIO
-//                
-//            }
- 
             $id_informe = $_REQUEST['id_informe'];
             $Titulo = $_REQUEST['Titulo'];
             $Asunto = $_REQUEST['Asunto'];
@@ -186,12 +254,9 @@ switch ($opciones) {
                 if ($ActualizarInforme > 0) {
                     echo '<script> document.location.href="../CONTROLADOR/Jefe_Controlador.php?op=3";</script>';
                 }
+                break;
             }
-            
-            break;
         }
-
-
 
     case 8: {
 //VISUALIZACION DE INFORMES ESPECIFICOS POR SU ID- YA SEA DE PRODUCTOS O NO
