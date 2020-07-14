@@ -75,9 +75,10 @@ class InformesDAO {
 
         $instanciaCompartida = ConexionBD::getInstance();
 
-        $sql = "SELECT act.act_nombre, rb.nomb_rubro, inf.id_informe, rub.id_rubro_productos, rub.pro_titulo, rub.pro_autor, rub.pro_estado FROM informe as inf 
+        $sql = "SELECT act.act_nombre,act.id_tipo_act, tac.nomb_tipo_act, rb.nomb_rubro, inf.id_informe, rub.id_rubro_productos, rub.pro_titulo, rub.pro_autor, rub.pro_estado FROM informe as inf 
                 INNER JOIN actividad as act on act.id_informe=inf.id_informe 
                 INNER JOIN rubro_productos as rub on rub.id_rubro_productos =act.id_rubro_productos 
+                INNER JOIN tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
                 INNER JOIN rubro as rb on rb.id_rubro=act.id_rubro 
                 WHERE inf.id_informe=$id_informe";
         

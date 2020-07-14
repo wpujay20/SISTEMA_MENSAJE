@@ -1,10 +1,17 @@
 <?php
 session_start();
 
-if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_informes_sin_productos'])) {
+if ($_SESSION['lista_informes_con_productos'] == null || !isset($_SESSION['lista_informes_con_productos'])) {
+    $informesConProductos = null;
+} else {
     $informesConProductos = $_SESSION['lista_informes_con_productos'];
+}
+
+if (isset($_SESSION['lista_informes_sin_productos'])) {
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
 }
+
+
 //var_dump($informesConProductos);
 //var_dump($informesSinProductos);
 ?>
@@ -90,6 +97,8 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
 
                                     </tr>
                                 </thead>
+                                
+                                
                                 <tbody>
                                     <?php
                                     $i = 0;
@@ -111,7 +120,9 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
 
                         </div>
                         <?php
-                        if ($informesConProductos != null) {
+                        if (!isset($informesConProductos) || $informesConProductos == null) {
+                            echo "<center>Este informe no registra actividades de Rubro Productos</center>";
+                        } else {
                             ?>
                             <div class="form-group">
                                 <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
@@ -131,9 +142,7 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                                         <tr>
                                             <?php
                                             $a = 0;
-                                            foreach ($informesConProductos as $ind):
-                                                
-                                                if ($informesConProductos[$a]['id_rubro_productos'] != null && $informesConProductos[$a]['nomb_rubro'] == "Productos" ) {
+                                            foreach ($informesConProductos as $ind): 
                                                     ?>
                                                     <td> <?php echo $informesConProductos[$a]['act_nombre'];?> </td> 
                                                     <td> <?php echo $informesConProductos[$a]['nomb_rubro'];?> </td> 
@@ -142,8 +151,6 @@ if (isset($_SESSION['lista_informes_con_productos']) && isset($_SESSION['lista_i
                                                     <td> <?php echo $informesConProductos[$a]['pro_estado'];?> </td> 
                                                     <?php
                                                      $a++;
-                                                }
-                                                
                                             endforeach;
                                         }
                                         ?>

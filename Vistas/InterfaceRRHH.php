@@ -51,13 +51,14 @@ if (!isset($_SESSION)) {
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
 
-                                        <th class="th-sm" scope="col">Id_Informe</th>
+                                        <th class="th-sm" scope="col">ID_Inf</th>
+                                        <th class="th-sm" scope="col">Tipo_de_Actividad</th>
                                         <th class="th-sm" scope="col">Titulo_informe</th>               
                                         <th class="th-sm" scope="col">Fecha</th>
                                         <th class="th-sm" scope="col">Area</th>
                                         <th class="th-sm" scope="col">Nombre_jefe</th>
                                         <th class="th-sm" scope="col">Apellido_jefe</th>
-                                        <th class="th-sm" scope="col">Dni_Jefe</th>
+<!--                                        <th class="th-sm" scope="col">Dni_Jefe</th>-->
                                         <th class="th-sm" scope="col">Estado</th>
                                         <th class="th-sm" scope="col" >Acciones</th>
                                         <th class="th-sm" scope="col" >Acciones</th>
@@ -74,12 +75,13 @@ if (!isset($_SESSION)) {
                                     <tr>
 
                                         <td><?php echo $indice['id_informe']?></td>
+                                        <td><?php echo $indice['nomb_tipo_act'] ?></td>
                                         <td><?php echo $indice['inf_titulo_col']?></td>
                                         <td><?php echo $indice['inf_fecha']?></td>
                                         <td><?php echo $indice['area_nombre']?></td>
                                         <td><?php echo $indice['nombre']?></td>
                                         <td><?php echo $indice['apellido']?></td>
-                                        <td><?php echo $indice['dni']?></td>
+<!--                                        <td><?php //echo $indice['dni']?></td>-->
                                         <td><?php echo $indice['nom_estado_inf']?></td>
                                         <td><a href="../CONTROLADOR/RRHH_Controlador.php?op=1&id_informe=<?php echo $indice['id_informe'];?>" class="btn btn-info"> Visualizar </a></td>
                                         <td>

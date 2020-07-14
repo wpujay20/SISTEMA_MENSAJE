@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-if (isset($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'])) {   
-    $InformesJEFE = $_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']; 
+if (isset($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'])) {
+    $InformesJEFE = $_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'];
 }
-if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']==null){
-        $InformesJEFE=null;
-    }
+if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
+    $InformesJEFE = null;
+}
 ?>
 
 <!doctype html>
@@ -35,9 +35,9 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']==null){
         <div style="height:50px">
             <div class="card-body">
                 <!-- Button trigger modal -->
-               <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver">Volver al Menu Principal</a>
+                <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver">Volver al Menu Principal</a>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
-              
+
                 <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
             </div>
 
@@ -55,10 +55,11 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']==null){
                         <div class="table-responsive">        
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
-                                        <th class="th-sm" scope="col" >ID_informe</th>
-                                        <th class="th-sm" scope="col" >Nombres_Colaborador</th>
-                                        <th class="th-sm" scope="col" >Apellidos_Colaborador</th>
-                                        <th class="th-sm" scope="col" >DNI</th>
+                                        <th class="th-sm" scope="col" >ID_Inf</th>
+                                        <th class="th-sm" scope="col" >Nombres Colaborador</th>
+                                        <th class="th-sm" scope="col" >Apellidos Colaborador</th>
+<!--                                        <th class="th-sm" scope="col" >DNI</th>-->
+                                        <th class="th-sm" scope="col">Tipo_de_Actividad</th>
                                         <th class="th-sm" scope="col">Titulo</th>
                                         <th class="th-sm" scope="col">Area</th>               
                                         <th class="th-sm" scope="col">Fecha</th>
@@ -66,9 +67,6 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']==null){
                                         <th class="th-sm" scope="col">Acciones</th>
                                         <th class="th-sm" scope="col">Acciones</th>
                                         <th class="th-sm" scope="col">Acciones</th>
-
-
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,33 +81,35 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR']==null){
                                                 <td><?php echo $indice['id_informe'] ?></td>
                                                 <td><?php echo $indice['nombre'] ?> </td>
                                                 <td><?php echo $indice['apellido'] ?> </td>
-                                                <td><?php echo $indice['dni'] ?> </td>
+                                                <td><?php echo $indice['nomb_tipo_act'] ?> </td>
+<!--                                                <td><?php //echo $indice['dni'] ?> </td>-->
                                                 <td><?php echo $indice['inf_titulo_col'] ?></td>
                                                 <td><?php echo $indice['area_nombre'] ?> </td>
                                                 <td><?php echo $indice['inf_fecha'] ?></td>
-                                                 <td><?php echo $indice['nom_estado_inf'] ?></td>
-                                                
-                                                
-                                                <?php if($indice['nom_estado_inf']=='Enviado a Jefatura'){ ?>
-                                                
-                                                <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Visualizar </a></td>   
-                                                <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=4&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-success"> Aprobar </a></td>
-                                                <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=6&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-danger"> Rechazar </a></td>   
-                                                
-                                                <?php } else if ($indice['nom_estado_inf']=='Aprobado por Jefatura'){ ?> 
-                                                <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Visualizar </a></td>   
-                                                <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=5&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-secondary"> Desaprobar </a></td>  
-                                                <td><a href="../Vistas/(Jefe)_Enviar_RRHH.php?&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-warning"> Enviar RR.HH </a></td>  
-                                                <?php }?>
-                                               
-                                            </tr>
-                                         
+                                                <td><?php echo $indice['nom_estado_inf'] ?></td>
 
-                                <?php endforeach;
-                            } ?>
+
+                                                <?php if ($indice['nom_estado_inf'] == 'Enviado a Jefatura') { ?>
+
+                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
+                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=4&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-success"> Aprobar </a></td>
+                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=6&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-danger"> Rechazar </a></td>   
+
+                                                <?php } else if ($indice['nom_estado_inf'] == 'Aprobado por Jefatura') { ?> 
+                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
+                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=5&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-secondary"> Desaprobar </a></td>  
+                                                    <td><a href="../Vistas/(Jefe)_Enviar_RRHH.php?&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-warning"> Enviar RR.HH </a></td>  
+                                                <?php } ?>
+
+                                            </tr>
+
+
+                                        <?php endforeach;
+                                    }
+                                    ?>
 
                                 </tbody>
-                               
+
                             </table>
                         </div>
                     </div>
