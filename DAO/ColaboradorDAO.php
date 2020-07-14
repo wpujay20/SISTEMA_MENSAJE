@@ -54,6 +54,7 @@ class ColaboradorDAO {
                     WHERE inf.id_informe=$id_informe";
              $rs = $instanciaCompartida->ejecutar($sql);
              $array = $instanciaCompartida->obtener_filas($rs);
+             $instanciaCompartida->setArray(null);
 
              return $array;
 

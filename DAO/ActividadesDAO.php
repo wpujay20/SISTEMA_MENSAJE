@@ -108,20 +108,6 @@ class ActividadesDAO {
         return $lista;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function ListarActividadesSegunInformeProductos(ActividadesBean $ActividadBean) {
 
         try {
@@ -160,8 +146,6 @@ class ActividadesDAO {
         return $estado;
     }
 
-
-
     public function EliminarActividadesPor_ID_Actividad($id_actividad) {
 
 
@@ -172,25 +156,48 @@ class ActividadesDAO {
 
         return $estado;
     }
+
 ///___________________________funciones para editar____________________________________________________________________________________________
     public function ListarActividadesSegunInformeProductos2($id_informe) {
 
-            try {
-                 $instanciacompartida = ConexionBD::getInstance();
-                $sql = " SELECT act.id_actividad, act.act_nombre,rub.id_rubro,rub.nomb_rubro,rub.desc_rubro,pro.id_rubro_productos,pro.pro_titulo,pro.pro_autor,pro.pro_estado FROM rubro_productos as pro
+        try {
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = " SELECT act.id_actividad, act.act_nombre,rub.id_rubro,rub.nomb_rubro,rub.desc_rubro,pro.id_rubro_productos,pro.pro_titulo,pro.pro_autor,pro.pro_estado FROM rubro_productos as pro
                         INNER JOIN actividad as act on act.id_rubro_productos=pro.id_rubro_productos
                         INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro
                         where act.id_informe=$id_informe";
 
-                  $res = $instanciacompartida->EjecutarConEstado($sql);
-                   $lista = $instanciacompartida->obtener_filas($res);
+            $res = $instanciacompartida->EjecutarConEstado($sql);            
+            $lista = $instanciacompartida->obtener_filas($res);
+            $instanciacompartida->setArray(null);
 
+            return $lista;
+        } catch (Exception $ex) {
+            
+        }
+    }
 
-                return $lista;
-            } catch (Exception $ex) {
-                echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
-            }
+    public function ListarActividadesSegunInforme2($id_informe) {
+        try { 
+        $instanciacompartida = ConexionBD::getInstance();
+//        $sql="SELECT act.id_actividad,act.act_nombre,rub.id_rubro,rub.nomb_rubro,rub.desc_rubro,tpa.id_tipo_act,tpa.nomb_tipo_act FROM actividad as act
+//                 INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro INNER JOIN tipo_actividad as tpa on tpa.id_tipo_act=act.id_tipo_act
+//             WHERE act.id_informe= 10 and rub.id_rubro<>5 and act.id_tipo_act=2";
+        $sql = "SELECT act.id_actividad,act.act_nombre,rub.id_rubro,rub.nomb_rubro,rub.desc_rubro,tpa.id_tipo_act,tpa.nomb_tipo_act FROM actividad as act
+                 INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro INNER JOIN tipo_actividad as tpa on tpa.id_tipo_act=act.id_tipo_act
+             WHERE act.id_informe= $id_informe   and rub.id_rubro<>5"; 
+        
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+        $instanciacompartida->setArray(null);
+        
+                      
+        } catch (Exception $ex) {
+            
         }
 
-}
 
+      return $lista;
+    }
+
+}

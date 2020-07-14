@@ -221,7 +221,6 @@ switch ($opciones) {
 
 
     case 6: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PERSONALIZADOS
-
             $id_actividad = $_REQUEST['id_actividad'];
             $id_informe = $_SESSION['id_ultimo_informe'];
 
@@ -233,7 +232,6 @@ switch ($opciones) {
         }
 
     case 7: { //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-
             $id_actividad = $_REQUEST['id_actividad'];
             $id_informe = $_SESSION['id_ultimo_informe'];
             $id_rubro_productos = $_REQUEST['id_rubro_productos'];
@@ -247,12 +245,11 @@ switch ($opciones) {
                 echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
             }
             break;
-    }
+        }
 
-     case 8:
-     {
+    case 8: {
 
-      $msj = $_REQUEST['msj'];
+            $msj = $_REQUEST['msj'];
             if ($msj == 1) {
 
                 $_SESSION['id_informe'] = $_REQUEST['id_informe'];
@@ -269,7 +266,7 @@ switch ($opciones) {
             }
 
             break;
-     }
+        }
 
     case 9: {
             $del = $_REQUEST['del'];
@@ -277,59 +274,52 @@ switch ($opciones) {
 
                 $_SESSION['id_informe'] = $_REQUEST['id_informe'];
                 echo '<script src="../JAVASCRIPT/(Colaborador)_Eliminar_informe.js"></script> ';
-
             } else {
 
                 $infDAO = new InformesDAO();
-                $actDAO=new ActividadesDAO();
+                $actDAO = new ActividadesDAO();
                 $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
                 $estado = $infDAO->EliminarInforme_por_ID($_SESSION['id_informe']);
                 unset($_SESSION['id_informe']);
                 var_dump($estado);
-                if ($estado ==true) {
+                if ($estado == true) {
                     echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
-                }else{
+                } else {
                     echo '<script src="../JAVASCRIPT/(Colaborador)ErrorGeneral.js"></script> ';
-
                 }
             }
 
             break;
         }
-        //Wilson: ir a modificar  Informe
-    case 10:
-    {
+    //Wilson: ir a modificar  Informe
+    case 10: {
+            unset($_SESSION['Lista_Activi_Productos']);
+            unset($_SESSION['Lista_Actividades']);
 
-        $id_informe = $_REQUEST['id_informe'];
-        $ColaboradorDAO = new ColaboradorDAO();
-         $ActividadesDAO = new ActividadesDAO();
+
+            $id_informe = $_REQUEST['id_informe'];
+            $ColaboradorDAO = new ColaboradorDAO();
+            $ActividadesDAO = new ActividadesDAO();
             $ProductosDAO = new ProductosDAO();
             $RubrosDAO = new RubrosDAO();
-        $ListaXid=$ColaboradorDAO->ListarInformePorID($id_informe);
+            $ListaXid = $ColaboradorDAO->ListarInformePorID($id_informe);
 
 
-
-        // $_SESSION['Lista_Actividades_Agregadas'] = $ActividadesDAO->ListarActividadesSegunInforme($ActividadesBean);
-        $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-        // $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
+            $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
 
 
-        $_SESSION['ListaXid']= $ListaXid;
-         echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
-             break;
-    }
-    case 11:
-    {
+            //$_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();    
 
-
-    }
+            $_SESSION['ListaXid'] = $ListaXid;
+            echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
+            break;
+        }
+    case 11: {
+            
+        }
 
         break;
-
-
-
-
-
 }
 ?>
 <a href=""></a>
