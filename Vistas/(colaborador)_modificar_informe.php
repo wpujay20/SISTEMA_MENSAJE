@@ -7,21 +7,20 @@ if (empty($_SESSION["nombre"])) {
     // var_dump($ListaXid);
     if (isset($_SESSION['Lista_Activi_Productos'])) {
         $Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
-        //var_dump($Lista_Actividades_Productos);
+//        var_dump($Lista_Actividades_Productos);
     }
     if (isset($_SESSION['Lista_Actividades'])) {
         $Lista_Actividades = $_SESSION['Lista_Actividades'];
         //var_dump($Lista_Actividades);
     }
     $listaRubrosSinProductos = $_SESSION['listarRubrosSinProductos'];
-    // var_dump( $listaRubrosSinProductos  );
+//     var_dump( $listaRubrosSinProductos  );
     $idInform = $_SESSION['id_inform'];
     // Tipo de cada informe
-    // var_dump($idInform);
-    $Tipoinforme   = $_SESSION['Tipoinforme'][0]['id_tipo_act'];
-    $NombreTipoInf = $_SESSION['Tipoinforme'][0]['nomb_tipo_act'];
-    // print("ID Tipo inform= " . $Tipoinforme . " nombre de actividad= " . $NombreTipoInf)
+    // var_dump($idInform);    
 
+    $Tipoinforme = $_SESSION['Tipoinforme'][0]['id_tipo_act'];
+    $NombreTipoInf = $_SESSION['Tipoinforme'][0]['nomb_tipo_act'];
     ?>
 
     <!DOCTYPE html>
@@ -46,9 +45,8 @@ if (empty($_SESSION["nombre"])) {
                 .Ocultar_div{
                     display: none;
                 }
-                .Ocultar_div2{
-                    display: none;
-                }
+
+
 
             </style>
             <title>Menú</title>
@@ -68,15 +66,15 @@ if (empty($_SESSION["nombre"])) {
         <body>
         <center>
 
-            <?php foreach ($ListaXid as $info) {?>
+            <?php foreach ($ListaXid as $info) { ?>
                 <div class=" ">
-                    <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe con Actividad <?php echo $NombreTipoInf ?></h4></strong>
+                    <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe con  <?php echo $NombreTipoInf ?></h4></strong>
                 </div>
             </center>
 
             <div class="d-flex">
                 <div class="col-sm-4">
-                      <!-- action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php // echo $Tipoinforme; ?>" method="post"  -->
+                      <!-- action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php // echo $Tipoinforme;        ?>" method="post"  -->
                     <form name="formRedaccion" id="formInsertar" >
 
 
@@ -122,7 +120,7 @@ if (empty($_SESSION["nombre"])) {
 
                             </div>
 
-                        <?php }?>
+                        <?php } ?>
 
                 </form>
             </div>
@@ -135,16 +133,18 @@ if (empty($_SESSION["nombre"])) {
                 <!--------------------------TABLAS DE ACTIVIDADES SIN PRODUCTO-------------------------->
                 <BR>  <BR>  <BR>
                 <h5> Actividades Registradas </h5>
-                <?php ?>
-                <form>
+                <br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">Agregar Actividad</button>
+
+                <form action="" method="post">
                     <table border="1"style="font-size: small"   class="table table-striped table-bordered" style="width:100%">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogo1">Agregar Actividad</button>
+
                         <br>
                         <?php
-if (!isset($Lista_Actividades) || $Lista_Actividades == null) {
-        echo 'Su informe no tiene actividades  ';
-    } else {
-        ?>
+                        if (!isset($Lista_Actividades) || $Lista_Actividades == null) {
+                            echo 'Su informe no tiene actividades  ';
+                        } else {
+                            ?>
                             <thead>
                                 <tr>
                                     <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
@@ -158,29 +158,27 @@ if (!isset($Lista_Actividades) || $Lista_Actividades == null) {
                                 <?php foreach ($Lista_Actividades as $LA): ?>
 
                                     <tr>
-                                        <!-- <td><?php// echo$LA['id_actividad'] ?></td> -->
+                                        <!-- <td><?php // echo$LA['id_actividad']        ?></td> -->
                                         <td><?php echo $LA['act_nombre'] ?></td>
                                         <td><?php echo $LA['nomb_rubro'] ?></td>
                                         <td><?php echo $LA['desc_rubro'] ?></td>
-
-                                        <td><a href="#"class="btn btn-danger"> Eliminar </a></td>
+                                        <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=14
+                                               &id_actividad=<?php echo $LA['id_actividad']; ?>
+                                               &id_rubro=<?php echo $LA['id_rubro']; ?>
+                                               &idInform=<?php echo $idInform; ?>"
+                                               class="btn btn-danger"> Eliminar </a></td>
 
                                     </tr>
                                     <?php
-endforeach;
-    }
-    ?>
+                                endforeach;
+                            }
+                            ?>
                         </tbody>
                     </table>
 
                 </form>
 
-                <?php ?>
-
-
-                <?php ?>
-
-                <form>
+                <form action="" method="post">
 
                     <br><br><br>
                     <!--------------------------TABLAS DE ACTIVIDADES CON PRODUCTO-------------------------->
@@ -189,45 +187,52 @@ endforeach;
                         <br>
 
                         <?php
-if (!isset($Lista_Actividades_Productos) || $Lista_Actividades == null) {
-        echo 'Su informe no tiene actividades del tipo producto';
-    } else {
-        foreach ($Lista_Actividades_Productos as $LAP):
-        ?>
-                                <thead>
-                                    <tr>
-                                        <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
-                                        <th class="th-sm" scope="col">Nombre</th>
-                                        <th class="th-sm" scope="col">Rubro</th>
-                                        <th class="th-sm" scope="col">Descripcion Del Rubro</th>
-                                        <th class="th-sm" scope="col">Titulo_Producto</th>
-                                        <th class="th-sm" scope="col">Autor_Producto</th>
-                                        <th class="th-sm" scope="col">Estado_Producto</th>
-                                        <th class="th-sm text-center"  scope="col" >Accion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        if (!isset($Lista_Actividades_Productos) || $Lista_Actividades == null) {
+                            echo 'Su informe no tiene actividades del tipo producto';
+                        } else
+                            
+                            ?>
+                        <thead>
+                            <tr>
+                                <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
+                                <th class="th-sm" scope="col">Nombre</th>
+                                <th class="th-sm" scope="col">Rubro</th>
+                                <th class="th-sm" scope="col">Descripcion Del Rubro</th>
+                                <th class="th-sm" scope="col">Titulo_Producto</th>
+                                <th class="th-sm" scope="col">Autor_Producto</th>
+                                <th class="th-sm" scope="col">Estado_Producto</th>
+                                <th class="th-sm text-center"  scope="col" >Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php {
+                                foreach ($Lista_Actividades_Productos as $LAP):
+                                    ?>
+
 
                                     <tr>
-                                        <!-- <td><?php // echo $LAP['id_actividad']; ?></td> -->
+                                        <!-- <td><?php // echo $LAP['id_actividad'];        ?></td> -->
                                         <td><?php echo $LAP['act_nombre']; ?></td>
-                                        <td><?php echo $LAP['id_rubro']; ?></td>
+                                        <!--<td><?php // echo $LAP['id_rubro'];     ?></td>-->
                                         <td><?php echo $LAP['nomb_rubro']; ?></td>
-                                        <td><?php echo $LAP['desc_rubro']; ?></td>
-                                        <td><?php echo $LAP['id_rubro_productos']; ?></td>
+                                        <td><?php echo $LAP['desc_rubro']; ?></td>                                       
                                         <td><?php echo $LAP['pro_titulo']; ?></td>
-                                               <!--   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php echo $indice['id_actividad']; ?>&id_rubro_productos=<?php //echo $indice['id_rubro_productos'];                                                                  ?>"class="btn btn-danger"> Eliminar </a></td> -->
-                                        <td><a href="#"class="btn btn-danger"> Eliminar </a></td>
+                                        <td><?php echo $LAP['pro_autor']; ?></td>
+                                        <td><?php echo $LAP['pro_estado']; ?></td>
+
+                                        <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=15&id_actividad=<?php echo $LAP['id_actividad']; ?>&id_rubro_productos=<?php echo $LAP['id_rubro_productos']; ?>&idInform=<?php echo $idInform; ?>"                                              
+                                               class="btn btn-danger"> Eliminar 
+                                            </a>
+                                        </td> 
+
                                     </tr>
                                     <?php
-endforeach;
-    }
-    ?>
+                                endforeach;
+                            }
+                            ?>
 
                         </tbody>
                     </table>
-
-
                 </form>
                 <?php ?>
                 <!---------------------------------MODAL PARA AGREGAR  ACTIVIDADES------------------------------------------------------>
@@ -245,8 +250,8 @@ endforeach;
 
                                 <!-- cuerpo del diálogo                                          ../CONTROLADOR/ColaboradorControlador.php?op=3    -->
                                 <div class="modal-body modal-xl ">
+                                    <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=13&idInform=<?php echo $idInform; ?>&idTipoAct=<?php echo $Tipoinforme; ?>" method="post">
 
-                                    <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=13&id_informe=<?php echo $idInform; ?>&idTipoAct<?php echo $Tipoinforme; ?>" method="post">
 
                                         <div style="padding: 30px 200px 10px 200px ; ">
 
@@ -293,11 +298,11 @@ endforeach;
                                                     <label>Seleccione la Rubro al cual pertenece su actividad </label>
                                                     <select class="form-control" name="rubro" id="rubro">
                                                         <?php
-foreach ($listaRubrosSinProductos as $fila) {
+                                                        foreach ($listaRubrosSinProductos as $fila) {
 
-        echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
-    }
-    ?>
+                                                            echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <!--  **************CHECKBOX  ******************************************************************-->
@@ -350,7 +355,7 @@ foreach ($listaRubrosSinProductos as $fila) {
                     });
                 </script>
                 <button id="EditarActividades" class="btn"></button>
- -->
+                -->
 
 
                 <!-- datatables JS -->
@@ -358,7 +363,7 @@ foreach ($listaRubrosSinProductos as $fila) {
 
                 <script type="text/javascript" src="../jquery/main.js"></script>
 
-            <?php }?>
+            <?php } ?>
 
             </body>
             </html>
