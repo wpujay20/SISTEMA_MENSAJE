@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-echo' <script src="../jquery/jquery-3.3.1.min.js"></script>  
+echo' <script src="../jquery/jquery-3.3.1.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">';
 
@@ -101,7 +101,7 @@ switch ($opciones) {
 
 
     case 4: {
-//PERMITE APROBAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES 
+//PERMITE APROBAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES
 
             $id_informe = $_REQUEST['id_informe'];
 
@@ -115,7 +115,7 @@ switch ($opciones) {
         }
 
     case 5: {
-//PERMITE DESAPROBAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES 
+//PERMITE DESAPROBAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES
 
             $id_informe = $_REQUEST['id_informe'];
 
@@ -130,7 +130,7 @@ switch ($opciones) {
 
 
     case 6: {
-//PERMITE RECHAZAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES 
+//PERMITE RECHAZAR LOS INFORMES RECIBIDOS DE LOS COLABORADORES
 
             $id_informe = $_REQUEST['id_informe'];
 
@@ -175,9 +175,6 @@ switch ($opciones) {
                     echo '<script> document.location.href="../CONTROLADOR/Jefe_Controlador.php?op=3";</script>';
                 }
             }
-
-
-
             break;
         }
 
