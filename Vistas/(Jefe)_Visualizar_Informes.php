@@ -13,7 +13,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
 
 //var_dump($informesConProductos);
-var_dump($informesSinProductos);
+//var_dump($informesSinProductos);
 ?>
 
 <!doctype html>
@@ -90,7 +90,7 @@ var_dump($informesSinProductos);
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
                             <?php
-                            if ($informesSinProductos[0]['nomb_rubro'] == "Productos") {
+                            if (!isset($informesSinProductos)&&($informesSinProductos['nomb_rubro'] == "Productos")) {
                                 echo "<center>Este informe no registra actividades </center>";
                             } else {
                                 ?>

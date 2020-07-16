@@ -115,15 +115,19 @@ if (isset($_SESSION['lista_informes_sin_productos']) && isset($_SESSION['lista_d
 
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
-
+                            <?php
+                       if (!isset($informesSinProductos)&&($informesSinProductos['nomb_rubro'] == "Productos")) {
+                                echo "<center>Este informe no registra actividades </center>";
+                            } else {
+                            ?>
                             <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
                                         <th class="" scope="col">Nombre</th>
                                         <th class="" scope="col">Rubro</th>               
                                         <th class="" scope="col">Descripcion Del Rubro</th>
-
                                     </tr>
                                 </thead>
+                        <?php }?> 
                                 <tbody>
                                     <?php
                                     $i = 0;
@@ -154,6 +158,7 @@ if (isset($_SESSION['lista_informes_sin_productos']) && isset($_SESSION['lista_d
                                 <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
 
                                 <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
+                                    <thead> 
                                         <tr>
                                             <th class="" scope="col">Nombre</th>
                                             <th class="" scope="col">Rubro</th>               

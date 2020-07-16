@@ -2,7 +2,11 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+$informesRRHH=null;
+if(isset($_SESSION['LISTA_INFORMES_RR_HH'])){
      $informesRRHH = $_SESSION['LISTA_INFORMES_RR_HH'];
+}
+//var_dump($informesRRHH);
 ?>
 
 <!doctype html>
@@ -67,32 +71,34 @@ if (!isset($_SESSION)) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if($informesRRHH == null){
+                                    <?php 
+                                    $m=0;
+                                    if($informesRRHH == null){
                                         echo "<strong> Aun no has recibido informes por parte de Jefatura </strong><br><br>";
                                     }else{
                                     
                                     foreach ($informesRRHH as $indice):?>
                                     <tr>
 
-                                        <td><?php echo $indice['id_informe']?></td>
-                                        <td><?php echo $indice['nomb_tipo_act'] ?></td>
-                                        <td><?php echo $indice['inf_titulo_col']?></td>
-                                        <td><?php echo $indice['inf_fecha']?></td>
-                                        <td><?php echo $indice['area_nombre']?></td>
-                                        <td><?php echo $indice['nombre']?></td>
-                                        <td><?php echo $indice['apellido']?></td>
+                                        <td><?php echo $informesRRHH[$m]['id_informe']?></td>
+                                        <td><?php echo $informesRRHH[$m]['nomb_tipo_act'] ?></td>
+                                        <td><?php echo $informesRRHH[$m]['inf_titulo_col']?></td>
+                                        <td><?php echo $informesRRHH[$m]['inf_fecha']?></td>
+                                        <td><?php echo $informesRRHH[$m]['area_nombre']?></td>
+                                        <td><?php echo $informesRRHH[$m]['nombre']?></td>
+                                        <td><?php echo $informesRRHH[$m]['apellido']?></td>
 <!--                                        <td><?php //echo $indice['dni']?></td>-->
-                                        <td><?php echo $indice['nom_estado_inf']?></td>
-                                        <td><a href="../CONTROLADOR/RRHH_Controlador.php?op=1&id_informe=<?php echo $indice['id_informe'];?>" class="btn btn-info"> Visualizar </a></td>
+                                        <td><?php echo $informesRRHH[$m]['nom_estado_inf']?></td>
+                                        <td><a href="../CONTROLADOR/RRHH_Controlador.php?op=1&id_informe=<?php echo $informesRRHH[$m]['id_informe'];?>" class="btn btn-info"> Visualizar </a></td>
                                         <td>
                                         <?php
-                                        if($indice['nom_estado_inf']!="Archivado"){
+                                        if($informesRRHH[$m]['nom_estado_inf']!="Archivado"){
                                         ?>
-                                        <a href="../CONTROLADOR/RRHH_Controlador.php?op=2&msj=1&id_informe=<?php echo $indice['id_informe'];?>" class="btn btn-primary"> Archivar </a>
+                                        <a href="../CONTROLADOR/RRHH_Controlador.php?op=2&msj=1&id_informe=<?php echo $informesRRHH[$m]['id_informe'];?>" class="btn btn-primary"> Archivar </a>
                                         <?php }?>
                                         </td>
                                     </tr>
-                                        <?php endforeach; }?>
+                                        <?php $m++; endforeach; }?>
                                    
                                 </tbody>
                             </table>
