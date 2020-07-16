@@ -9,7 +9,13 @@ if (isset($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR'])) {
 if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR']==null){
         $InformesJEFE=null;
  }
-
+var_dump($Lista_Rubros_completos);
+// $fecha= date('d/m/Y H:i:s', strtotime('now'));
+// $fecha= date('m/d/Y', strtotime('now'));
+// $dat= strftime("%V", strtotime($fecha));
+// var_dump($fecha);
+// var_dump($dat);
+ 
 ?>
 <!doctype html>
 <html lang="es">
