@@ -30,12 +30,15 @@ class RRHH_DAO {
             INNER join estado_informe as est on inf.id_estado_inf=est.id_estado_inf
             INNER join actividad as act on act.id_informe=inf.id_informe
             INNER join tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
-            where (inf.id_estado_inf=4) or (inf.id_estado_inf=5)";
+            where (inf.id_estado_inf=4) or (inf.id_estado_inf=5)
+            GROUP BY inf.id_informe;";
 
             
         $rs = $instanciaCompartida->ejecutar($sql);
         $array = $instanciaCompartida->obtener_filas($rs);
-
+        
+        $instanciaCompartida->setArray(null);
+        
         return $array;
     }
     
