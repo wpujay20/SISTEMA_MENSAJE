@@ -127,19 +127,7 @@ class RubrosDAO {
             $estado = $instanciacompartida->EjecutarConEstado($sql); 
         return $estado;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     public function ListarRubrosCompletos(){

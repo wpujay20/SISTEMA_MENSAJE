@@ -1,8 +1,12 @@
 
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
+// if (!isset($_SESSION)) {
+//     session_start();
+// }
+session_start();
+if (empty($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+    }else{
 
 $listaRubrosSinProductos = $_SESSION['listarRubrosSinProductos'];
 
@@ -240,6 +244,7 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                                                            class="btn btn-danger"> Eliminar </a></td>
 
 
+
                                                 </tr>
 
         <?php
@@ -255,6 +260,7 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                     </div>
 
 <?php } ?>
+<?php }?>
 
         <div class="modal-footer">
             <a href="../CONTROLADOR/ColaboradorControlador.php?op=4" class="btn btn-secondary"> Cancelar Informe </a>

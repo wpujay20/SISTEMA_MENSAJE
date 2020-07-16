@@ -3,6 +3,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
 $id_tipo_actividad = $_REQUEST['tipo_Actividad'];
 
 $nombre = ($id_tipo_actividad == 2) ? "Realizadas" : "Planificadas";
@@ -32,13 +33,13 @@ $nombre = ($id_tipo_actividad == 2) ? "Realizadas" : "Planificadas";
     </head>
     <body>
 
-        <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php echo $id_tipo_actividad;?>" method="post">
+        <form name="formRedaccion" id="formInsertar" action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php echo $id_tipo_actividad; ?>" method="post">
 
             <div style="padding: 30px 200px 100px 200px ; ">
 
                 <div class="modal-header">
 
-                    <strong> <h4 style="color: green;"class="modal-title" id="exampleModalLabel">Menu de Redaccion de informes de actividades <?php echo $nombre;?></h4></strong>
+                    <strong> <h4 style="color: green;"class="modal-title" id="exampleModalLabel">Menu de Redaccion de informes de actividades <?php echo $nombre; ?></h4></strong>
                 </div>
                 <div class="modal-body">
 
