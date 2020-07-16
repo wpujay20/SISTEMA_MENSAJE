@@ -62,12 +62,12 @@ class InformesDAO {
                     INNER JOIN trabajador as trab on trab.id_trabajador=col.id_trabajador
                     
                     WHERE inf.id_informe=$id_informe";
-        
+
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
 //        var_export($lista);
         $instanciaCompartida->setArray(null);
-        
+
         return $lista;
     }
 
@@ -81,7 +81,7 @@ class InformesDAO {
                 INNER JOIN tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
                 INNER JOIN rubro as rb on rb.id_rubro=act.id_rubro 
                 WHERE inf.id_informe=$id_informe";
-        
+
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
 //        var_export($lista);
@@ -91,13 +91,13 @@ class InformesDAO {
     }
 
     public function Detalle_Inf($id_informe) {
-        
+
         $instanciaCompartida = ConexionBD::getInstance();
-        
+
         $sql = "SELECT * FROM informe as inf 
                 INNER JOIN detalle_informe as det on det.id_det_inf=inf.id_det_inf 
                 WHERE inf.id_informe=$id_informe";
-       
+
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
 //        var_export($lista);
@@ -111,6 +111,33 @@ class InformesDAO {
         $estado = $instanciaCompartida->EjecutarConEstado($sql);
 
         return $estado;
+    }
+
+    //Wilson: finción para editar datos del informe
+    public function ActualizarInforme($titulo, $description, $id_informe) {
+        try {
+            $instanciaCompartida = ConexionBD::getInstance();
+            $sq1 = " UPDATE `informe` SET `inf_titulo_col` = '$titulo', `inf_descripcion` = '$description' WHERE `informe`.`id_informe` = $id_informe";
+
+            $estado = $instanciaCompartida->ejecutar($sq1);
+
+            return $estado;
+        } catch (Exception $ex) {
+            
+        }
+    }
+
+    //Wilson función para modificar el perido del informe
+    public function ActualizarPeriodo($fechaIni, $fechaFin, $hora, $id_periodo) {
+        try {
+            $instanciaCompartida = ConexionBD::getInstance();
+            $sql = "UPDATE periodo SET `periodo_ini` = '$fechaIni', `periodo_fin` = '$fechaFin', `periodo_horas` = '$hora' WHERE `periodo`.`id_periodo` = $id_periodo;";
+            $estado = $instanciaCompartida->ejecutar($sql);
+
+            return $estado;
+        } catch (Exception $ex) {
+            
+        }
     }
 
 }

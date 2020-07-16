@@ -400,17 +400,27 @@ switch ($opciones) {
             $id_informe = $_REQUEST['idInform'];
             $ColaboradorDAO = new ColaboradorDAO();
             $ActividadesDAO = new ActividadesDAO();
-            $RubrosDAO = new RubrosDAO();
             $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
             $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
 
-            $estado1 = count($_SESSION['Lista_Activi_Productos']);
-            $estado2 = count($_SESSION['Lista_Actividades']);
+            $estado1 = 0;
+            $estado2 = 0;
+
+            $RubrosDAO = new RubrosDAO();
+            $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            if (isset($_SESSION['Lista_Activi_Productos'])) {
+                $estado1 = count($_SESSION['Lista_Activi_Productos']);
+            }
+            if (isset($_SESSION['Lista_Actividades'])) {
+                $estado2 = count($_SESSION['Lista_Actividades']);
+            }
+
 
 //            var_dump("Estado 1= ".$estado1);
 //             var_dump("Estado 2= ".$estado2);
+            if (($estado1 > 0 && $estado2 > 0)) {
 
-            if (($estado1 = 1 && $estado2 > 1) || ($estado1 > 1 && $estado2 = 1)) {
                 $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
 
                 //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
@@ -449,14 +459,19 @@ switch ($opciones) {
             $ColaboradorDAO = new ColaboradorDAO();
             $ActividadesDAO = new ActividadesDAO();
             $RubrosDAO = new RubrosDAO();
-            $estado1 = count($_SESSION['Lista_Activi_Productos']);
-            $estado2 = count($_SESSION['Lista_Actividades']);
+            $estado1 = 0;
+            $estado2 = 0;
 
-            var_dump("Estado 1= " . $estado1);
-            var_dump("Estado 2= " . $estado2);
-            var_dump($id_actividad);
+            if (isset($_SESSION['Lista_Activi_Productos'])) {
+                $estado1 = count($_SESSION['Lista_Activi_Productos']);
+            }
+            if (isset($_SESSION['Lista_Actividades'])) {
+                $estado2 = count($_SESSION['Lista_Actividades']);
+            }
 
-            if (($estado1 > 1 && $estado2 = 1)||($estado1 = 1 && $estado2 > 1) ) {
+
+
+            if (($estado1 > 0 && $estado2 > 0)) {
                 $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
                 if ($estado > 0) {
                     $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
@@ -478,9 +493,38 @@ switch ($opciones) {
 
                 echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
             }
-
-
-
             break;
         }
+
+    case 16: {
+
+            $id_informe = $_REQUEST['id_informe'];
+            $titulo = $_REQUEST['titulo'];
+            $description = $_REQUEST['descripcion_informe'];
+
+            $id_periodo = $_REQUEST['id_periodo'];
+            $fechaIni = $_REQUEST['fecha_ini'];
+            $fechaFin = $_REQUEST['fecha_fin'];
+            $hora = $_REQUEST['horas'];
+//            var_dump($fechaIni);
+//            var_dump($fechaFin);
+
+
+            $informesDAO = new InformesDAO();
+            $objUsuarioDAO = new UsuarioDAO();
+            $estado = $informesDAO->ActualizarInforme($titulo, $description, $id_informe);
+            if ($estado = 1) {
+
+                $sub = $informesDAO->ActualizarPeriodo($fechaIni, $fechaFin, $hora, $id_periodo);
+                if ($sub = 1) {
+                    echo '<script> document.location.href="./UsuariosControlador.php?op=1";</script>';
+                } else {
+                    echo 'no modificado! :C';
+                }
+            }
+//            
+//
+//            echo '<script> document.location.href="../Vistas/EmpleadoPrincipal.php";</script>';
+        }
+        break;
 }

@@ -4,11 +4,11 @@ if (empty($_SESSION["nombre"])) {
     echo '<script> document.location.href="../index.php";</script>';
 } else {
     $ListaXid = $_SESSION['ListaXid'];
-    // var_dump($ListaXid);
+//     var_dump($ListaXid);
     if (isset($_SESSION['Lista_Activi_Productos'])) {
-        $Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
+      $Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
 //        var_dump($Lista_Actividades_Productos);
-    }
+    } 
     if (isset($_SESSION['Lista_Actividades'])) {
         $Lista_Actividades = $_SESSION['Lista_Actividades'];
         //var_dump($Lista_Actividades);
@@ -67,64 +67,67 @@ if (empty($_SESSION["nombre"])) {
         <center>
 
             <?php foreach ($ListaXid as $info) { ?>
-                <div class=" ">
-                    <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe con  <?php echo $NombreTipoInf ?></h4></strong>
-                </div>
+
+                <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe con  <?php echo $NombreTipoInf ?></h4></strong>
+
             </center>
 
-            <div class="d-flex">
+            <div class="d-flex">                
                 <div class="col-sm-4">
-                      <!-- action="../CONTROLADOR/ColaboradorControlador.php?op=2&tipo_Actividad=<?php // echo $Tipoinforme;        ?>" method="post"  -->
-                    <form name="formRedaccion" id="formInsertar" >
+                    <div class="container">
+                        <form name="formRedaccion" id="formInsertar"action="../CONTROLADOR/ColaboradorControlador.php?op=16&id_informe=<?php echo $info['id_informe']; ?>&id_periodo=<?php echo $info['id_periodo'];?>" method="POST"  >
 
+                            <input type="hidden" name="id" value="<?php echo $info['id_informe'] ?>">
 
-                        <input type="hidden" name="id" value="<?php echo $info['id_informe'] ?>">
+                            <div style="/*padding: 30px 200px 100px 200px*/ ;  " class=" ">
 
-                        <div style="/*padding: 30px 200px 100px 200px*/ ;  " class=" ">
+                                <div class="modal-body">
 
-                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Titulo del Informe</label>
+                                        <input  name="titulo" type="text" class="form-control" value="<?php echo $info['inf_titulo_col'] ?>" id="titulo">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Titulo del Informe</label>
-                                    <input  name="titulo" type="text" class="form-control" value="<?php echo $info['inf_titulo_col'] ?>" id="titulo">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Inicio)</label>
+                                        <input name="fecha_ini"  type="date" class="form-control"value="<?php echo $info['periodo_ini'] ?>"  id="fecha_ini">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Final)</label>
+                                        <input name="fecha_fin"  type="date" class="form-control"value="<?php echo $info['periodo_fin'] ?>" id="fecha_fin">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Horas Dedicadas</label>
+                                        <input  name="horas" type="text" class="form-control" value="<?php echo $info['periodo_horas'] ?>" id="horas">
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <label>Aqui puede redactar su informe </label>
+
+                                        <textarea  style="height: 200px;" name="descripcion_informe" class="form-control " id="descripcion_informe" >
+                                            <?php echo $info['inf_descripcion'] ?>
+                                        </textarea>
+                                    </div>
+
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Inicio)</label>
-                                    <input name="fecha_ini"  type="date" class="form-control"value="<?php echo $info['periodo_ini'] ?>"  id="fecha_ini">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Final)</label>
-                                    <input name="fecha_fin"  type="date" class="form-control"value="<?php echo $info['periodo_fin'] ?>" id="fecha_fin">
+                                <div class="modal-footer">                                    
+
+                                    <a href="../CONTROLADOR/UsuariosControlador.php?op=1" class="btn btn-secondary" >Volver</a>
+                                    <input type="submit" value="Actualizar" id="boton" class="btn btn-info">
+
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Horas Dedicadas</label>
-                                    <input  name="horas" type="text" class="form-control" value="<?php echo $info['periodo_horas'] ?>" id="horas">
-                                </div>
+                            <?php } ?>
 
-                                <div class="form-group" >
-                                    <label>Aqui puede redactar su informe </label>
 
-                                    <textarea  style="height: 200px;" name="descripcion_informe" class="form-control " id="descripcion_informe" >
-                                        <?php echo $info['inf_descripcion'] ?>
-                                    </textarea>
-                                </div>
 
-                            </div>
-
-                            <div class="modal-footer">
-
-                                <a href="EmpleadoPrincipal.php" class="btn btn-secondary" >Volver</a>
-                                <input type="submit" value="Siguiente" id="boton" class="btn btn-info">
-
-                            </div>
-
-                        <?php } ?>
-
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
+
 
         <div class="d-flex">
 
@@ -158,7 +161,7 @@ if (empty($_SESSION["nombre"])) {
                                 <?php foreach ($Lista_Actividades as $LA): ?>
 
                                     <tr>
-                                        <!-- <td><?php // echo$LA['id_actividad']        ?></td> -->
+                                        <!-- <td><?php // echo$LA['id_actividad']           ?></td> -->
                                         <td><?php echo $LA['act_nombre'] ?></td>
                                         <td><?php echo $LA['nomb_rubro'] ?></td>
                                         <td><?php echo $LA['desc_rubro'] ?></td>
@@ -187,9 +190,9 @@ if (empty($_SESSION["nombre"])) {
                         <br>
 
                         <?php
-                        if (!isset($Lista_Actividades_Productos) || $Lista_Actividades == null) {
+                        if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
                             echo 'Su informe no tiene actividades del tipo producto';
-                        } else
+                        } else{
                             
                             ?>
                         <thead>
@@ -205,15 +208,15 @@ if (empty($_SESSION["nombre"])) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php {
+                            <?php 
                                 foreach ($Lista_Actividades_Productos as $LAP):
                                     ?>
 
 
                                     <tr>
-                                        <!-- <td><?php // echo $LAP['id_actividad'];        ?></td> -->
+                                        <!-- <td><?php // echo $LAP['id_actividad'];           ?></td> -->
                                         <td><?php echo $LAP['act_nombre']; ?></td>
-                                        <!--<td><?php // echo $LAP['id_rubro'];     ?></td>-->
+                                        <!--<td><?php // echo $LAP['id_rubro'];        ?></td>-->
                                         <td><?php echo $LAP['nomb_rubro']; ?></td>
                                         <td><?php echo $LAP['desc_rubro']; ?></td>                                       
                                         <td><?php echo $LAP['pro_titulo']; ?></td>
