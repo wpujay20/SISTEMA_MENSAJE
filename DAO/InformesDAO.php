@@ -112,14 +112,14 @@ class InformesDAO {
 
         return $estado;
     }
-    
-    public function Fecha_Inf($id_traba){
+
+    public function Fecha_Inf($id_traba) {
         $instanciaCompartida = ConexionBD::getInstance();
-        
+
         $sql = "SELECT inf.inf_fecha, est.nom_estado_inf FROM informe as inf
                 INNER JOIN estado_informe as est on est.id_estado_inf=inf.id_estado_inf
                     WHERE id_colaborador=$id_traba";
-       
+
         $rs = $instanciaCompartida->ejecutar($sql);
         $lista = $instanciaCompartida->obtener_filas($rs);
 //        var_export($lista);
