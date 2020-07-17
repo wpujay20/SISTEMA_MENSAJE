@@ -47,14 +47,22 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
             <div style="padding-bottom:20px; height:50px;text-align: center">    
                 <h3>Menu de Gestion de Informes (Jefe)</h3>
             </div>
-
+            <form action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" method="POST">
+            <div class="container">
+<!--                <a href="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" class="btn btn-warning"> Enviar RR.HH </a>-->
+                    <input type="submit" value="Enviar RR.HH" class="btn btn-warning">
+            </div>
+            
+            <br>
             <!--Ejemplo tabla con DataTables-->
             <div style="max-width: 1350px;" class="container">
+                
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="table-responsive">        
+                        <div class="table-responsive">   
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
+                                        <th class="th-sm" scope="col" ></th>
                                         <th class="th-sm" scope="col" >ID_Inf</th>
                                         <th class="th-sm" scope="col" >Nombres Colaborador</th>
                                         <th class="th-sm" scope="col" >Apellidos Colaborador</th>
@@ -71,6 +79,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                                 </thead>
                                 <tbody>
                                     <?php
+                                   
                                     if ($InformesJEFE == null) {
                                         echo "<strong> Aun no tienes informes recibidos por colaboradores </strong><br><br>";
                                     } else {
@@ -78,6 +87,11 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                                         foreach ($InformesJEFE as $indice):
                                             ?>
                                             <tr>
+                                                <?php if($indice['nom_estado_inf']=='Aprobado por Jefatura'){ ?>
+                                                <td><input type="checkbox" value="<?php echo $indice['id_informe'] ?>" name="chkjefe[]"></td>
+                                                <?php }else{ ?>
+                                                <td><input type="checkbox" disabled></td>
+                                                <?php } ?>
                                                 <td><?php echo $indice['id_informe'] ?></td>
                                                 <td><?php echo $indice['nombre'] ?> </td>
                                                 <td><?php echo $indice['apellido'] ?> </td>
@@ -98,7 +112,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                                                 <?php } else if ($indice['nom_estado_inf'] == 'Aprobado por Jefatura') { ?> 
                                                     <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
                                                     <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=5&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-secondary"> Desaprobar </a></td>  
-                                                    <td><a href="../Vistas/(Jefe)_Enviar_RRHH.php?&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-warning"> Enviar RR.HH </a></td>  
+                                                    <td></td>
                                                 <?php } ?>
 
                                             </tr>
@@ -113,6 +127,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                     </div>
                 </div>
             </div>  
+            </form>
             <br>
 
 
