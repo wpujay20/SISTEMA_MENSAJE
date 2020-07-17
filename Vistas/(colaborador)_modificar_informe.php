@@ -6,9 +6,9 @@ if (empty($_SESSION["nombre"])) {
     $ListaXid = $_SESSION['ListaXid'];
 //     var_dump($ListaXid);
     if (isset($_SESSION['Lista_Activi_Productos'])) {
-      $Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
+        $Lista_Actividades_Productos = $_SESSION['Lista_Activi_Productos'];
 //        var_dump($Lista_Actividades_Productos);
-    } 
+    }
     if (isset($_SESSION['Lista_Actividades'])) {
         $Lista_Actividades = $_SESSION['Lista_Actividades'];
         //var_dump($Lista_Actividades);
@@ -17,10 +17,11 @@ if (empty($_SESSION["nombre"])) {
 //     var_dump( $listaRubrosSinProductos  );
     $idInform = $_SESSION['id_inform'];
     // Tipo de cada informe
-    // var_dump($idInform);    
-
-    $Tipoinforme = $_SESSION['Tipoinforme'][0]['id_tipo_act'];
-    $NombreTipoInf = $_SESSION['Tipoinforme'][0]['nomb_tipo_act'];
+    // var_dump($idInform);
+    if (isset($_SESSION['Tipoinforme'])) {
+        $Tipoinforme = $_SESSION['Tipoinforme'][0]['id_tipo_act'];
+        $NombreTipoInf = $_SESSION['Tipoinforme'][0]['nomb_tipo_act'];
+    }
     ?>
 
     <!DOCTYPE html>
@@ -66,7 +67,7 @@ if (empty($_SESSION["nombre"])) {
         <body>
         <center>
 
-            <?php foreach ($ListaXid as $info) { ?>
+    <?php foreach ($ListaXid as $info) { ?>
 
                 <strong> <h3 style="color: green;"class="modal-title" id="exampleModalLabel">Modificación de Informe con  <?php echo $NombreTipoInf ?></h4></strong>
 
@@ -75,7 +76,7 @@ if (empty($_SESSION["nombre"])) {
             <div class="d-flex">                
                 <div class="col-sm-4">
                     <div class="container">
-                        <form name="formRedaccion" id="formInsertar"action="../CONTROLADOR/ColaboradorControlador.php?op=16&id_informe=<?php echo $info['id_informe']; ?>&id_periodo=<?php echo $info['id_periodo'];?>" method="POST"  >
+                        <form name="formRedaccion" id="formInsertar"action="../CONTROLADOR/ColaboradorControlador.php?op=16&id_informe=<?php echo $info['id_informe']; ?>&id_periodo=<?php echo $info['id_periodo']; ?>" method="POST"  >
 
                             <input type="hidden" name="id" value="<?php echo $info['id_informe'] ?>">
 
@@ -106,7 +107,7 @@ if (empty($_SESSION["nombre"])) {
                                         <label>Aqui puede redactar su informe </label>
 
                                         <textarea  style="height: 200px;" name="descripcion_informe" class="form-control " id="descripcion_informe" >
-                                            <?php echo $info['inf_descripcion'] ?>
+        <?php echo $info['inf_descripcion'] ?>
                                         </textarea>
                                     </div>
 
@@ -119,7 +120,7 @@ if (empty($_SESSION["nombre"])) {
 
                                 </div>
 
-                            <?php } ?>
+    <?php } ?>
 
 
 
@@ -143,11 +144,11 @@ if (empty($_SESSION["nombre"])) {
                     <table border="1"style="font-size: small"   class="table table-striped table-bordered" style="width:100%">
 
                         <br>
-                        <?php
-                        if (!isset($Lista_Actividades) || $Lista_Actividades == null) {
-                            echo 'Su informe no tiene actividades  ';
-                        } else {
-                            ?>
+    <?php
+    if (!isset($Lista_Actividades) || $Lista_Actividades == null) {
+        echo 'Su informe no tiene actividades  ';
+    } else {
+        ?>
                             <thead>
                                 <tr>
                                     <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
@@ -158,10 +159,10 @@ if (empty($_SESSION["nombre"])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($Lista_Actividades as $LA): ?>
+        <?php foreach ($Lista_Actividades as $LA): ?>
 
                                     <tr>
-                                        <!-- <td><?php // echo$LA['id_actividad']           ?></td> -->
+                                        <!-- <td><?php // echo$LA['id_actividad']            ?></td> -->
                                         <td><?php echo $LA['act_nombre'] ?></td>
                                         <td><?php echo $LA['nomb_rubro'] ?></td>
                                         <td><?php echo $LA['desc_rubro'] ?></td>
@@ -172,10 +173,10 @@ if (empty($_SESSION["nombre"])) {
                                                class="btn btn-danger"> Eliminar </a></td>
 
                                     </tr>
-                                    <?php
-                                endforeach;
-                            }
-                            ?>
+            <?php
+        endforeach;
+    }
+    ?>
                         </tbody>
                     </table>
 
@@ -189,34 +190,33 @@ if (empty($_SESSION["nombre"])) {
                     <table border="1"style="font-size: small"   class="table table-striped table-bordered" style="width:100%">
                         <br>
 
-                        <?php
-                        if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
-                            echo 'Su informe no tiene actividades del tipo producto';
-                        } else{
-                            
-                            ?>
-                        <thead>
-                            <tr>
-                                <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
-                                <th class="th-sm" scope="col">Nombre</th>
-                                <th class="th-sm" scope="col">Rubro</th>
-                                <th class="th-sm" scope="col">Descripcion Del Rubro</th>
-                                <th class="th-sm" scope="col">Titulo_Producto</th>
-                                <th class="th-sm" scope="col">Autor_Producto</th>
-                                <th class="th-sm" scope="col">Estado_Producto</th>
-                                <th class="th-sm text-center"  scope="col" >Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                foreach ($Lista_Actividades_Productos as $LAP):
-                                    ?>
+    <?php
+    if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
+        echo 'Su informe no tiene actividades del tipo producto';
+    } else {
+        ?>
+                            <thead>
+                                <tr>
+                                    <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
+                                    <th class="th-sm" scope="col">Nombre</th>
+                                    <th class="th-sm" scope="col">Rubro</th>
+                                    <th class="th-sm" scope="col">Descripcion Del Rubro</th>
+                                    <th class="th-sm" scope="col">Titulo_Producto</th>
+                                    <th class="th-sm" scope="col">Autor_Producto</th>
+                                    <th class="th-sm" scope="col">Estado_Producto</th>
+                                    <th class="th-sm text-center"  scope="col" >Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+        <?php
+        foreach ($Lista_Actividades_Productos as $LAP):
+            ?>
 
 
                                     <tr>
-                                        <!-- <td><?php // echo $LAP['id_actividad'];           ?></td> -->
+                                        <!-- <td><?php // echo $LAP['id_actividad'];            ?></td> -->
                                         <td><?php echo $LAP['act_nombre']; ?></td>
-                                        <!--<td><?php // echo $LAP['id_rubro'];        ?></td>-->
+                                        <!--<td><?php // echo $LAP['id_rubro'];         ?></td>-->
                                         <td><?php echo $LAP['nomb_rubro']; ?></td>
                                         <td><?php echo $LAP['desc_rubro']; ?></td>                                       
                                         <td><?php echo $LAP['pro_titulo']; ?></td>
@@ -229,15 +229,15 @@ if (empty($_SESSION["nombre"])) {
                                         </td> 
 
                                     </tr>
-                                    <?php
-                                endforeach;
-                            }
-                            ?>
+            <?php
+        endforeach;
+    }
+    ?>
 
                         </tbody>
                     </table>
                 </form>
-                <?php ?>
+    <?php ?>
                 <!---------------------------------MODAL PARA AGREGAR  ACTIVIDADES------------------------------------------------------>
 
                 <div class="container">
@@ -300,12 +300,12 @@ if (empty($_SESSION["nombre"])) {
                                                 <div id="rubros" class="form-group" >
                                                     <label>Seleccione la Rubro al cual pertenece su actividad </label>
                                                     <select class="form-control" name="rubro" id="rubro">
-                                                        <?php
-                                                        foreach ($listaRubrosSinProductos as $fila) {
+    <?php
+    foreach ($listaRubrosSinProductos as $fila) {
 
-                                                            echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
-                                                        }
-                                                        ?>
+        echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
+    }
+    ?>
                                                     </select>
                                                 </div>
                                                 <!--  **************CHECKBOX  ******************************************************************-->
@@ -366,7 +366,7 @@ if (empty($_SESSION["nombre"])) {
 
                 <script type="text/javascript" src="../jquery/main.js"></script>
 
-            <?php } ?>
+<?php } ?>
 
             </body>
             </html>
