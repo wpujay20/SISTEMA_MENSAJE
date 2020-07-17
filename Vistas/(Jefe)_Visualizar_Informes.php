@@ -11,9 +11,8 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
 }
 
-
-//var_dump($informesConProductos);
-//var_dump($informesSinProductos);
+// var_dump($informesConProductos);
+// var_dump($informesSinProductos);
 ?>
 
 <!doctype html>
@@ -28,7 +27,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
         <!--datables CSS basico-->
         <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.css"/>
-        <!--datables estilo bootstrap 4 CSS-->  
+        <!--datables estilo bootstrap 4 CSS-->
         <link rel="stylesheet"  type="text/css" href="../datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
 
         <title>Menú</title>
@@ -37,7 +36,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../JAVASCRIPT/Opcion_Cerrar_Sesion.js"></script>
 
-    </head> 
+    </head>
     <body>
         <div style="height:50px">
             <div class="card-body">
@@ -51,7 +50,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
             <!-- Tabla Informes -->
             <!--Ejemplo tabla con DataTables-->
-            <div style="padding-bottom:20px; height:50px;text-align: center">    
+            <div style="padding-bottom:20px; height:50px;text-align: center">
                 <h4>Informe de <?php echo $informesSinProductos[0]['nombre'] . "  " . $informesSinProductos[0]['apellido'] . " - " . $informesSinProductos[0]['inf_titulo_col'] ?> </h4>
             </div>
             <!-- TIENES PENSADO AVANZAR LA VISUALIZACION DE LOS INFORMES , ASI COMO EL MINI MENU DE ENVIO A RR.HH Y EL SPRITN ESTARA TERMINADO -->
@@ -61,28 +60,28 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label  style="font-weight: bold">Titulo de Informe :</label>
-                            <p> 
-                                <?php echo $informesSinProductos[0]['inf_titulo_col']; ?> 
+                            <p>
+                                <?php echo $informesSinProductos[0]['inf_titulo_col']; ?>
                             </p>
                         </div>
 
                         <div class="form-group">
                             <label  style="font-weight: bold">Descripcion del Informe :</label>
-                            <p> 
-                                <?php echo $informesSinProductos[0]['inf_descripcion']; ?> 
+                            <p>
+                                <?php echo $informesSinProductos[0]['inf_descripcion']; ?>
                             </p>
                         </div>
 
                         <div class="form-group">
                             <label  style="font-weight: bold">Fecha de Redaccion :</label>
-                            <p> 
-                                <?php echo $informesSinProductos[0]['inf_fecha']; ?> 
+                            <p>
+                                <?php echo $informesSinProductos[0]['inf_fecha']; ?>
                             </p>
                         </div>
                         <div class="form-group">
                             <label  style="font-weight: bold">Periodo del Informe :</label>
-                            <p> 
-                                <?php echo "Desde el " . $informesSinProductos[0]['periodo_ini'] . " hasta el " . $informesSinProductos[0]['periodo_fin']; ?> 
+                            <p>
+                                <?php echo "Desde el " . $informesSinProductos[0]['periodo_ini'] . " hasta el " . $informesSinProductos[0]['periodo_fin']; ?>
                             </p>
                         </div>
 
@@ -90,53 +89,57 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
                             <?php
-                            if (!isset($informesSinProductos)&&($informesSinProductos['nomb_rubro'] == "Productos")) {
-                                echo "<center>Este informe no registra actividades </center>";
-                            } else {
-                                ?>
+if (!isset($informesSinProductos) && ($informesSinProductos['nomb_rubro'] == "Productos")) {
+    echo "<center>Este informe no registra actividades </center>";
+} else {
+    ?>
 
 
                                 <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
                                         <tr>
+                                             <th class="" colspan=" 2" scope="col">nombre del colaborador</th>
                                             <th class="" scope="col">Nombre</th>
-                                            <th class="" scope="col">Rubro</th>               
+                                            <th class="" scope="col">Rubro</th>
                                             <th class="" scope="col">Descripcion Del Rubro</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         <?php
-                                        $i = 0;
-                                        foreach ($informesSinProductos as $indice):
-                                            if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
-                                                    <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
-                                                    <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
+$i = 0;
+    foreach ($informesSinProductos as $indice):
+        if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
+            ?>
+                                                                                        <tr>
+                                                                                              <td><?php echo $informesSinProductos[$i]['nombre']; ?></td>
+                                                                                              <td><?php echo $informesSinProductos[$i]['apellido']; ?></td>
+                                                                                            <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
+                                                                                            <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
+                                                                                            <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
 
-                                                    <?php
-                                                }
-                                                $i++;
-                                            endforeach;
-                                        }
-                                        ?>
+                                                                                            <?php
+    }
+        $i++;
+    endforeach;
+}
+?>
                                 </tbody>
                             </table>
 
                         </div>
                         <?php
-                        if (!isset($informesConProductos) || $informesConProductos == null) {
-                            echo "<center>Este informe no registra actividades de Rubro Productos</center>";
-                        } else {
-                            ?>
+if (!isset($informesConProductos) || $informesConProductos == null) {
+    echo "<center>Este informe no registra actividades de Rubro Productos</center>";
+} else {
+    ?>
                             <div class="form-group">
                                 <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
 
                                 <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
                                         <tr>
+                                             <th class="" colspan=" 2" scope="col">nombre del colaborador</th>
                                             <th class="" scope="col">Nombre</th>
-                                            <th class="" scope="col">Rubro</th>               
+                                            <th class="" scope="col">Rubro</th>
                                             <th class="" scope="col">Titulo del producto</th>
                                             <th class="" scope="col">Autor del producto</th>
                                             <th class="" scope="col">Estado del producto</th>
@@ -146,23 +149,24 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
                                     <tbody>
                                         <?php
-                                        $a = 0;
-                                        foreach ($informesConProductos as $ind):
-                                            ?>
+$a = 0;
+    foreach ($informesConProductos as $ind):
+    ?>
                                             <tr>
-
-                                                <td> <?php echo $informesConProductos[$a]['act_nombre']; ?> </td> 
-                                                <td> <?php echo $informesConProductos[$a]['nomb_rubro']; ?> </td> 
-                                                <td> <?php echo $informesConProductos[$a]['pro_titulo']; ?> </td> 
-                                                <td> <?php echo $informesConProductos[$a]['pro_autor']; ?> </td> 
-                                                <td> <?php echo $informesConProductos[$a]['pro_estado']; ?> </td> 
+                                                 <td> <?php echo $informesConProductos[$a]['nombre']; ?> </td>
+                                                 <td> <?php echo $informesConProductos[$a]['apellido']; ?> </td>
+                                                <td> <?php echo $informesConProductos[$a]['act_nombre']; ?> </td>
+                                                <td> <?php echo $informesConProductos[$a]['nomb_rubro']; ?> </td>
+                                                <td> <?php echo $informesConProductos[$a]['pro_titulo']; ?> </td>
+                                                <td> <?php echo $informesConProductos[$a]['pro_autor']; ?> </td>
+                                                <td> <?php echo $informesConProductos[$a]['pro_estado']; ?> </td>
 
                                             </tr>
                                             <?php
-                                            $a++;
-                                        endforeach;
-                                    }
-                                    ?>
+$a++;
+    endforeach;
+}
+?>
                                 </tbody>
                             </table>
 
@@ -173,7 +177,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
             <br>
 
 
@@ -191,9 +195,9 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
         <script src="../bootstrap/js/bootstrap.min.js"></script>
 
         <!-- datatables JS -->
-        <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
+        <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 
-        <script type="text/javascript" src="../jquery/main.js"></script>  
+        <script type="text/javascript" src="../jquery/main.js"></script>
 
     </body>
 </html>

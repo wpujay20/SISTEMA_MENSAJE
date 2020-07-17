@@ -1,29 +1,28 @@
-
+x
 <?php
 if (!isset($_SESSION)) {
     session_start();
 }
 
-$listaAreaas= $_SESSION['Lista_Areas'];
-
+$listaAreaas = $_SESSION['Lista_Areas'];
 
 ?>
 <html lang="es">
-    
+
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <!-- Validate css-->
-        <link href="../CSS/EstiloRegister.css" rel="stylesheet">	
-        
+        <link href="../CSS/EstiloRegister.css" rel="stylesheet">
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
         <!--datables CSS basico-->
         <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.css"/>
-        <!--datables estilo bootstrap 4 CSS-->  
+        <!--datables estilo bootstrap 4 CSS-->
         <link rel="stylesheet"  type="text/css" href="../datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
 
         <title>Menú</title>
@@ -34,7 +33,7 @@ $listaAreaas= $_SESSION['Lista_Areas'];
 
 
 
-    </head> 
+    </head>
     <body>
 
         <form name="formInsertar" id="formInsertar" action="../CONTROLADOR/Registro_Login_Controlador.php?op=5" method="post">
@@ -72,16 +71,16 @@ $listaAreaas= $_SESSION['Lista_Areas'];
                         <input  name="pass2" type="password" class="form-control" id="pass2">
                     </div>
 
-                 
+
                     <div class="form-group" >
                         <label>Seleccione Area al que pertenece</label>
                         <select class="form-control" name="area" >
                             <?php
-                            foreach ($listaAreaas as $fila) {
+foreach ($listaAreaas as $fila) {
 
-                                echo "<option value='" . $fila['id_area'] . "'>" . $fila['area_nombre'] . "</option>";
-                            }
-                            ?>
+    echo "<option value='" . $fila['id_area'] . "'>" . $fila['area_nombre'] . "</option>";
+}
+?>
                         </select>
                     </div>
 
@@ -90,20 +89,20 @@ $listaAreaas= $_SESSION['Lista_Areas'];
                 <div class="modal-footer">
 
                     <a href="../index.php" class="btn btn-secondary" >Volver</a>
-                    
-                   
+
+
                     <input type="submit" value="enviar" id="boton" class="btn btn-info">
                 </div>
             </div>
 
-        </form> 
+        </form>
 
     </body>
 
     <!-- datatables JS -->
-    <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
+    <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 
-    <script type="text/javascript" src="../jquery/main.js"></script>  
+    <script type="text/javascript" src="../jquery/main.js"></script>
 
 </body>
 </html>
