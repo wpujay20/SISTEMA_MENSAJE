@@ -10,7 +10,11 @@ if (isset($_SESSION['lista_informes_sin_productos']) && isset($_SESSION['lista_d
     $informesSinProductos = $_SESSION['lista_informes_sin_productos'];
     $detalleInforme       = $_SESSION['lista_detalle_informes'];
 }
+
 // var_dump(informesSinProductos);
+
+//print_r($detalleInforme);
+
 ?>
 
 <!doctype html>
@@ -132,12 +136,12 @@ $i = 0;
 foreach ($informesSinProductos as $indice):
     if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
         ?>
-                                                    <tr>
-                                                        <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
-                                                        <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
-                                                        <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
-                                                    </tr>
-                                                    <?php
+                                                            <tr>
+                                                                <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
+                                                                <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
+                                                                <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
+                                                            </tr>
+                                                            <?php
     }
     $i++;
 endforeach;
