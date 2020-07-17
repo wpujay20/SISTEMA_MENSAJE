@@ -6,11 +6,16 @@
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/InterfaceJefe.php</file>
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/InterfaceRRHH.php</file>
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/(RRHH)_Visualizar_Informe.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/DAO/ActividadesDAO.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/DAO/RRHH_DAO.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/JAVASCRIPT/(Colaborador)_Eliminar_informe.js</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/CONTROLADOR/ColaboradorControlador.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/DAO/InformesDAO.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/CONTROLADOR/Jefe_Controlador.php</file>
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/DAO/UsuarioDAO.php</file>
+            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/EmpleadoPrincipal.php</file>
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/CONTROLADOR/UsuariosControlador.php</file>
             <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/(Jefe)_Enviar_RRHH.php</file>
-            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/Vistas/(Jefe)_Visualizar_Informes.php</file>
-            <file>file:/C:/xampp/htdocs/SISTEMA_MENSAJE/DAO/RRHH_DAO.php</file>
         </group>
     </open-files>
 </project-private>
