@@ -82,11 +82,11 @@ if (empty($_SESSION["nombre"])) {
                             <label>Seleccione la Rubro al cual pertenece su actividad </label>
                             <select class="form-control" name="rubro" id="rubro">
                                 <?php
-                                foreach ($listaRubrosSinProductos as $fila) {
+foreach ($listaRubrosSinProductos as $fila) {
 
-                                    echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
-                                }
-                                ?>
+        echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
+    }
+    ?>
                             </select>
                         </div>
                         <!--  **************CHECKBOX  ******************************************************************-->
@@ -115,10 +115,10 @@ if (empty($_SESSION["nombre"])) {
                 <div style="padding: 0px 200px 10px 200px ; ">
                     <h5> Actividades Registradas hasta el momento</h5>
                     <?php
-                    if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
-                        echo "<center>Aun no tienes actividades asignadas a este informe. Agrega unas arriba</center>";
-                    } else {
-                        ?>
+if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
+        echo "<center>Aun no tienes actividades asignadas a este informe. Agrega unas arriba</center>";
+    } else {
+        ?>
                         <div style="max-width: 1350px;" class="container">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -134,8 +134,8 @@ if (empty($_SESSION["nombre"])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($listaActividadesAgregadas as $indice):
-                                                    ?>
+foreach ($listaActividadesAgregadas as $indice):
+        ?>
                                                     <tr>
                                                         <td><?php echo $indice['id_actividad'] ?></td>
                                                         <td><?php echo $indice['act_nombre'] ?></td>
@@ -146,8 +146,8 @@ if (empty($_SESSION["nombre"])) {
                                                                class="btn btn-danger"> Eliminar </a></td>
                                                     </tr>
                                                     <?php
-                                                endforeach;
-                                                ?>
+endforeach;
+        ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -155,7 +155,7 @@ if (empty($_SESSION["nombre"])) {
                             </div>
                         </div>
 
-                    <?php } ?>
+                    <?php }?>
 
                 </div>
             </form>
@@ -163,10 +163,10 @@ if (empty($_SESSION["nombre"])) {
                 <div style="padding: 0px 200px 100px 200px ; ">
                     <h5> Actividades Registradas del Rubro Producto hasta el momento</h5>
                     <?php
-                    if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
-                        echo "<center>Aun no tienes actividades del Rubro Productos asignadas a este informe. Agrega unas arriba</center>";
-                    } else {
-                        ?>
+if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
+        echo "<center>Aun no tienes actividades del Rubro Productos asignadas a este informe. Agrega unas arriba</center>";
+    } else {
+        ?>
                         <div style="max-width: 1350px;" class="container">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -185,8 +185,8 @@ if (empty($_SESSION["nombre"])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($Lista_Actividades_Productos as $indice):
-                                                    ?>
+foreach ($Lista_Actividades_Productos as $indice):
+        ?>
                                                     <tr>
                                                         <td><?php echo $indice['id_actividad'] ?></td>
                                                         <td><?php echo $indice['act_nombre'] ?></td>
@@ -199,8 +199,8 @@ if (empty($_SESSION["nombre"])) {
                                                                class="btn btn-danger"> Eliminar </a></td>
                                                     </tr>
                                                     <?php
-                                                endforeach;
-                                                ?>
+endforeach;
+        ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -208,8 +208,8 @@ if (empty($_SESSION["nombre"])) {
                             </div>
                         </div>
 
-                    <?php } ?>
-                <?php } ?>
+                    <?php }?>
+                <?php }?>
 
                 <div class="modal-footer">
                     <a href="../CONTROLADOR/ColaboradorControlador.php?op=4" class="btn btn-secondary"> Cancelar Informe </a>

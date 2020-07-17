@@ -213,7 +213,6 @@ switch ($opciones) {
 
             echo '<script> document.location.href="../CONTROLADOR/UsuariosControlador.php?op=1";</script>';
             // }
-             >>  >>  >>  > Dev
 
             break;
         }
@@ -224,12 +223,7 @@ switch ($opciones) {
             $id_informe   = $_SESSION['id_ultimo_informe'];
 
             $ActividadesDAO = new ActividadesDAO();
-
-            $_SESSION['estado'] = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
-
-            echo '<script> document.location.href="ColaboradorControlador.php?op=3"</script>';
-
-            $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
+            $estado         = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
             echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
 
             break;
