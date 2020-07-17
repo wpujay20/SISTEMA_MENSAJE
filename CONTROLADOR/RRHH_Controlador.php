@@ -17,17 +17,17 @@ switch ($opciones) {
             unset($_SESSION['lista_informes_sin_productos']);
             unset($_SESSION['lista_informes_con_productos']);
             unset($_SESSION['lista_detalle_informes']);
-            
+
             $id_informe = $_REQUEST['id_informe'];
 
             $InformesDAO = new InformesDAO();
 
-            
-             $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-             $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-             $_SESSION['lista_detalle_informes']       = $InformesDAO->Detalle_Inf($id_informe);
 
-               echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
+            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            $_SESSION['lista_detalle_informes'] = $InformesDAO->Detalle_Inf($id_informe);
+
+            echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
 
 
             break;
@@ -48,4 +48,5 @@ switch ($opciones) {
             }
             break;
         }
+   
 }

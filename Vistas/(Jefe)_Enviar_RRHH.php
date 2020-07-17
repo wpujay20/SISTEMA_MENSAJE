@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$id_informe = $_REQUEST['id_informe'];
+//$id_informe = $_REQUEST['id_informe'];
 ?>
 <html lang="es">
 
@@ -35,7 +35,7 @@ $id_informe = $_REQUEST['id_informe'];
     </head> 
     <body>
 
-        <form name="formInsertar" id="formInsertar" action="../CONTROLADOR/Jefe_Controlador.php?op=7&id_informe= <?php echo $id_informe?>" method="post">
+        <form name="formInsertar" id="formInsertar" action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=2" method="post">
 
 
             <div style="padding: 30px 200px 100px 200px ; ">
@@ -55,9 +55,7 @@ $id_informe = $_REQUEST['id_informe'];
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Descripcion</label>
-                        <textarea name="Descripcion"  type="text" class="form-control" id="Descripcion">
-                            
-                        </textarea>
+                        <textarea name="Descripcion"  type="text" class="form-control" id="Descripcion"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -40,6 +40,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR'] == null) {
 
     </head>
     <body>
+        
         <div style="height:50px">
             <div class="card-body">
                 <!-- Button trigger modal -->
@@ -58,14 +59,17 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR'] == null) {
             <div style="padding-bottom:20px; height:50px;text-align: center">
                 <h3>Menu Principal Jefe</h3>
             </div>
-
+            
             <!--Ejemplo tabla con DataTables-->
             <div style="max-width: 1350px;" class="container">
                 <div class="row">
                     <div class="col-lg-12">
+
                         <div class="table-responsive">
+
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
+                                        
                                         <th class="th-sm" scope="col" >ID_Inf</th>
                                         <th class="th-sm" scope="col" >Nombres Colaborador</th>
                                         <th class="th-sm" scope="col" >Apellidos Colaborador</th>
@@ -110,6 +114,8 @@ if ($indice['nom_estado_inf'] == "Enviado a Jefatura") {
     ?>
                                                 </td>
 
+
+
                                             </tr>
 
                                 <?php endforeach;
@@ -118,12 +124,13 @@ if ($indice['nom_estado_inf'] == "Enviado a Jefatura") {
                                 </tbody>
 
                             </table>
+                        
                         </div>
                     </div>
                 </div>
             </div>
             <br>
-
+            
 
 
 
