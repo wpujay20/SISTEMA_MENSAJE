@@ -87,7 +87,7 @@ switch ($opciones) {
             $PeriodoBean->setHoras_dedicadas($horas);
 
             $insertarPeriodo = $informesDAO->registrarPeriodoInforme($PeriodoBean, $informesBean);
-            var_dump($insertarPeriodo);
+//            var_dump($insertarPeriodo);
             if ($insertarPeriodo > 0) {
                 $insertarIinforme = $informesDAO->registrarInformeNormal($informesBean);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
@@ -107,12 +107,17 @@ switch ($opciones) {
             $RubrosBean = new RubrosBean();
             $ActividadesDAO = new ActividadesDAO();
 
+
             $ActividadesBean->setId_tipo_actividad($_SESSION['tipo_Actividad']);
 
             if (!isset($_REQUEST['toogle_productos']) && !isset($_REQUEST['rubro_nuevo'])) {
 
+
                 $actividad = $_REQUEST['actividad'];
+
                 $rubro = $_REQUEST['rubro'];
+
+
 
                 $ActividadesBean->setId_rubro($rubro);
                 $ActividadesBean->setAct_nombre($actividad);
@@ -169,7 +174,12 @@ switch ($opciones) {
             $_SESSION['Lista_Actividades_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos($ActividadesBean);
             $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
+
             echo '<script> document.location.href="../Vistas/(Colaborador)_LLenar_Actividades.php";</script>';
+
+
+
+
             break;
         }
 
@@ -188,20 +198,15 @@ switch ($opciones) {
             $id_informe = $_SESSION['id_ultimo_informe'];
             $id_ultimo_periodo = $_SESSION['id_periodo_ultimo_informe'];
 
-            $lista_rubros_personalizados = $RubrosDAO->ListarEliminarRubros($id_informe);
-            $lista_rubro_productos = $RubrosDAO->ListarEliminarRubrosProductos($id_informe);
+//            $lista_rubros_personalizados = $RubrosDAO->ListarEliminarRubros($id_informe);
+//            $lista_rubro_productos = $RubrosDAO->ListarEliminarRubrosProductos($id_informe);
+//            $eliminacion_de_Actividades = $ActividadesDAO->EliminarActividadesPor_ID_informe($id_informe);
 
-            $eliminacion_de_Actividades = $ActividadesDAO->EliminarActividadesPor_ID_informe($id_informe);
-            var_dump($eliminacion_de_Actividades);
-            if ($eliminacion_de_Actividades > 0) {
 
-                $InformesDAO->EliminarInforme_por_ID($id_informe);
-                $RubrosDAO->ArraydeRubrosPersonalizadosParaBorrar($lista_rubros_personalizados);
-                $RubrosDAO->ArraydeRubrosPersonalizadosParaBorrar_Productos($lista_rubro_productos);
-                $InformesDAO->Periodos_Eliminar($id_ultimo_periodo);
 
-                echo '<script> document.location.href="../CONTROLADOR/UsuariosControlador.php?op=1";</script>';
-            }
+            $InformesDAO->EliminarInforme_por_ID($id_informe);
+            echo '<script> document.location.href="../CONTROLADOR/UsuariosControlador.php?op=1";</script>';
+
 
             break;
         }
@@ -211,9 +216,12 @@ switch ($opciones) {
             $id_actividad = $_REQUEST['id_actividad'];
             $id_informe = $_SESSION['id_ultimo_informe'];
 
+
+
             $ActividadesDAO = new ActividadesDAO();
-            $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
-            echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
+            $_SESSION['estado'] = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
+
+            echo '<script> document.location.href="ColaboradorControlador.php?op=3"</script>';
 
             break;
         }
@@ -224,6 +232,7 @@ switch ($opciones) {
             $id_informe = $_SESSION['id_ultimo_informe'];
             $id_rubro_productos = $_REQUEST['id_rubro_productos'];
 
+            $ide_informe = $_REQUEST['id'];
             $ActividadesDAO = new ActividadesDAO();
             $RubrosDAO = new RubrosDAO();
             $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
@@ -235,9 +244,8 @@ switch ($opciones) {
             break;
         }
 
-    case 8:
-        { //VALIDANDO 1 INFORME POR SEMANA :D
-        //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
+    case 8: { //VALIDANDO 1 INFORME POR SEMANA :D
+            //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
             date_default_timezone_set('America/Lima');
             //INICIALIZACION DE VARIABLES
             $dat1 = null;
@@ -247,19 +255,19 @@ switch ($opciones) {
             $arg = 'Aprobado';
             //------------------------------------------------------
 //            $id_informe = $_REQUEST['id_informe'];
-            $id_traba   = $_SESSION['id_colaborador'];
+            $id_traba = $_SESSION['id_colaborador'];
 
             $InformesDAO = new InformesDAO();
             //OBTENER ARRAY CON LISTA DE FECHAS Y NOMBRES DE ESTADOS DE INFORMES
             $dateinf = $InformesDAO->Fecha_Inf($id_traba);
             //EXTRAER EL NUMERO DE SEMANA DE LA FECHA ACTUAL
             $fecha = date('m/d/Y', strtotime('now'));
-            $dat2  = strftime("%V", strtotime($fecha));
+            $dat2 = strftime("%V", strtotime($fecha));
             //RECORRER EL ARRAY DE LA LISTA CON FECHAS Y NOMBRES DE ESTADOS DE INFORMES
-    
+
             foreach ($dateinf as $info):
                 //EXTRAER EL NUMERO DE SEMANA DE LA FECHA DE LOS INFORMES 1 POR 1
-                $ars  = date('m/d/Y', strtotime($info['inf_fecha']));
+                $ars = date('m/d/Y', strtotime($info['inf_fecha']));
                 $dat1 = strftime("%V", strtotime($ars));
                 //CONDICIONAL PARA EVALUAR SI HAY NUMERO DE SEMANA IGUALES EN FUNCION AL ESTADO
                 if ($dat1 == $dat2 && ($info['nom_estado_inf'] == 'Enviado a Jefatura' || $info['nom_estado_inf'] == 'Aprovado por Jefatura' || $info['nom_estado_inf'] == 'Enviado a RRHH' || $info['nom_estado_inf'] == 'Archivado')) {
@@ -277,38 +285,38 @@ switch ($opciones) {
             if ($arg != null) {
                 $date = null;
                 $date = getdate();
-
+                //Hacer un Review en el envio de informes en el fin de semana. correguir codigo
                 if (($date['weekday'] == 'Friday' || $date['weekday'] == 'Saturday' || $date['weekday'] == 'Sunday') && $date['hours'] >= 20) {
                     echo '<script src="../JAVASCRIPT/(Colaborador)_Informe_fuera_Hora.js"></script>';
                 } else {
                     //VALIDANDO 1 INFORME POR SEMANA :D
 
-                        $msj = $_REQUEST['msj'];
-                        if ($msj == 1) {
+                    $msj = $_REQUEST['msj'];
+                    if ($msj == 1) {
 
-                            $_SESSION['id_informe'] = $_REQUEST['id_informe'];
-                            echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
-                        } else {
+                        $_SESSION['id_informe'] = $_REQUEST['id_informe'];
+                        echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
+                    } else {
 
-                            $ColaboradorDAO = new ColaboradorDAO();
-                            $estado         = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
-                            unset($_SESSION['id_informe']);
+                        $ColaboradorDAO = new ColaboradorDAO();
+                        $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
+                        unset($_SESSION['id_informe']);
 
-                            if ($estado > 0) {
-                                echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
-                            }
-                        } 
+                        if ($estado > 0) {
+                            echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
+                        }
+                    }
                 }
             } else {
                 echo '<script src="../JAVASCRIPT/InformeDiario.js"></script>';
-            }        
-        
+            }
+
             break;
         }
 
     case 9: {
             $del = $_REQUEST['del'];
-            
+
             if ($del == 1) {
 
                 $_SESSION['id_informe'] = $_REQUEST['id_informe'];
@@ -320,7 +328,7 @@ switch ($opciones) {
 //                $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
                 $estado = $infDAO->EliminarInforme_por_ID($_SESSION['id_informe']);
                 unset($_SESSION['id_informe']);
-                var_dump($estado);
+//                var_dump($estado);
                 if ($estado == true) {
                     echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
                 } else {
