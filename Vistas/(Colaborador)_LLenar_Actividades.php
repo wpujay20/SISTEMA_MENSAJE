@@ -158,7 +158,7 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                                                 <th class="th-sm" scope="col">Nombre</th>
                                                 <th class="th-sm" scope="col">Rubro</th>
                                                 <th class="th-sm" scope="col">Descripcion Del Rubro</th>
-                                                <th class="th-sm" scope="col" >Accion</th>
+                                                <!--<th class="th-sm" scope="col" >Accion</th>-->
 
 
 
@@ -174,8 +174,8 @@ if (isset($_SESSION['Lista_Actividades_Productos'])) {
                                                     <td><?php echo $indice['nomb_rubro'] ?> </td>
                                                     <td><?php echo $indice['desc_rubro'] ?></td>
 
-                                                    <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=6&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro=<?php echo $indice['id_rubro'];?>"
-                                                           class="btn btn-danger"> Eliminar </a></td>
+<!--                                                    <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=6&id_actividad=<?php // echo $indice['id_actividad'];?>&id_rubro=<?php// echo $indice['id_rubro'];?>"
+                                                           class="btn btn-danger"> Eliminar </a></td>-->
                                                 </tr>
 
                                             <?php
@@ -221,7 +221,7 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                                                 <th class="th-sm" scope="col">Titulo_Producto</th>
                                                 <th class="th-sm" scope="col">Autor_Producto</th>
                                                 <th class="th-sm" scope="col">Estado_Producto</th>
-                                                <th class="th-sm" scope="col" >Accion</th>
+                                                <!--<th class="th-sm" scope="col" >Accion</th>-->
 
 
 
@@ -240,8 +240,8 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                                                     <td><?php echo $indice['pro_autor'] ?></td>
                                                     <td><?php echo $indice['pro_estado'] ?> </td>
 
-                                                   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php echo $indice['id_actividad'];?>&id_rubro_productos=<?php echo $indice['id_rubro_productos'];?>"
-                                                           class="btn btn-danger"> Eliminar </a></td>
+<!--                                                   <td><a href="../CONTROLADOR/ColaboradorControlador.php?op=7&id_actividad=<?php //echo $indice['id_actividad'];?>&id_rubro_productos=<?php// echo $indice['id_rubro_productos'];?>"
+                                                           class="btn btn-danger"> Eliminar </a></td>-->
 
 
 
