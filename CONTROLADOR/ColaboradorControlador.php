@@ -308,6 +308,7 @@ switch ($opciones) {
 
     case 9: {
             $del = $_REQUEST['del'];
+            
             if ($del == 1) {
 
                 $_SESSION['id_informe'] = $_REQUEST['id_informe'];
@@ -316,7 +317,7 @@ switch ($opciones) {
 
                 $infDAO = new InformesDAO();
                 $actDAO = new ActividadesDAO();
-                $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
+//                $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
                 $estado = $infDAO->EliminarInforme_por_ID($_SESSION['id_informe']);
                 unset($_SESSION['id_informe']);
                 var_dump($estado);

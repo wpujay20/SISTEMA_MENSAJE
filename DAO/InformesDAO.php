@@ -42,7 +42,7 @@ class InformesDAO {
 
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "UPDATE informe SET id_estado_inf='Archivado' WHERE id_informe=$id_informe";
+        $sql = "DELETE FROM INFORME WHERE id_informe=$id_informe";
 
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 
