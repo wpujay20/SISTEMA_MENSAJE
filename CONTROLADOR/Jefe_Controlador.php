@@ -216,12 +216,20 @@ switch ($opciones) {
     case 7: {
 
 //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
+            
             $cod = $_REQUEST['cod'];
-            if ($cod == 1) {
-                $id = $_REQUEST['chkjefe'];
-                $_SESSION['id_enviar'] = $id;
 
-                echo '<script> document.location.href="../Vistas/(Jefe)_Enviar_RRHH.php";</script>';
+            if ($cod == 1) {
+                if (!isset($_REQUEST['chkjefe'])) {
+                    echo '<script src="../JAVASCRIPT/SeleccionFallida.js"></script>';
+                    
+                } else {
+                    unset($_SESSION['id_enviar']);
+                    $id = $_REQUEST['chkjefe'];
+                    $_SESSION['id_enviar'] = $id;
+
+                    echo '<script> document.location.href="../Vistas/(Jefe)_Enviar_RRHH.php";</script>';
+                }
             } else {
 
 
@@ -249,8 +257,8 @@ switch ($opciones) {
                         $a++;
                     endforeach;
                     if ($ActualizarInforme > 0) {
-                        echo '<script> document.location.href="../CONTROLADOR/Jefe_Controlador.php?op=3";</script>';
-                    } 
+                        echo '<script src="../JAVASCRIPT/(Jefe)_Enviado_Correcto.js"></script>';
+                    }
                 }
             }
             break;

@@ -31,7 +31,7 @@ class RRHH_DAO {
             INNER join actividad as act on act.id_informe=inf.id_informe
             INNER join tipo_actividad as tac on tac.id_tipo_act=act.id_tipo_act
             where (inf.id_estado_inf=4) or (inf.id_estado_inf=5)
-            GROUP BY inf.id_informe;";
+            GROUP BY det.id_det_inf;";
 
             
         $rs = $instanciaCompartida->ejecutar($sql);

@@ -30,11 +30,11 @@ if (!isset($_SESSION)) {
         <script src="../js/jquery.validate.min.js"></script>
         <script src="../js/ValidarFormularios.js"></script>
 
-
+        
 
     </head> 
     <body>
-
+        
         <form name="formInsertar" id="formInsertar" action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=2" method="post">
 
 

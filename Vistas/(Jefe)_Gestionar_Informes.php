@@ -32,6 +32,17 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
 
     </head> 
     <body>
+        <script>
+            function selectall(form)
+            {
+                var formulario = eval(form)
+                for (var i = 0, len = formulario.elements.length; i < len; i++)
+                {
+                    if (formulario.elements[i].type == "checkbox")
+                        formulario.elements[i].checked = formulario.elements[0].checked
+                }
+            }
+        </script>
         <div style="height:50px">
             <div class="card-body">
                 <!-- Button trigger modal -->
@@ -47,13 +58,20 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
             <div style="padding-bottom:20px; height:50px;text-align: center">    
                 <h3>Menu de Gestion de Informes (Jefe)</h3>
             </div>
+            <?php
+            if ($InformesJEFE == null) {
+                                        echo "<br><br><br><br><div style='padding-bottom:20px; height:50px; text-align: center'><strong>Aun no tienes informes recibidos por colaboradores</strong></div>";
+                                    } else {
+            ?>
             <form action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" method="POST">
-            <div class="container">
+                
+            <div  class="container">
 <!--                <a href="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" class="btn btn-warning"> Enviar RR.HH </a>-->
-                    <input type="submit" value="Enviar RR.HH" class="btn btn-warning">
+                    <input style="margin: 0px 100px 0px -100px" type="submit" value="Enviar RR.HH" class="btn btn-warning">
             </div>
             
             <br>
+            
             <!--Ejemplo tabla con DataTables-->
             <div style="max-width: 1350px;" class="container">
                 
@@ -62,7 +80,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                         <div class="table-responsive">   
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
-                                        <th class="th-sm" scope="col" ></th>
+                                        <th class="th-sm" scope="col" ><input type="checkbox" onclick="selectall(document.forms[0])"/></th>
                                         <th class="th-sm" scope="col" >ID_Inf</th>
                                         <th class="th-sm" scope="col" >Nombres Colaborador</th>
                                         <th class="th-sm" scope="col" >Apellidos Colaborador</th>
@@ -79,10 +97,6 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                   
-                                    if ($InformesJEFE == null) {
-                                        echo "<strong> Aun no tienes informes recibidos por colaboradores </strong><br><br>";
-                                    } else {
 
                                         foreach ($InformesJEFE as $indice):
                                             ?>

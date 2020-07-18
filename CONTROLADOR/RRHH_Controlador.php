@@ -14,18 +14,15 @@ require_once '../DAO/InformesDAO.php';
 $opciones = $_REQUEST['op'];
 switch ($opciones) {
     case 1: { //VISUALIZAR INFORMES
-            unset($_SESSION['lista_informes_sin_productos']);
-            unset($_SESSION['lista_informes_con_productos']);
-            unset($_SESSION['lista_detalle_informes']);
-
-            $id_informe = $_REQUEST['id_informe'];
-
+        
+        
+            unset($_SESSION['Inf_con_det']);
+            $det_inf=$_REQUEST['det_inf'];
+            
+//
             $InformesDAO = new InformesDAO();
 
-
-            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
-            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
-            $_SESSION['lista_detalle_informes'] = $InformesDAO->Detalle_Inf($id_informe);
+            $_SESSION['Inf_con_det']=$InformesDAO->VisualizarInfRRHH($det_inf);
 
             echo '<script> document.location.href="../Vistas/(RRHH)_Visualizar_Informe.php";</script>';
 
@@ -36,17 +33,33 @@ switch ($opciones) {
             $msj = $_REQUEST['msj'];
 
             if ($msj == 1) {
-                $_SESSION['id_informe'] = $_REQUEST['id_informe'];
+                $_SESSION['id_det'] = $_REQUEST['det_inf'];
                 echo '<script src="../JAVASCRIPT/(RRHH)_Archivar_Inf.js"></script> ';
             } else {
                 $InformesDAO = new InformesDAO();
-                $estado = $InformesDAO->Archivar_Inf($_SESSION['id_informe']);
-                unset($_SESSION['id_informe']);
+                $estado = $InformesDAO->Archivar_Inf($_SESSION['id_det']);
+                unset($_SESSION['id_det']);
                 if ($estado > 0) {
                     echo '<script> document.location.href="UsuariosControlador.php?op=3";</script>';
                 }
             }
             break;
         }
+    case 3:{//VER INF DEL COLABORADOR
+            unset($_SESSION['id_det']);
+            unset($_SESSION['lista_informes_con_productos']);
+            unset($_SESSION['lista_informes_sin_productos']);
+            
+            $_SESSION['id_det']=$_REQUEST['det_inf'];
+            
+            $id_informe = $_REQUEST['id_informe'];
+
+            $InformesDAO = new InformesDAO();
+            $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
+            $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
+            echo '<script> document.location.href="../Vistas/(RRHH)_Ver_Inf_Colaborador.php";</script>';
+            break;
+    }
+    
    
 }

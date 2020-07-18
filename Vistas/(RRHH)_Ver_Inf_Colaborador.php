@@ -41,7 +41,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
         <div style="height:50px">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver"> Volver al Menu Prncipal </a>
+                <a href="../CONTROLADOR/UsuariosControlador.php?op=3" class="btn btn btn-info" id="volver"> Volver al Menu Principal </a>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
 
                 <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
@@ -89,15 +89,15 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
                         <div style="padding: 10px 0px 10px 0px"class="form-group">
                             <label  style="font-weight: bold; color:blue">Actividades Realizadas:</label>
                             <?php
-                            if (!isset($informesSinProductos) && ($informesSinProductos['nomb_rubro'] == "Productos")) {
-                                echo "<center>Este informe no registra actividades </center>";
-                            } else {
-                                ?>
+if (!isset($informesSinProductos) && ($informesSinProductos['nomb_rubro'] == "Productos")) {
+    echo "<center>Este informe no registra actividades </center>";
+} else {
+    ?>
 
 
                                 <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
                                         <tr>
-                                            <th class="" colspan=" 2" scope="col">nombre del colaborador</th>
+                                             
                                             <th class="" scope="col">Nombre</th>
                                             <th class="" scope="col">Rubro</th>
                                             <th class="" scope="col">Descripcion Del Rubro</th>
@@ -106,38 +106,37 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
                                     <tbody>
                                         <?php
-                                        $i = 0;
-                                        foreach ($informesSinProductos as $indice):
-                                            if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $informesSinProductos[$i]['nombre']; ?></td>
-                                                    <td><?php echo $informesSinProductos[$i]['apellido']; ?></td>
-                                                    <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
-                                                    <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
-                                                    <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
+$i = 0;
+    foreach ($informesSinProductos as $indice):
+        if ($informesSinProductos[$i]['nomb_rubro'] != "Productos") {
+            ?>
+                                                                                        <tr>
+                                                                                              
+                                                                                            <td><?php echo $informesSinProductos[$i]['act_nombre']; ?></td>
+                                                                                            <td><?php echo $informesSinProductos[$i]['nomb_rubro']; ?> </td>
+                                                                                            <td><?php echo $informesSinProductos[$i]['desc_rubro']; ?></td>
 
-                                                    <?php
-                                                }
-                                                $i++;
-                                            endforeach;
-                                        }
-                                        ?>
+                                                                                            <?php
+    }
+        $i++;
+    endforeach;
+}
+?>
                                 </tbody>
                             </table>
 
                         </div>
                         <?php
-                        if (!isset($informesConProductos) || $informesConProductos == null) {
-                            echo "<center>Este informe no registra actividades de Rubro Productos</center>";
-                        } else {
-                            ?>
+if (!isset($informesConProductos) || $informesConProductos == null) {
+    echo "<center>Este informe no registra actividades de Rubro Productos</center>";
+} else {
+    ?>
                             <div class="form-group">
                                 <label  style="font-weight: bold; color: green ">Actividades Realizadas del Rubro Productos:</label>
 
                                 <table style="font-size: small" id="" class="table table-striped table-bordered" style="width:100%"><thead>
                                         <tr>
-                                            <th class="" colspan=" 2" scope="col">nombre del colaborador</th>
+                                            
                                             <th class="" scope="col">Nombre</th>
                                             <th class="" scope="col">Rubro</th>
                                             <th class="" scope="col">Titulo del producto</th>
@@ -149,12 +148,11 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
                                     <tbody>
                                         <?php
-                                        $a = 0;
-                                        foreach ($informesConProductos as $ind):
-                                            ?>
+$a = 0;
+    foreach ($informesConProductos as $ind):
+    ?>
                                             <tr>
-                                                <td> <?php echo $informesConProductos[$a]['nombre']; ?> </td>
-                                                <td> <?php echo $informesConProductos[$a]['apellido']; ?> </td>
+                                                 
                                                 <td> <?php echo $informesConProductos[$a]['act_nombre']; ?> </td>
                                                 <td> <?php echo $informesConProductos[$a]['nomb_rubro']; ?> </td>
                                                 <td> <?php echo $informesConProductos[$a]['pro_titulo']; ?> </td>
@@ -163,17 +161,17 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
                                             </tr>
                                             <?php
-                                            $a++;
-                                        endforeach;
-                                    }
-                                    ?>
+$a++;
+    endforeach;
+}
+?>
                                 </tbody>
                             </table>
 
                         </div>
 
                         <div>
-                            <a href="../CONTROLADOR/Jefe_Controlador.php?op=3" style="margin: 10px 0px 20px 1170px" class="btn btn-secondary">Volver a Gestion</a>
+                            <a href="../CONTROLADOR/RRHH_Controlador.php?op=1&det_inf=<?php echo $_SESSION['id_det']; ?>" style="margin: 10px 0px 20px 1170px" class="btn btn-secondary">Volver</a>
                         </div>
                     </div>
                 </div>
