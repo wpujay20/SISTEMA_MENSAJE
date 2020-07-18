@@ -49,7 +49,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_PRELIMINAR'] == null) {
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModa2">Gestionar Rubros</button>
 
               <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
-                 <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . "<br>Area : " . $_SESSION['area_nombre']; ?> </label>
+                 <br><br><label class="text-left"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . "<br>Area : " . $_SESSION['area_nombre']; ?> </label>
 
             </div>
 

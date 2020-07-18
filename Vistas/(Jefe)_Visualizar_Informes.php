@@ -44,7 +44,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
                 <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver"> Volver al Menu Prncipal </a>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
 
-                <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
+                <br><br><label class="text-left"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
             </div>
 
 

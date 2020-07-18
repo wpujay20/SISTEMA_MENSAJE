@@ -49,7 +49,7 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
                 <a href="../CONTROLADOR/UsuariosControlador.php?op=2" class="btn btn btn-info" id="volver">Volver al Menu Principal</a>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
 
-                <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
+                <br><br><label class="text-left"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] ?></label>
             </div>
 
 

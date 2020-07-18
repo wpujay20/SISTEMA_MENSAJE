@@ -38,7 +38,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Redactar Informes de Actividades</button>
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
-                <br><br><label class="text-left;"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . "<br>Area : " . $_SESSION['area_nombre']; ?> </label>
+                <br><br><label class="text-left"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . "<br>Area : " . $_SESSION['area_nombre']; ?> </label>
             </div>
 
 
