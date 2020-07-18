@@ -181,11 +181,5 @@ class InformesDAO {
         return $lista;
     }
     
-    public function ArchivarPorDet($det_inf){
-        $isntanciaCompartida=ConexionBD::getInstance();
-        $sql="";
-        $estado=$instanciaCompartida->ejecutar($sql);
-        return $estado;
-    }
 
 }
