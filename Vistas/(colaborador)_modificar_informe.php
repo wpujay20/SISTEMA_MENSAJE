@@ -67,24 +67,24 @@ if (empty($_SESSION["nombre"])) {
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Titulo del Informe</label>
-                                        <input  name="titulo" type="text" class="form-control" value="<?php echo $info['inf_titulo_col'] ?>" id="titulo">
+                                        <input  name="titulo" type="text" class="form-control" value="<?php echo $info['inf_titulo_col'] ?>" id="titulo" required="">
                                     </div>
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Inicio)</label>
-                                        <input name="fecha_ini"  type="date" class="form-control"value="<?php echo $info['periodo_ini'] ?>"  id="fecha_ini">
+                                        <input name="fecha_ini"  type="date" class="form-control"value="<?php echo $info['periodo_ini'] ?>"  id="fecha_ini" required="">
                                     </div>
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Periodo de la actividad(Fecha/Final)</label>
-                                        <input name="fecha_fin"  type="date" class="form-control"value="<?php echo $info['periodo_fin'] ?>" id="fecha_fin">
+                                        <input name="fecha_fin"  type="date" class="form-control"value="<?php echo $info['periodo_fin'] ?>" id="fecha_fin" required="">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Horas Dedicadas</label>
-                                        <input  name="horas" type="text" class="form-control" value="<?php echo $info['periodo_horas'] ?>" id="horas">
+                                        <input  name="horas" type="number" class="form-control" value="<?php echo $info['periodo_horas'] ?>" id="horas" required="">
                                     </div>
                                     <div class="form-group" >
                                         <label>Aqui puede redactar su informe </label>
-                                        <textarea  style="height: 200px;" name="descripcion_informe" class="form-control " id="descripcion_informe" >
+                                        <textarea  style="height: 200px;" name="descripcion_informe" class="form-control " id="descripcion_informe" required="">
                                             <?php echo $info['inf_descripcion'] ?>
                                         </textarea>
                                     </div>

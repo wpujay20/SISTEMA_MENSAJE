@@ -9,15 +9,25 @@ function agregaform(id_informe, id, nombre, rubro) {
 }
 function ActualizarActividadesNormales() {
 
-    id = $('#id').val();
-    nombre = $('#nombre').val();
-    rubro = $('#rubro').val(); //el rubro es el ID
-    id_informe = $('#id_informe').val();
+    var id = $('#id').val();
+    var nombre = $('#nombre').val();
+    var rubro = $('#rubro').val(); //el rubro es el ID
+    var id_informe = $('#id_informe').val();
 
-    if ((nombre === null && rubro === null) || (nombre === "" || rubro === "")) {
-        alert("Rellene los datos por favor!.");
+    if (isBlank(nombre) === true || isBlank(rubro) === true) {
+        Swal.fire({
+            title: "¡Error!",
+            html: '<h4><strong> Rellene todos los campos por favor </strong></h4>',
+            icon: "error",
+            padding: '1rem',
+            timer: 5000,
+            //timerProgressBar: true,
+            position: 'center',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
+        });
     } else {
-//        alert(id_informe+" "+id + " " + nombre + " " + rubro);
         cadena = "id=" + id +
                 "&nombre=" + nombre +
                 "&id_rubro=" + rubro +
@@ -27,11 +37,37 @@ function ActualizarActividadesNormales() {
             url: "../CONTROLADOR/ColaboradorControlador.php?op=17",
             data: cadena,
             success: function (r) {
-                if (r == 1) {
-
-                } else {
+                if (isBlank(r)===false) {
                     id_informe = $('#id_informe').val();
                     document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=10&id_informe=" + id_informe + "";
+
+                    Swal.fire({
+                        title: "Perfecto!",
+                        html: '<h4><strong> ¡Actividad Actualizada! </strong></h4>',
+                        icon: "success",
+                        padding: '2rem',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        position: 'center',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        stopKeydownPropagation: false
+                    });
+
+                } else {
+                    Swal.fire({
+                        title: "¡Error de Servidor!",                        
+                        icon: "error",
+                        padding: '1rem',
+                        timer: 5000,
+                        //timerProgressBar: true,
+                        position: 'center',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });
+
                 }
             }
         });
@@ -51,81 +87,80 @@ function agregaformProducto(id_informe, id_act, id_rubro, nombreu, rubrou, titul
     $('#autoru').val(autoru);
     $('#estadopro').val(estados_producto);
 }
-function ActualizarActividadConProducto() {
 
-
-//    id_informe = $('#id_informe').val();
-//    id_act = $('#id_act').val();
-//    id_rubro = $('#id_rubro').val(); 
-//    nombreu = $('#nombreu').val();
-//    rubrou = $('#rubrou').val();
-//    titulou = $('#titulou').val();
-//    autoru = $('#autoru').val();  
-//    estados_producto = $('#estados_producto').val();
-//
-//
-//
-//    if (nombreu==null || titulou==null ) {
-//        alert("Rellene todos los datos por favor!");
-//           alert(id_informe + " " + id_act + "  " + id_rubro + "  " + nombre + "  " + rubro + "  " + titulo + "  " + autor + "  " + estado);
-//
-////    }
-//    id_informe = $('#id_informe').val();
-//    id_act = $('#id_act').val();
-//    id_rubro = $('#id_rubro').val();
-//    nombreu = $('#nombreu').val();
-//    rubrou = $('#rubrou').val();
-//    titulou = $('#titulou').val();
-//    autoru = $('#autoru').val();
-//    estados_producto = $('#estados_producto').val();
-//
-//    alert(id_informe + " " + id_act + "  " + id_rubro + "  " + nombre + "  " + rubro + "  " + titulo + "  " + autor + "  " + estado);
-//
-//    if (nombreu == null && titulou == null) {
-//        alert("Rellene todos los datos por favor!");
-//
-//    }
-
-
-
+//Función para validar datos de modificación
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
 }
+
+
 function ActualizarActividadesNormales2() {
 
-    id_informe = $('#id_informe').val();
-    id_act = $('#id_act').val();
-    id_rubro = $('#id_rubro').val();
-    nombreu = $('#nombreu').val();
-    rubrou = $('#rubrou').val();
-    titulou = $('#titulou').val();
-    autoru = $('#autoru').val();
-    estadopro = $('#estadopro').val(); 
-    cadena = "id_informe=" + id_informe +
-            "&id_act=" + id_act +
-            "&id_rubro=" + id_rubro +
-            "&nombreu=" + nombreu +
-            "&titulou=" + titulou +
-            "&autoru=" + autoru +
-            "&estadopro=" + estadopro;
-    
-    
-    
+    var id_informe = $('#id_informe').val();
+    var id_act = $('#id_act').val();
+    var id_rubro = $('#id_rubro').val();
+    var nombreu = $('#nombreu').val();
+//    var rubrou = $('#rubrou').val();
+    var titulou = $('#titulou').val();
+    var autoru = $('#autoru').val();
+    var estadopro = $('#estadopro').val();
 
-    $.ajax({
-        type: "POST",
-        url: "../CONTROLADOR/ColaboradorControlador.php?op=18",
-        data: cadena,
-        success: function (r) {
-            if (r !==null) {              
-                
-                id_informe = $('#id_informe').val();
-                document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=10&id_informe=" + id_informe + "";
-               
-                
-            } else {
-                alert("Error!");
+
+    if (isBlank(nombreu) === true || isBlank(titulou) === true || isBlank(autoru) === true || isBlank(estadopro) === true) {
+        Swal.fire({
+            title: "¡Error!",
+            html: '<h4><strong> Rellene todos los campos por favor </strong></h4>',
+            icon: "error",
+            padding: '1rem',
+            timer: 5000,
+            //timerProgressBar: true,
+            position: 'center',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
+        });
+        return false;
+    } else {
+
+        cadena = "id_informe=" + id_informe +
+                "&id_act=" + id_act +
+                "&id_rubro=" + id_rubro +
+                "&nombreu=" + nombreu +
+                "&titulou=" + titulou +
+                "&autoru=" + autoru +
+                "&estadopro=" + estadopro;
+
+
+        $.ajax({
+            type: "POST",
+            url: "../CONTROLADOR/ColaboradorControlador.php?op=18",
+            data: cadena,
+            success: function (r) {
+                if (isBlank(r)===false) {
+
+                    id_informe = $('#id_informe').val();
+                    document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=10&id_informe=" + id_informe + "";
+
+                    Swal.fire({
+                        title: "Perfecto!",
+                        html: '<h4><strong> ¡Actividad Actualizada! </strong></h4>',
+                        icon: "success",
+                        padding: '2rem',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        position: 'center',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        stopKeydownPropagation: false
+                    });
+
+                } else {
+                    alert("Error!");
+                }
             }
-        }
-    });
+        });
+    }
 
 
 
