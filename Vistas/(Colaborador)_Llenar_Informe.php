@@ -1,12 +1,24 @@
 
 <?php
-if (!isset($_SESSION)) {
+ 
     session_start();
-}
+ 
+if (empty($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+} else {
+    
+    if(empty($_REQUEST['tipo_Actividad'])){
+       echo '<script> document.location.href="./EmpleadoPrincipal.php";</script>';
+       
+        
+    } else {
+        
+    
+    
 
 $id_tipo_actividad = $_REQUEST['tipo_Actividad'];
 
-$nombre = ($id_tipo_actividad == 2) ? "Realizadas" : "Planificadas";
+$nombre = ($id_tipo_actividad == 2) ? "Realizadas" : "Planificadas"; 
 
 ?>
 <html lang="es">
@@ -85,6 +97,7 @@ $nombre = ($id_tipo_actividad == 2) ? "Realizadas" : "Planificadas";
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 
     <script type="text/javascript" src="../jquery/main.js"></script>
+    <?php } }?>
 
 </body>
 </html>
