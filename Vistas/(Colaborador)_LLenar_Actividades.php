@@ -7,6 +7,7 @@ session_start();
 if (empty($_SESSION["nombre"])) {
     echo '<script> document.location.href="../index.php";</script>';
 } else {
+    
 
     $listaRubrosSinProductos = $_SESSION['listarRubrosSinProductos'];
 
@@ -17,6 +18,7 @@ if (empty($_SESSION["nombre"])) {
     if (isset($_SESSION['Lista_Actividades_Productos'])) {
         $Lista_Actividades_Productos = $_SESSION['Lista_Actividades_Productos'];
     }
+     
     ?>
     <html lang="es">
 
@@ -82,11 +84,11 @@ if (empty($_SESSION["nombre"])) {
                             <label>Seleccione la Rubro al cual pertenece su actividad </label>
                             <select class="form-control" name="rubro" id="rubro">
                                 <?php
-foreach ($listaRubrosSinProductos as $fila) {
+                                foreach ($listaRubrosSinProductos as $fila) {
 
-        echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
-    }
-    ?>
+                                    echo "<option value='" . $fila['id_rubro'] . "'>" . $fila['nomb_rubro'] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                         <!--  **************CHECKBOX  ******************************************************************-->
@@ -115,17 +117,17 @@ foreach ($listaRubrosSinProductos as $fila) {
                 <div style="padding: 0px 200px 10px 200px ; ">
                     <h5> Actividades Registradas hasta el momento</h5>
                     <?php
-if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
-        echo "<center>Aun no tienes actividades asignadas a este informe. Agrega unas arriba</center>";
-    } else {
-        ?>
+                    if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
+                        echo "<center>Aun no tienes actividades asignadas a este informe. Agrega unas arriba</center>";
+                    } else {
+                        ?>
                         <div style="max-width: 1350px;" class="container">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
                                         <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                                 <tr>
-                                                    <th class="th-sm" scope="col">ID_actividad</th>
+                                                    <!-- <th class="th-sm" scope="col">ID_actividad</th> -->
                                                     <th class="th-sm" scope="col">Nombre</th>
                                                     <th class="th-sm" scope="col">Rubro</th>
                                                     <th class="th-sm" scope="col">Descripcion Del Rubro</th>
@@ -134,10 +136,10 @@ if (!isset($listaActividadesAgregadas) || $listaActividadesAgregadas == null) {
                                             </thead>
                                             <tbody>
                                                 <?php
-foreach ($listaActividadesAgregadas as $indice):
-        ?>
+                                                foreach ($listaActividadesAgregadas as $indice):
+                                                    ?>
                                                     <tr>
-                                                        <td><?php echo $indice['id_actividad'] ?></td>
+                                                        <!-- <td><?php // echo $indice['id_actividad']  ?></td> -->
                                                         <td><?php echo $indice['act_nombre'] ?></td>
                                                         <td><?php echo $indice['nomb_rubro'] ?> </td>
                                                         <td><?php echo $indice['desc_rubro'] ?></td>
@@ -146,8 +148,8 @@ foreach ($listaActividadesAgregadas as $indice):
                                                                class="btn btn-danger"> Eliminar </a></td>
                                                     </tr>
                                                     <?php
-endforeach;
-        ?>
+                                                endforeach;
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -155,7 +157,7 @@ endforeach;
                             </div>
                         </div>
 
-                    <?php }?>
+                    <?php } ?>
 
                 </div>
             </form>
@@ -163,10 +165,10 @@ endforeach;
                 <div style="padding: 0px 200px 100px 200px ; ">
                     <h5> Actividades Registradas del Rubro Producto hasta el momento</h5>
                     <?php
-if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
-        echo "<center>Aun no tienes actividades del Rubro Productos asignadas a este informe. Agrega unas arriba</center>";
-    } else {
-        ?>
+                    if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null) {
+                        echo "<center>Aun no tienes actividades del Rubro Productos asignadas a este informe. Agrega unas arriba</center>";
+                    } else {
+                        ?>
                         <div style="max-width: 1350px;" class="container">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -185,8 +187,8 @@ if (!isset($Lista_Actividades_Productos) || $Lista_Actividades_Productos == null
                                             </thead>
                                             <tbody>
                                                 <?php
-foreach ($Lista_Actividades_Productos as $indice):
-        ?>
+                                                foreach ($Lista_Actividades_Productos as $indice):
+                                                    ?>
                                                     <tr>
                                                         <td><?php echo $indice['id_actividad'] ?></td>
                                                         <td><?php echo $indice['act_nombre'] ?></td>
@@ -199,8 +201,8 @@ foreach ($Lista_Actividades_Productos as $indice):
                                                                class="btn btn-danger"> Eliminar </a></td>
                                                     </tr>
                                                     <?php
-endforeach;
-        ?>
+                                                endforeach;
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -208,13 +210,25 @@ endforeach;
                             </div>
                         </div>
 
-                    <?php }?>
-                <?php }?>
-
+                    <?php } ?>
+                <?php } ?>
                 <div class="modal-footer">
+
                     <a href="../CONTROLADOR/ColaboradorControlador.php?op=4" class="btn btn-secondary"> Cancelar Informe </a>
-                    <a href="#" id="generar" class="btn btn-success btn-lg"> Generar Informe </a>
-                </div>
+
+                    <?php if (!empty($listaActividadesAgregadas) || !empty($Lista_Actividades_Productos)) { ?>
+
+
+                        <a href="#" id="generar" style="font-family: "  class="btn btn-success btn-lg"> Generar Informe </a>
+                    </div>
+                    <?php
+                } else {
+                    if (!isset($listaActividadesAgregadas) && empty($Lista_Actividades_Productos)) {
+                        echo " <br>";
+                        echo '<center><h5><strong class="btn btn" style="color:red;"> PARA PODER GENERAR EL INFORME DEBE DE REGISTRAR AL MENOS UNA ACTIVIDAD </strong></h5></center>';
+                    }
+                }
+                ?>
             </div>
             <a href=""></a>
         </form>

@@ -38,7 +38,7 @@ $opciones = $_REQUEST['op'];
 
 switch ($opciones) {
 
-    case 1:{
+    case 1: {
 //permite obtener los datos NECESARIOS PARA LA REDACCION DE LOS INFORMES (SELECTS)
             //1: planificadas
             //2: realizadas
@@ -51,7 +51,7 @@ switch ($opciones) {
             break;
         }
 
-    case 2:{
+    case 2: {
 
             //ESTOS SON LOS RECURSOS PARA LA INSERCION DE ACTIVIDADES A UN INFORME EN ESPECIFICO
             unset($_SESSION['tipo_Actividad']);
@@ -59,22 +59,22 @@ switch ($opciones) {
             unset($_SESSION['Lista_Actividades_Productos']);
             unset($_SESSION['listarRubrosSinProductos']);
 
-            $id_colaborador             = $_SESSION['id_colaborador'];
-            $id_estado                  = 1;
-            $titulo                     = $_REQUEST['titulo'];
+            $id_colaborador = $_SESSION['id_colaborador'];
+            $id_estado = 1;
+            $titulo = $_REQUEST['titulo'];
             $_SESSION['tipo_Actividad'] = $_REQUEST['tipo_Actividad'];
-            $fecha_ini                  = $_REQUEST['fecha_ini'];
-            $fecha_fin                  = $_REQUEST['fecha_fin'];
-            $horas                      = $_REQUEST['horas'];
-            $descripcion_informe        = $_REQUEST['descripcion_informe'];
+            $fecha_ini = $_REQUEST['fecha_ini'];
+            $fecha_fin = $_REQUEST['fecha_fin'];
+            $horas = $_REQUEST['horas'];
+            $descripcion_informe = $_REQUEST['descripcion_informe'];
 
-            $informesDAO    = new InformesDAO();
+            $informesDAO = new InformesDAO();
             $ActividadesDAO = new ActividadesDAO();
-            $ProductosDAO   = new ProductosDAO();
-            $RubrosDAO      = new RubrosDAO();
+            $ProductosDAO = new ProductosDAO();
+            $RubrosDAO = new RubrosDAO();
 
-            $informesBean  = new InformesBean();
-            $PeriodoBean   = new PeriodoBean();
+            $informesBean = new InformesBean();
+            $PeriodoBean = new PeriodoBean();
             $ProductosBean = new ProductosBean();
 
             $informesBean->setId_colaborador($id_colaborador);
@@ -89,7 +89,7 @@ switch ($opciones) {
             $insertarPeriodo = $informesDAO->registrarPeriodoInforme($PeriodoBean, $informesBean);
 //            var_dump($insertarPeriodo);
             if ($insertarPeriodo > 0) {
-                $insertarIinforme                     = $informesDAO->registrarInformeNormal($informesBean);
+                $insertarIinforme = $informesDAO->registrarInformeNormal($informesBean);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
                 echo '<script> document.location.href="../Vistas/(Colaborador)_LLenar_Actividades.php";</script>';
             }
@@ -97,14 +97,14 @@ switch ($opciones) {
             break;
         }
 
-    case 3:{
+    case 3: {
             // AQUI SE HACE EL LLENADO DE LAS ACTIVIDADES DE CUALQUIER TIPO
             $ActividadesBean = new ActividadesBean();
-            $ProductosDAO    = new ProductosDAO();
-            $RubrosDAO       = new RubrosDAO();
+            $ProductosDAO = new ProductosDAO();
+            $RubrosDAO = new RubrosDAO();
 
-            $ProductosBean  = new ProductosBean();
-            $RubrosBean     = new RubrosBean();
+            $ProductosBean = new ProductosBean();
+            $RubrosBean = new RubrosBean();
             $ActividadesDAO = new ActividadesDAO();
 
             $ActividadesBean->setId_tipo_actividad($_SESSION['tipo_Actividad']);
@@ -126,9 +126,9 @@ switch ($opciones) {
 
             if (isset($_REQUEST['toogle_productos'])) {
 
-                $actividad        = $_REQUEST['actividad'];
-                $titulo_producto  = $_REQUEST['titulo_producto'];
-                $autor_producto   = $_REQUEST['autor_producto'];
+                $actividad = $_REQUEST['actividad'];
+                $titulo_producto = $_REQUEST['titulo_producto'];
+                $autor_producto = $_REQUEST['autor_producto'];
                 $estados_producto = $_REQUEST['estados_producto'];
 
                 $ProductosBean->setPro_titulo($titulo_producto);
@@ -149,9 +149,9 @@ switch ($opciones) {
 
             if (isset($_REQUEST['rubro_nuevo'])) {
 
-                $actividad          = $_REQUEST['actividad'];
+                $actividad = $_REQUEST['actividad'];
                 $nombre_rubro_nuevo = $_REQUEST['nombre_rubro_nuevo'];
-                $descripcion        = $_REQUEST['descripcion'];
+                $descripcion = $_REQUEST['descripcion'];
 
                 $RubrosBean->setNomb_rubro($nombre_rubro_nuevo);
                 $RubrosBean->setDesc_rubro($descripcion);
@@ -170,26 +170,26 @@ switch ($opciones) {
 
             $_SESSION['Lista_Actividades_Agregadas'] = $ActividadesDAO->ListarActividadesSegunInforme($ActividadesBean);
             $_SESSION['Lista_Actividades_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos($ActividadesBean);
-            $_SESSION['listarRubrosSinProductos']    = $RubrosDAO->ListarRubrosSinProductos();
+            $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
             echo '<script> document.location.href="../Vistas/(Colaborador)_LLenar_Actividades.php";</script>';
 
             break;
         }
 
-    case 4:{
+    case 4: {
 // MENU DE CANCELACION DE REDACCION DE INFORME - COLABORADOR
             echo '<script src="../JAVASCRIPT/(Colaborador)_Cancelar_Informe_Redaccion.js"></script>';
             break;
         }
 
-    case 5:{
+    case 5: {
             //   CANCELACION DE REDACCION DE INFORME - COLABORADOR
             $ActividadesDAO = new ActividadesDAO();
-            $InformesDAO    = new InformesDAO();
-            $RubrosDAO      = new RubrosDAO();
+            $InformesDAO = new InformesDAO();
+            $RubrosDAO = new RubrosDAO();
 
-            $id_informe        = $_SESSION['id_ultimo_informe'];
+            $id_informe = $_SESSION['id_ultimo_informe'];
             $id_ultimo_periodo = $_SESSION['id_periodo_ultimo_informe'];
 
 //            $lista_rubros_personalizados = $RubrosDAO->ListarEliminarRubros($id_informe);
@@ -201,7 +201,6 @@ switch ($opciones) {
 
             // $lista_rubros_personalizados = $RubrosDAO->ListarEliminarRubros($id_informe);
             // $lista_rubro_productos       = $RubrosDAO->ListarEliminarRubrosProductos($id_informe);
-
             // $eliminacion_de_Actividades = $ActividadesDAO->EliminarActividadesPor_ID_informe($id_informe);
             // var_dump($eliminacion_de_Actividades);
             // if ($eliminacion_de_Actividades > 0) {
@@ -217,40 +216,53 @@ switch ($opciones) {
             break;
         }
 
-    case 6:{
+    case 6: {
             //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PERSONALIZADOS
             $id_actividad = $_REQUEST['id_actividad'];
-            $id_informe   = $_SESSION['id_ultimo_informe'];
+            $id_informe = $_SESSION['id_ultimo_informe'];
 
             $ActividadesDAO = new ActividadesDAO();
-            $estado         = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
-            echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
+            $RubrosDAO = new RubrosDAO();
+            $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
+
+            //Listar Informes y sus actividades hata ahora.    
+
+            $_SESSION['Lista_Actividades_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+            $_SESSION['Lista_Actividades_Agregadas'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
+
+            echo '<script> document.location.href="../Vistas/(Colaborador)_LLenar_Actividades.php";</script>';
+
 
             break;
         }
 
-    case 7:{
+    case 7: {
             //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-            $id_actividad       = $_REQUEST['id_actividad'];
-            $id_informe         = $_SESSION['id_ultimo_informe'];
+            $id_actividad = $_REQUEST['id_actividad'];
+            $id_informe = $_SESSION['id_ultimo_informe'];
             $id_rubro_productos = $_REQUEST['id_rubro_productos'];
 
-            $ide_informe    = $_REQUEST['id'];
             $ActividadesDAO = new ActividadesDAO();
-            $RubrosDAO      = new RubrosDAO();
-            $estado         = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
+            $RubrosDAO = new RubrosDAO();
+            $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
 
             if ($estado > 0) {
                 $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
-                echo '<script> document.location.href="ColaboradorControlador.php?op=3";</script>';
+                //Listar Informes y sus actividades hata ahora.    
+
+                $_SESSION['Lista_Actividades_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+                $_SESSION['Lista_Actividades_Agregadas'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+                $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
+
+                echo '<script> document.location.href="../Vistas/(Colaborador)_LLenar_Actividades.php";</script>';
             }
             break;
         }
 
-    case 8:{
+    case 8: {
 
             //VALIDANDO 1 INFORME POR SEMANA :D
-
             //PERMITE ENVIAR A RR.HH LOS INFORMES CONVALIDADOS
             date_default_timezone_set('America/Lima');
             //INICIALIZACION DE VARIABLES
@@ -260,9 +272,7 @@ switch ($opciones) {
             //$datfin = null;
             $arg = 'Aprobado';
             //------------------------------------------------------
-
 //            $id_informe = $_REQUEST['id_informe'];
-
             //            $id_informe = $_REQUEST['id_informe'];
 
             $id_traba = $_SESSION['id_colaborador'];
@@ -272,12 +282,12 @@ switch ($opciones) {
             $dateinf = $InformesDAO->Fecha_Inf($id_traba);
             //EXTRAER EL NUMERO DE SEMANA DE LA FECHA ACTUAL
             $fecha = date('m/d/Y', strtotime('now'));
-            $dat2  = strftime("%V", strtotime($fecha));
+            $dat2 = strftime("%V", strtotime($fecha));
             //RECORRER EL ARRAY DE LA LISTA CON FECHAS Y NOMBRES DE ESTADOS DE INFORMES
 
             foreach ($dateinf as $info):
                 //EXTRAER EL NUMERO DE SEMANA DE LA FECHA DE LOS INFORMES 1 POR 1
-                $ars  = date('m/d/Y', strtotime($info['inf_fecha']));
+                $ars = date('m/d/Y', strtotime($info['inf_fecha']));
                 $dat1 = strftime("%V", strtotime($ars));
                 //CONDICIONAL PARA EVALUAR SI HAY NUMERO DE SEMANA IGUALES EN FUNCION AL ESTADO
                 if ($dat1 == $dat2 && ($info['nom_estado_inf'] == 'Enviado a Jefatura' || $info['nom_estado_inf'] == 'Aprovado por Jefatura' || $info['nom_estado_inf'] == 'Enviado a RRHH' || $info['nom_estado_inf'] == 'Archivado')) {
@@ -328,7 +338,7 @@ switch ($opciones) {
             break;
         }
 
-    case 9:{
+    case 9: {
             $del = $_REQUEST['del'];
 
             if ($del == 1) {
@@ -353,47 +363,47 @@ switch ($opciones) {
             break;
         }
     //Wilson: ir a modificar  Informe
-    case 10:{
+    case 10: {
             unset($_SESSION['Lista_Activi_Productos']);
             unset($_SESSION['Lista_Actividades']);
             unset($_SESSION['listarRubrosSinProductos']);
 
-            $id_informe            = $_REQUEST['id_informe'];
+            $id_informe = $_REQUEST['id_informe'];
             $_SESSION['id_inform'] = $id_informe;
 
-            $ColaboradorDAO          = new ColaboradorDAO();
-            $ActividadesDAO          = new ActividadesDAO();
-            $RubrosDAO               = new RubrosDAO();
-            $_SESSION['ListaXid']    = $ColaboradorDAO->ListarInformePorID($id_informe);
+            $ColaboradorDAO = new ColaboradorDAO();
+            $ActividadesDAO = new ActividadesDAO();
+            $RubrosDAO = new RubrosDAO();
+            $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
             $_SESSION['Tipoinforme'] = $ActividadesDAO->ObtenerTipoDeInforme($id_informe);
             // var_dump($Tipoinforme);
 
-            $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-            $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
             $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
             echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
             break;
         }
 
-    case 13:{
+    case 13: {
             // unset($_SESSION['Lista_Activi_Productos']);
             // unset($_SESSION['Lista_Actividades']);
             // unset($_SESSION['listarRubrosSinProductos']);
 
             $Tipoinforme = $_REQUEST['idTipoAct'];
-            $id_informe  = $_REQUEST['idInform'];
+            $id_informe = $_REQUEST['idInform'];
 
             // var_dump("ID_Tipo:informe:= " . $Tipoinforme);
             // AQUI SE HACE EL LLENADO DE LAS ACTIVIDADES DE CUALQUIER TIPO
 
             $ActividadesBean = new ActividadesBean();
-            $ProductosDAO    = new ProductosDAO();
-            $RubrosDAO       = new RubrosDAO();
-            $ColaboradorDAO  = new ColaboradorDAO();
+            $ProductosDAO = new ProductosDAO();
+            $RubrosDAO = new RubrosDAO();
+            $ColaboradorDAO = new ColaboradorDAO();
 
-            $ProductosBean  = new ProductosBean();
-            $RubrosBean     = new RubrosBean();
+            $ProductosBean = new ProductosBean();
+            $RubrosBean = new RubrosBean();
             $ActividadesDAO = new ActividadesDAO();
 
             $ActividadesBean->setId_tipo_actividad($Tipoinforme);
@@ -401,7 +411,7 @@ switch ($opciones) {
             if (!isset($_REQUEST['toogle_productos']) && !isset($_REQUEST['rubro_nuevo'])) {
 
                 $actividad = $_REQUEST['actividad'];
-                $rubro     = $_REQUEST['rubro'];
+                $rubro = $_REQUEST['rubro'];
 
                 $ActividadesBean->setId_rubro($rubro);
                 $ActividadesBean->setAct_nombre($actividad);
@@ -412,9 +422,9 @@ switch ($opciones) {
 
             if (isset($_REQUEST['toogle_productos'])) {
 
-                $actividad        = $_REQUEST['actividad'];
-                $titulo_producto  = $_REQUEST['titulo_producto'];
-                $autor_producto   = $_REQUEST['autor_producto'];
+                $actividad = $_REQUEST['actividad'];
+                $titulo_producto = $_REQUEST['titulo_producto'];
+                $autor_producto = $_REQUEST['autor_producto'];
                 $estados_producto = $_REQUEST['estados_producto'];
 
                 $ProductosBean->setPro_titulo($titulo_producto);
@@ -435,9 +445,9 @@ switch ($opciones) {
 
             if (isset($_REQUEST['rubro_nuevo'])) {
 
-                $actividad          = $_REQUEST['actividad'];
+                $actividad = $_REQUEST['actividad'];
                 $nombre_rubro_nuevo = $_REQUEST['nombre_rubro_nuevo'];
-                $descripcion        = $_REQUEST['descripcion'];
+                $descripcion = $_REQUEST['descripcion'];
 
                 $RubrosBean->setNomb_rubro($nombre_rubro_nuevo);
                 $RubrosBean->setDesc_rubro($descripcion);
@@ -453,33 +463,33 @@ switch ($opciones) {
                 }
             }
             //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
-            $_SESSION['ListaXid']                 = $ColaboradorDAO->ListarInformePorID($id_informe);
-            $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-            $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
+            $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
             $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
             echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
             break;
         }
-    case 14:{
+    case 14: {
             unset($_SESSION['tipo_Actividad']);
             unset($_SESSION['Lista_Actividades_Agregadas']);
             unset($_SESSION['Lista_Actividades_Productos']);
             unset($_SESSION['listarRubrosSinProductos']);
             //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PERSONALIZADOS
-            $id_actividad                       = $_REQUEST['id_actividad'];
-            $id_informe                         = $_REQUEST['idInform'];
-            $ColaboradorDAO                     = new ColaboradorDAO();
-            $ActividadesDAO                     = new ActividadesDAO();
+            $id_actividad = $_REQUEST['id_actividad'];
+            $id_informe = $_REQUEST['idInform'];
+            $ColaboradorDAO = new ColaboradorDAO();
+            $ActividadesDAO = new ActividadesDAO();
             $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-            $_SESSION['Lista_Actividades']      = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
 
             $estado1 = 0;
             $estado2 = 0;
 
-            $RubrosDAO                          = new RubrosDAO();
+            $RubrosDAO = new RubrosDAO();
             $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-            $_SESSION['Lista_Actividades']      = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+            $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
             if (isset($_SESSION['Lista_Activi_Productos'])) {
                 $estado1 = count($_SESSION['Lista_Activi_Productos']);
             }
@@ -494,17 +504,17 @@ switch ($opciones) {
                 $estado = $ActividadesDAO->EliminarActividadesPor_ID_Actividad($id_actividad);
 
                 //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
-                $_SESSION['ListaXid']                 = $ColaboradorDAO->ListarInformePorID($id_informe);
-                $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-                $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+                $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
+                $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+                $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
                 echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
             } else {
                 //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
-                $_SESSION['ListaXid']                 = $ColaboradorDAO->ListarInformePorID($id_informe);
-                $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-                $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+                $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
+                $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+                $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
                 echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
@@ -513,20 +523,20 @@ switch ($opciones) {
             break;
         }
 
-    case 15:{
+    case 15: {
             unset($_SESSION['tipo_Actividad']);
             unset($_SESSION['Lista_Actividades_Agregadas']);
             unset($_SESSION['Lista_Actividades_Productos']);
             unset($_SESSION['listarRubrosSinProductos']);
             //   ELIMINACION DE UNA ACTIVIDAD DE RUBROS PRODUCTOS
-            $id_actividad       = $_REQUEST['id_actividad'];
-            $id_informe         = $_REQUEST['idInform'];
+            $id_actividad = $_REQUEST['id_actividad'];
+            $id_informe = $_REQUEST['idInform'];
             $id_rubro_productos = $_REQUEST['id_rubro_productos'];
-            $ColaboradorDAO     = new ColaboradorDAO();
-            $ActividadesDAO     = new ActividadesDAO();
-            $RubrosDAO          = new RubrosDAO();
-            $estado1            = 0;
-            $estado2            = 0;
+            $ColaboradorDAO = new ColaboradorDAO();
+            $ActividadesDAO = new ActividadesDAO();
+            $RubrosDAO = new RubrosDAO();
+            $estado1 = 0;
+            $estado2 = 0;
 
             if (isset($_SESSION['Lista_Activi_Productos'])) {
                 $estado1 = count($_SESSION['Lista_Activi_Productos']);
@@ -540,18 +550,18 @@ switch ($opciones) {
                 if ($estado > 0) {
                     $RubrosDAO->EliminarRubroProductosPorID($id_rubro_productos);
                     //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
-                    $_SESSION['ListaXid']                 = $ColaboradorDAO->ListarInformePorID($id_informe);
-                    $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-                    $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+                    $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
+                    $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+                    $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
                     $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
                     echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
                 }
             } else {
                 //SE LISTAN LOS REGISTROS Y LOS NUEVOS RUBROS QUE SE AÑANDAN
-                $_SESSION['ListaXid']                 = $ColaboradorDAO->ListarInformePorID($id_informe);
-                $_SESSION['Lista_Activi_Productos']   = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
-                $_SESSION['Lista_Actividades']        = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
+                $_SESSION['ListaXid'] = $ColaboradorDAO->ListarInformePorID($id_informe);
+                $_SESSION['Lista_Activi_Productos'] = $ActividadesDAO->ListarActividadesSegunInformeProductos2($id_informe);
+                $_SESSION['Lista_Actividades'] = $ActividadesDAO->ListarActividadesSegunInforme2($id_informe);
                 $_SESSION['listarRubrosSinProductos'] = $RubrosDAO->ListarRubrosSinProductos();
 
                 echo '<script> document.location.href="../Vistas/(colaborador)_modificar_informe.php";</script>';
@@ -559,22 +569,22 @@ switch ($opciones) {
             break;
         }
 
-    case 16:{
+    case 16: {
 
-            $id_informe  = $_REQUEST['id_informe'];
-            $titulo      = $_REQUEST['titulo'];
+            $id_informe = $_REQUEST['id_informe'];
+            $titulo = $_REQUEST['titulo'];
             $description = $_REQUEST['descripcion_informe'];
 
             $id_periodo = $_REQUEST['id_periodo'];
-            $fechaIni   = $_REQUEST['fecha_ini'];
-            $fechaFin   = $_REQUEST['fecha_fin'];
-            $hora       = $_REQUEST['horas'];
+            $fechaIni = $_REQUEST['fecha_ini'];
+            $fechaFin = $_REQUEST['fecha_fin'];
+            $hora = $_REQUEST['horas'];
 //            var_dump($fechaIni);
             //            var_dump($fechaFin);
 
-            $informesDAO   = new InformesDAO();
+            $informesDAO = new InformesDAO();
             $objUsuarioDAO = new UsuarioDAO();
-            $estado        = $informesDAO->ActualizarInforme($titulo, $description, $id_informe);
+            $estado = $informesDAO->ActualizarInforme($titulo, $description, $id_informe);
             if ($estado = 1) {
 
                 $sub = $informesDAO->ActualizarPeriodo($fechaIni, $fechaFin, $hora, $id_periodo);
@@ -587,6 +597,36 @@ switch ($opciones) {
 //
             //
             //            echo '<script> document.location.href="../Vistas/EmpleadoPrincipal.php";</script>';
+        }
+        break;
+    case 17: { //Modificar Actividad sin rubro producto
+            $ActividadesDAO = new ActividadesDAO();
+            $RubrosDAO = new RubrosDAO();
+            $ColaboradorDAO = new ColaboradorDAO();
+            $idActividad = $_REQUEST['id'];
+            $nombre = $_REQUEST['nombre'];
+            $idRubro = $_REQUEST['id_rubro'];
+            $id_informe = $_REQUEST['id_informe'];
+
+            $estado = $ActividadesDAO->ActualizarActividad($nombre, $idRubro, $idActividad);
+            echo $estado;
+        }
+        break;
+    case 18: {
+            $ActividadesDAO = new ActividadesDAO();
+            $RubrosDAO = new RubrosDAO();
+            $ColaboradorDAO = new ColaboradorDAO();
+            $id_informe = $_REQUEST['id_informe'];
+            $idActividad = $_REQUEST['id_act'];
+            $idRubro = $_REQUEST['id_rubro'];
+            $nombre = $_REQUEST['nombreu'];
+            $titulou = $_REQUEST['titulou'];
+            $autor = $_REQUEST['autoru'];
+            $estadopro = $_REQUEST['estadopro'];
+
+            $action = $ActividadesDAO->ActualizarActividadConRubro($nombre, $idActividad);
+            $status = $ActividadesDAO->ActualizarActividadDeRubroProducto($titulou, $autor, $estadopro, $idRubro);
+            return $status;
         }
         break;
 }
