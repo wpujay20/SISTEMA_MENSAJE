@@ -33,15 +33,15 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
     </head> 
     <body>
         <script>
-            function selectall(form)
-            {
-                var formulario = eval(form)
-                for (var i = 0, len = formulario.elements.length; i < len; i++)
-                {
-                    if (formulario.elements[i].type == "checkbox")
-                        formulario.elements[i].checked = formulario.elements[0].checked
+            function toggle(source) {
+                checkboxes = document.getElementsByName('chkjefe[]');
+
+                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                    checkboxes[i].checked = source.checked;
                 }
+
             }
+
         </script>
         <div style="height:50px">
             <div class="card-body">
@@ -60,87 +60,87 @@ if ($_SESSION['LISTA_INFORMES_JEFE_CONSOLIDAR'] == null) {
             </div>
             <?php
             if ($InformesJEFE == null) {
-                                        echo "<br><br><br><br><div style='padding-bottom:20px; height:50px; text-align: center'><strong>Aun no tienes informes recibidos por colaboradores</strong></div>";
-                                    } else {
-            ?>
-            <form action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" method="POST">
-                
-            <div  class="container">
-<!--                <a href="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" class="btn btn-warning"> Enviar RR.HH </a>-->
-                    <input style="margin: 0px 100px 0px -100px" type="submit" value="Enviar RR.HH" class="btn btn-warning">
-            </div>
-            
-            <br>
-            
-            <!--Ejemplo tabla con DataTables-->
-            <div style="max-width: 1350px;" class="container">
-                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsive">   
-                            <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
-                                    <tr>
-                                        <th class="th-sm" scope="col" ><input type="checkbox" onclick="selectall(document.forms[0])"/></th>
-                                        <th class="th-sm" scope="col" >ID_Inf</th>
-                                        <th class="th-sm" scope="col" >Nombres Colaborador</th>
-                                        <th class="th-sm" scope="col" >Apellidos Colaborador</th>
-<!--                                        <th class="th-sm" scope="col" >DNI</th>-->
-                                        <th class="th-sm" scope="col">Tipo_de_Actividad</th>
-                                        <th class="th-sm" scope="col">Titulo</th>
-                                        <th class="th-sm" scope="col">Area</th>               
-                                        <th class="th-sm" scope="col">Fecha</th>
-                                        <th class="th-sm" scope="col">Estado</th>
-                                        <th class="th-sm" scope="col">Acciones</th>
-                                        <th class="th-sm" scope="col">Acciones</th>
-                                        <th class="th-sm" scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
+                echo "<br><br><br><br><div style='padding-bottom:20px; height:50px; text-align: center'><strong>Aun no tienes informes recibidos por colaboradores</strong></div>";
+            } else {
+                ?>
+                <form action="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" method="POST">
 
-                                        foreach ($InformesJEFE as $indice):
-                                            ?>
+                    <div  class="container">
+                        <!--                <a href="../CONTROLADOR/Jefe_Controlador.php?op=7&cod=1" class="btn btn-warning"> Enviar RR.HH </a>-->
+                        <input style="margin: 0px 100px 0px -100px" type="submit" value="Enviar RR.HH" class="btn btn-warning">
+                    </div>
+
+                    <br>
+
+                    <!--Ejemplo tabla con DataTables-->
+                    <div style="max-width: 1350px;" class="container">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">   
+                                    <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                             <tr>
-                                                <?php if($indice['nom_estado_inf']=='Aprobado por Jefatura'){ ?>
-                                                <td><input type="checkbox" value="<?php echo $indice['id_informe'] ?>" name="chkjefe[]"></td>
-                                                <?php }else{ ?>
-                                                <td><input type="checkbox" disabled></td>
-                                                <?php } ?>
-                                                <td><?php echo $indice['id_informe'] ?></td>
-                                                <td><?php echo $indice['nombre'] ?> </td>
-                                                <td><?php echo $indice['apellido'] ?> </td>
-                                                <td><?php echo $indice['nomb_tipo_act'] ?> </td>
-<!--                                                <td><?php //echo $indice['dni'] ?> </td>-->
-                                                <td><?php echo $indice['inf_titulo_col'] ?></td>
-                                                <td><?php echo $indice['area_nombre'] ?> </td>
-                                                <td><?php echo $indice['inf_fecha'] ?></td>
-                                                <td><?php echo $indice['nom_estado_inf'] ?></td>
-
-
-                                                <?php if ($indice['nom_estado_inf'] == 'Enviado a Jefatura') { ?>
-
-                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
-                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=4&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-success"> Aprobar </a></td>
-                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=6&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-danger"> Rechazar </a></td>   
-
-                                                <?php } else if ($indice['nom_estado_inf'] == 'Aprobado por Jefatura') { ?> 
-                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
-                                                    <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=5&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-secondary"> Desaprobar </a></td>  
-                                                    <td></td>
-                                                <?php } ?>
-
+                                                <th class="th-sm" scope="col" ><input type="checkbox" onclick="toggle(this)"/></th>
+                                                <th class="th-sm" scope="col" >ID_Inf</th>
+                                                <th class="th-sm" scope="col" >Nombres Colaborador</th>
+                                                <th class="th-sm" scope="col" >Apellidos Colaborador</th>
+        <!--                                        <th class="th-sm" scope="col" >DNI</th>-->
+                                                <th class="th-sm" scope="col">Tipo_de_Actividad</th>
+                                                <th class="th-sm" scope="col">Titulo</th>
+                                                <th class="th-sm" scope="col">Area</th>               
+                                                <th class="th-sm" scope="col">Fecha</th>
+                                                <th class="th-sm" scope="col">Estado</th>
+                                                <th class="th-sm" scope="col">Acciones</th>
+                                                <th class="th-sm" scope="col">Acciones</th>
+                                                <th class="th-sm" scope="col">Acciones</th>
                                             </tr>
-                                        <?php endforeach;
-                                    }
-                                    ?>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($InformesJEFE as $indice):
+                                                ?>
+                                                <tr>
+                                                    <?php if ($indice['nom_estado_inf'] == 'Aprobado por Jefatura') { ?>
+                                                        <td><input type="checkbox" value="<?php echo $indice['id_informe'] ?>" name="chkjefe[]"></td>
+                                                    <?php } else { ?>
+                                                        <td><input type="checkbox" disabled></td>
+                                                    <?php } ?>
+                                                    <td><?php echo $indice['id_informe'] ?></td>
+                                                    <td><?php echo $indice['nombre'] ?> </td>
+                                                    <td><?php echo $indice['apellido'] ?> </td>
+                                                    <td><?php echo $indice['nomb_tipo_act'] ?> </td>
+        <!--                                                <td><?php //echo $indice['dni']  ?> </td>-->
+                                                    <td><?php echo $indice['inf_titulo_col'] ?></td>
+                                                    <td><?php echo $indice['area_nombre'] ?> </td>
+                                                    <td><?php echo $indice['inf_fecha'] ?></td>
+                                                    <td><?php echo $indice['nom_estado_inf'] ?></td>
 
-                                </tbody>
 
-                            </table>
+                                                    <?php if ($indice['nom_estado_inf'] == 'Enviado a Jefatura') { ?>
+
+                                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
+                                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=4&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-success"> Aprobar </a></td>
+                                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=6&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-danger"> Rechazar </a></td>   
+
+                                                    <?php } else if ($indice['nom_estado_inf'] == 'Aprobado por Jefatura') { ?> 
+                                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=8&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-primary"> Visualizar </a></td>   
+                                                        <td><a href="../CONTROLADOR/Jefe_Controlador.php?op=5&id_informe=<?php echo $indice['id_informe'] ?>" class="btn btn-secondary"> Desaprobar </a></td>  
+                                                        <td></td>
+                                                    <?php } ?>
+
+                                                </tr>
+                                            <?php
+                                            endforeach;
+                                        }
+                                        ?>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>  
+                </div>  
             </form>
             <br>
 
