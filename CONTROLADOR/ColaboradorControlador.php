@@ -589,7 +589,9 @@ switch ($opciones) {
 
                 $sub = $informesDAO->ActualizarPeriodo($fechaIni, $fechaFin, $hora, $id_periodo);
                 if ($sub = 1) {
-                    echo '<script> document.location.href="./UsuariosControlador.php?op=1";</script>';
+//                    require '../JAVASCRIPT/(Colaborador)_InformeActualizado.js';
+                    echo '<script src="../JAVASCRIPT/(Colaborador)_InformeActualizado.js"></script> ';
+
                 } else {
                     echo 'no modificado! :C';
                 }
