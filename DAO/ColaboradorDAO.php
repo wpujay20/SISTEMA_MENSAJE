@@ -29,12 +29,33 @@ class ColaboradorDAO
     public function Registrar_Colaborador(AreasBean $AreasBean, TrabajadorBean $TrabajadorBean)
     {
 
-        $instanciacompartida = ConexionBD::getInstance();
+        $instanciacompartida = ConexionBD::getInstance();   
         $sql                 = "INSERT INTO colaborador(id_area, id_trabajador)
                 VALUES ($AreasBean->id_area,$TrabajadorBean->ID_trabajador)";
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 
         return $estado;
+    }
+    
+    
+        public function ActualizarColaborador(AreasBean $AreasBean, TrabajadorBean $TrabajadorBean) {
+
+         try {
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "UPDATE colaborador as c inner join trabajador as tra on tra.id_colaborador=c.id_colaborador  inner join area as a on a.id_area=c.id_area set  c.id_area =$AreasBean->id_area, "
+                  . " WHERE tra.id_trabajador =$TrabajadorBean->ID_trabajador;"
+                  ;
+
+    
+            
+            $estado = $instanciacompartida->EjecutarConEstado($sql);
+           
+            
+            return $estado;
+            
+        } catch (Exception $ex) {
+            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+        }
     }
 
     public function Enviar_a_Jefatura($id_informe)

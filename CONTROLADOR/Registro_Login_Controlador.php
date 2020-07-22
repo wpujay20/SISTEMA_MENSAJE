@@ -12,6 +12,7 @@ require_once '../DAO/TrabajadorDAO.php';
 require_once '../DAO/ColaboradorDAO.php';
 require_once '../DAO/JefeDAO.php';
 require_once '../DAO/RRHH_DAO.php';
+require_once '../DAO/GestionarUsuarioDAO.php';
 
 require_once '../BEAN/JefeBean.php';
 require_once '../BEAN/AreasBean.php';
@@ -30,16 +31,32 @@ switch ($opciones) {
     case 1: {
             //permite obtener los datos del registro de clientes
             
-
+            $objGestionDAO= new GestionDAO();
             $objUsuarioDAO = new UsuarioDAO();
             $objUsuarioBean = new UsuarioBean();
 
             $usu_nombre = $_REQUEST['usuario'];
             $usu_contra = $_REQUEST['password'];
-
+           
             $objUsuarioBean->setUsu_nombre($usu_nombre);
             $objUsuarioBean->setUsu_contra($usu_contra);
-            $objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
+           /* $estado = $objGestionDAO->ValidarEstado($objUsuarioBean);
+            var_dump($estado[0]['estado']);
+            
+          if($estado[0]['estado']=='habilitado'){
+                    $usu_nombre = $_REQUEST['usuario'];
+                    $usu_contra = $_REQUEST['password'];
+           
+                    $objUsuarioBean->setUsu_nombre($usu_nombre);
+                    $objUsuarioBean->setUsu_contra($usu_contra);
+                $est=$objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
+                var_dump($est);
+           }else{
+                // echo '<script> document.location.href="../index.php";</script>';
+                echo "no puesdes ingresar";
+           }
+           */
+               $est=$objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
             break;
         }
 

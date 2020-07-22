@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 require_once '../BEAN/TrabajadorBean.php';
 require_once '../UTILS/ConexionBD.php';
@@ -16,6 +16,23 @@ class RRHH_DAO {
         return $estado;
     }
     
+      public function ActualizarRRHH(AreasBean $AreasBean, TrabajadorBean $TrabajadorBean) {
+
+         try {
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "UPDATE jefe as j inner join area as a on j.id_jefe=a.id_area inner join trabajador as tra on tra.id_trabajador=j.id_trabajador set  c.id_area =$AreasBean->id_area, "
+                  . " WHERE a.id_trabajador =$TrabajadorBean->id_trabajador;"
+                 ;
+
+            $estado = $instanciacompartida->EjecutarConEstado($sql);
+           
+            
+            return $estado;
+            
+        } catch (Exception $ex) {
+            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+        }
+    }
     
     
      public function Listar_Informes_RR_HH(){

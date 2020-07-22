@@ -14,8 +14,10 @@ class UsuarioDAO {
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "SELECT * from usuario as usu 
                 INNER JOIN tipo_usuario as tip on usu.id_tipo_usu = tip.id_tipo_usu 
-                INNER JOIN trabajador as trab on trab.id_usu=usu.id_usu WHERE usu.usu_nombre = '$objUsuarioBean->usu_nombre' and usu.usu_contra='$objUsuarioBean->usu_contra'";
+                INNER JOIN trabajador as trab on trab.id_usu=usu.id_usu WHERE usu.usu_nombre = '$objUsuarioBean->usu_nombre' and usu.usu_contra='$objUsuarioBean->usu_contra' and usu.estado='habilitado'";
 
+        //  echo $sql;
+          
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
         $verificar = mysqli_affected_rows($instanciacompartida->getLink());
@@ -124,13 +126,31 @@ class UsuarioDAO {
     public function RegistrarUsuario(UsuarioBean $UsuarioBean) {
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "INSERT INTO usuario (id_tipo_usu, usu_nombre, usu_contra)
-                VALUES ($UsuarioBean->id_tipo_usu,'$UsuarioBean->usu_nombre','$UsuarioBean->usu_contra')";
+        $sql = "INSERT INTO usuario (id_tipo_usu, usu_nombre, usu_contra, estado )
+                VALUES ($UsuarioBean->id_tipo_usu,'$UsuarioBean->usu_nombre','$UsuarioBean->usu_contra','habilitado')";
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 
         $UsuarioBean->id_usu = $instanciacompartida->Ultimo_ID();
 
         return $estado;
+    }
+    
+      public function ActualizarUsuario(UsuarioBean $UsuarioBean) {
+
+         try {
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "UPDATE usuario set  id_tipo_usu =$UsuarioBean->id_tipo_usu,"
+                    . " usu_nombre='$UsuarioBean->usu_nombre', usu_contra ='$UsuarioBean->usu_contra' ,usu_estado='$UsuarioBean->usu_estado' WHERE id_usu =$UsuarioBean->id_usu " ;
+            
+       
+            $estado = $instanciacompartida->EjecutarConEstado($sql);
+           
+            
+            return $estado;
+            
+        } catch (Exception $ex) {
+            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+        }
     }
     
 

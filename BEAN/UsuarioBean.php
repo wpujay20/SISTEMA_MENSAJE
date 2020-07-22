@@ -7,8 +7,17 @@ class UsuarioBean {
     public $id_usu;
     public $usu_nombre;
     public $usu_contra;
-    
-    public function getId_tipo_usu() {
+    public $usu_estado;
+
+    public function getUsu_estado() {
+        return $this->usu_estado;
+    }
+
+    public function setUsu_estado($usu_estado) {
+        $this->usu_estado = $usu_estado;
+    }
+
+        public function getId_tipo_usu() {
         return $this->id_tipo_usu;
     }
 
