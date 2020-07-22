@@ -50,7 +50,7 @@
 
                                     <div class="form-group m-0">
                                         <input type="submit" value="Login" name="login"  class="btn btn-primary btn-block">
-                                        <a href="CONTROLADOR/Registro_Login_Controlador.php?op=4" class="btn btn-success btn-block"> Registrate</a>
+                                      <!--  <a href="CONTROLADOR/Registro_Login_Controlador.php?op=4" class="btn btn-success btn-block"> Olvide mi contraseña</a> -->
 
                                     </div>
 
