@@ -110,7 +110,7 @@ switch ($opciones) {
             $usu_contra_nuevo = $_REQUEST['usu_contra'];
             $tipo_usu_nuevo = $_REQUEST['tipo_usu'];
             $area_nuevo = $_REQUEST['area'];
-            $usu_estado_nuevo = $_REQUEST['usu_estado'];
+      
 
 
             $TrabajadorBean->setID_trabajador($id_trabajador);
@@ -121,14 +121,14 @@ switch ($opciones) {
             $UsuarioBean->setUsu_nombre($usu_nombre_nuevo);
             $UsuarioBean->setUsu_contra($usu_contra_nuevo);
             
-            $UsuarioBean->setUsu_estado($usu_estado_nuevo);
+      
             $UsuarioBean->setId_tipo_usu($tipo_usu_nuevo);
             $AreaBean->setArea_nombre($area_nuevo);
             
 
 
             $estado = $UsuarioDAO->ActualizarUsuario($UsuarioBean); //REGISTRAMOS EL USUARIO
-           // var_dump($estado);
+      
 
             if ($estado > 0) {             
                 $estado2 = $TrabajadorDAO->ActualizarTrabajo($TrabajadorBean); //REGISTRAMOS EL TRABAJADOR

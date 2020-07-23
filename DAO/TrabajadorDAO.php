@@ -24,11 +24,10 @@ class TrabajadorDAO {
             $instanciacompartida = ConexionBD::getInstance();
             $sql = "UPDATE trabajador set   nombre='$TrabajadorBean->trab_nombre', apellido ='$TrabajadorBean->trab_apellido',
                      dni=$TrabajadorBean->trab_dni
-                     WHERE id_trabajador=$TrabajadorBean->ID_trabajador ;
-";
+                     WHERE id_trabajador=$TrabajadorBean->ID_trabajador ; ";
 
             $estado = $instanciacompartida->EjecutarConEstado($sql);
-            echo $sql;
+            
             
             return $estado;
             

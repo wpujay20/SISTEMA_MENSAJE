@@ -140,7 +140,7 @@ class UsuarioDAO {
          try {
             $instanciacompartida = ConexionBD::getInstance();
             $sql = "UPDATE usuario set  id_tipo_usu =$UsuarioBean->id_tipo_usu,"
-                    . " usu_nombre='$UsuarioBean->usu_nombre', usu_contra ='$UsuarioBean->usu_contra' ,usu_estado='$UsuarioBean->usu_estado' WHERE id_usu =$UsuarioBean->id_usu " ;
+                    . " usu_nombre='$UsuarioBean->usu_nombre', usu_contra ='$UsuarioBean->usu_contra' WHERE id_usu =$UsuarioBean->id_usu " ;
             
        
             $estado = $instanciacompartida->EjecutarConEstado($sql);
