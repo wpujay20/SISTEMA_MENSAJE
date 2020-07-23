@@ -116,7 +116,7 @@ $listaTipos = $objTipoUsuarioDAO->ListarTipos_Usuarios();
                 </div>
                 <div class="modal-footer">
 
-                    <a href="../Vistas/InterfaceRRHH.php" class="btn btn-secondary" >Volver</a>
+                    <a href="Gestionar_RRHH(Usuario).php" class="btn btn-secondary" >Volver</a>
                     
                    
                     <input type="submit" value="enviar" id="boton" class="btn btn-success">

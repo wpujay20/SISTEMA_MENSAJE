@@ -59,7 +59,8 @@ if (!isset($_SESSION)) {
         <div class="row">
             <div class="col-lg-12">
                 <form name="form" method="POST" action="RegistrarUsuario.php">
-                    <div class="table-responsive">        
+                    <div class="table-responsive">  
+                          <a href="InterfaceRRHH.php" class="btn btn-danger">Regresar Menu principal</a> <br><br>
                         <table   style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
@@ -72,6 +73,7 @@ if (!isset($_SESSION)) {
                             <th>contraseña</th>
                             <th>descripcion</th>
                           <th>estado</th>
+                           <th>Modificar</th>
                                  
 
 
@@ -117,7 +119,7 @@ if (!isset($_SESSION)) {
 
                         </table>
                         
-                        <a href="InterfaceRRHH.php" class="btn btn-danger">Regresar</a>
+                      
 
                   
                     </div>

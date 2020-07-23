@@ -137,22 +137,22 @@ switch ($opciones) {
                                       
                     case 1: { //REGISTRAR JEFE
                             $estado4 = $JefeDAO->ActualizarJefe($AreaBean, $TrabajadorBean);
-                            echo '<script src="../JAVASCRIPT/RegistarJefe(RRHH).js"></script> ';
+                             echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
                             break;
                         }
                     case 2: {  //REGISTRAR COLABORADOR
                             $estado4 = $ColaboradorDAO->ActualizarColaborador($AreaBean, $TrabajadorBean);
-                            echo '<script src="../JAVASCRIPT/RegistrarColaborador(RRHH).js"></script> ';
+                            echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
                             break;
                         }
                     case 3: {   //REGISTRAR RR.HH
                             $estado5 = $RRHH_DAO->ActualizarRRHH($AreaBean, $TrabajadorBean);
-                            echo '<script src="../JAVASCRIPT/RegistarRR_HH(RRHH).js"></script> ';
+                         echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
                             break;
                         }
                 }
                   
-              // echo   'href="../CONTROLADOR/GestionarUsuario.php">';
+           
                
             }
              break;
