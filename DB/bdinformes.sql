@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-07-2020 a las 18:42:04
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.4
+-- Tiempo de generación: 23-07-2020 a las 20:11:42
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,6 +36,48 @@ CREATE TABLE `actividad` (
   `id_rubro_productos` int(11) DEFAULT NULL,
   `id_informe` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `actividad`
+--
+
+INSERT INTO `actividad` (`id_actividad`, `act_nombre`, `id_tipo_act`, `id_rubro`, `id_rubro_productos`, `id_informe`) VALUES
+(53, 'BOTOS', 1, 9, NULL, 20),
+(56, 'Segundo sprint', 1, 9, NULL, 21),
+(67, 'Mejorado123456678', 2, 5, 28, 28),
+(79, 'ASDASDASD', 2, 1, NULL, 30),
+(80, 'asdwsd', 2, 15, NULL, 30),
+(81, 'asdasd', 2, 5, 33, 30),
+(148, 'asdasd', 1, 1, NULL, 21),
+(149, 'asdasd', 1, 5, 44, 21),
+(159, 'hola pruebita', 2, 5, 46, 39),
+(160, 'feliz', 2, 1, NULL, 39),
+(161, 'Conteo por Soles', 2, 16, NULL, 40),
+(162, 'Sustentación Tesis', 2, 5, 47, 40),
+(163, 'Prueba psicológica', 1, 16, NULL, 41),
+(164, 'Sustentación de tesis', 1, 5, 48, 41),
+(165, 'actividad 1', 2, 15, NULL, 42),
+(166, 'actividad 1.1', 2, 3, NULL, 42),
+(167, 'Tesis para obtener el grado Magister', 2, 5, 49, 42),
+(168, 'actividad 1.112', 2, 2, NULL, 40),
+(169, 'tesis', 2, 5, 50, 40),
+(170, 'tesis doctorado', 2, 5, 51, 40),
+(181, 'asdasd', 2, 5, 52, 47),
+(182, 'actividad 1', 2, 1, NULL, 47),
+(202, 'dddd', 2, 1, NULL, 52),
+(203, 'ss', 2, 5, 57, 52),
+(218, 'WILSON', 2, 4, NULL, 55),
+(220, 'wilson123', 2, 4, NULL, 55),
+(221, 'hola', 2, 9, NULL, 28),
+(222, 'hola', 2, 2, NULL, 28),
+(223, '1111', 2, 3, NULL, 28),
+(224, 'actividad 1', 2, 1, NULL, 56),
+(225, 'ASDASD', 2, 9, NULL, 56),
+(226, 'actividad 11', 2, 5, 65, 56),
+(227, 'actividad 2', 2, 9, NULL, 57),
+(228, '', 2, 5, 66, 57),
+(229, 'ajax', 1, 4, NULL, 58),
+(230, 'actividad 12', 1, 5, 67, 58);
 
 -- --------------------------------------------------------
 
@@ -82,7 +124,12 @@ INSERT INTO `colaborador` (`id_colaborador`, `id_area`, `id_trabajador`) VALUES
 (2, 6, 4),
 (4, 5, 5),
 (5, 7, 7),
-(6, 4, 8);
+(6, 4, 8),
+(7, 1, 9),
+(8, 7, 10),
+(9, 1, 11),
+(10, 1, 12),
+(11, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -93,10 +140,25 @@ INSERT INTO `colaborador` (`id_colaborador`, `id_area`, `id_trabajador`) VALUES
 CREATE TABLE `detalle_informe` (
   `id_det_inf` int(11) NOT NULL,
   `id_jefe` int(11) DEFAULT NULL,
-  `titulo_desc` varchar(20) DEFAULT NULL,
-  `desc_det` varchar(50) DEFAULT NULL,
-  `asunto_det` varchar(20) DEFAULT NULL
+  `titulo_desc` varchar(250) DEFAULT NULL,
+  `desc_det` varchar(250) DEFAULT NULL,
+  `asunto_det` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_informe`
+--
+
+INSERT INTO `detalle_informe` (`id_det_inf`, `id_jefe`, `titulo_desc`, `desc_det`, `asunto_det`) VALUES
+(1, 1, 'prueba', '1234\r\n123\r\n123\r\n123\r\n123                          ', 'prueba RR.HH'),
+(2, 1, 'descrición ', 'asdasd\r\nasdasd                       \r\n           ', 'prueba RR.HHsss'),
+(3, 1, 'PROBANDO', 'ASDASDASD                            \r\n           ', 'URGENTE'),
+(4, 1, 'prueba111111111', 'fasnfailsu lwohanvlgbvnoawjsgn aowshbgo sdag\r\ndf\r\n', 'urgente!!'),
+(5, 1, 'pruebita', 'prueba                            \r\n              ', 'pruebita'),
+(6, 1, 'Informe Completo de ', 'Señor RR.HH le envío los informes que están correg', 'Presente de adjuntos'),
+(7, 1, 'Informe del área de investigación', 'este informe ya está revisado, solicito que se archive.\r\n                        ', 'URGENTE'),
+(8, 1, 'Wilson Probando envío reporte a RR.HH', 'asfasodnfaisudf', 'Prueba'),
+(9, 1, 'convalidación de Informes', 'informes Correctos', 'importante');
 
 -- --------------------------------------------------------
 
@@ -133,10 +195,30 @@ CREATE TABLE `informe` (
   `id_colaborador` int(11) DEFAULT NULL,
   `id_estado_inf` int(11) DEFAULT NULL,
   `id_periodo` int(11) DEFAULT NULL,
-  `inf_titulo_col` varchar(80) NOT NULL,
-  `inf_descripcion` varchar(10000) DEFAULT NULL,
-  `inf_fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `inf_titulo_col` varchar(100) NOT NULL,
+  `inf_descripcion` text DEFAULT NULL,
+  `inf_fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `informe`
+--
+
+INSERT INTO `informe` (`id_informe`, `id_det_inf`, `id_colaborador`, `id_estado_inf`, `id_periodo`, `inf_titulo_col`, `inf_descripcion`, `inf_fecha`) VALUES
+(20, NULL, 7, 1, 20, 'NUEVOONFORME', 'ÑOLDAFBNASLJDFA\r\nSDFADF', '2020-07-16 23:01:11'),
+(21, 7, 1, 4, 21, 'Presentación Previa del proyecto MDS', 'Emmanuel que ahsn ehco\"EW\"                               ', '2020-07-17 01:17:11'),
+(28, NULL, 1, 1, 28, 'Edción completa', '                                            aefsdsdfsdf                                                                                                                                                                                                                                                                  ', '2020-07-17 02:12:39'),
+(30, NULL, 8, 1, 30, 'prueba211', 'aaa         ', '2020-07-17 02:34:38'),
+(39, NULL, 1, 1, 39, 'ACTUALIZADO', 'asdasdasd                                                                ', '2020-07-17 15:50:41'),
+(40, 8, 10, 4, 40, 'Revisión de la contabilización de salarios', '                                            EL informe de salarios se ha realizado para \r\nsaber cuánto es el saldo que los colaboradores\r\nvan a recibir en su gratificación   \r\nse ha añadido nuevos rubros                                     ', '2020-07-17 16:53:02'),
+(41, 8, 11, 4, 41, 'Creatividad', 'Se ha hacho un recuento de los resultados que se ha realizado en un salón\r\npara ver cuanta creatividad tienen.', '2020-07-17 16:57:02'),
+(42, 8, 9, 4, 42, 'Revisión de proyectos Scrum', 'Revisión de proyectos...', '2020-07-17 17:01:55'),
+(47, NULL, 1, 1, 47, 'rrrr', 'asdasd', '2020-07-17 21:11:59'),
+(52, NULL, 1, 1, 52, 'ee', 'asdasd', '2020-07-17 22:58:26'),
+(55, NULL, 1, 1, 55, 'asdas', 'asdas', '2020-07-18 16:12:56'),
+(56, 9, 10, 4, 56, 'opppp', 'modificado                      ', '2020-07-20 15:04:14'),
+(57, 9, 11, 4, 57, 'informe prueba a modificar', 'Redacción de informe', '2020-07-20 15:07:29'),
+(58, NULL, 10, 1, 58, 'wdefasdf', 'hola informemde redacción', '2020-07-23 17:53:56');
 
 -- --------------------------------------------------------
 
@@ -165,10 +247,74 @@ INSERT INTO `jefe` (`id_jefe`, `id_area`, `id_trabajador`) VALUES
 
 CREATE TABLE `periodo` (
   `id_periodo` int(11) NOT NULL,
-  `periodo_ini` varchar(20) NOT NULL,
-  `periodo_fin` varchar(20) NOT NULL,
+  `periodo_ini` varchar(50) NOT NULL,
+  `periodo_fin` varchar(50) NOT NULL,
   `periodo_horas` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `periodo`
+--
+
+INSERT INTO `periodo` (`id_periodo`, `periodo_ini`, `periodo_fin`, `periodo_horas`) VALUES
+(1, '2020-07-01', '2020-07-08', '4'),
+(2, '2020-07-01', '2020-07-08', '4'),
+(3, '2020-07-01', '2020-07-06', '6'),
+(4, '2020-07-02', '2020-07-09', '6'),
+(5, '2020-07-16', '2020-07-16', '12'),
+(6, '2020-07-01', '2020-07-08', '4'),
+(7, '2020-07-05', '2020-07-14', '6'),
+(8, '2020-07-08', '2020-07-09', '10'),
+(9, '2020-07-08', '2020-07-09', '10'),
+(10, '2020-07-16', '2020-07-17', '4'),
+(11, '2020-07-01', '2020-07-04', '15'),
+(12, '2020-07-12', '2020-07-12', '3'),
+(13, '2020-07-06', '2020-07-07', '1'),
+(14, '2020-07-10', '2020-07-12', '5'),
+(15, '2020-07-05', '2020-07-06', '2'),
+(16, '2020-07-09', '2020-07-10', '111'),
+(17, '2020-07-16', '2020-07-16', '16'),
+(18, '2020-07-16', '2020-07-16', '25'),
+(19, '2020-07-02', '2020-07-03', '5'),
+(20, '2020-07-09', '2020-07-10', '6'),
+(21, '2020-07-01', '2020-07-03', '4'),
+(22, '2020-07-02', '2020-07-04', '5'),
+(23, '2020-07-02', '2020-07-04', '4'),
+(24, '2020-07-02', '2020-07-04', '6'),
+(25, '2020-07-02', '2020-07-04', '4'),
+(26, '2020-07-11', '2020-07-11', '1'),
+(27, '2020-07-02', '2020-07-04', '6'),
+(28, '2020-07-11', '2020-07-16', '6'),
+(29, '2020-07-14', '2020-07-16', '35'),
+(30, '2020-07-10', '2020-07-17', '6'),
+(31, '2020-07-02', '2020-07-17', '6'),
+(32, '2020-07-09', '2020-07-15', '6'),
+(33, '2020-07-16', '2020-07-15', '6'),
+(34, '2020-07-10', '2020-07-17', '6'),
+(35, '2020-07-02', '2020-07-08', '4'),
+(36, '2020-07-03', '2020-07-09', '4'),
+(37, '2020-07-03', '2020-07-04', '6'),
+(38, '2020-07-10', '2020-07-08', '5'),
+(39, '2020-07-07', '2020-07-07', '6'),
+(40, '2020-07-09', '2020-07-10', '5'),
+(41, '2020-07-11', '2020-07-12', '6'),
+(42, '2020-07-16', '2020-07-16', '15'),
+(43, '2020-07-02', '2020-07-04', '6'),
+(44, '2020-07-03', '2020-07-02', '6'),
+(45, '2020-07-02', '2020-07-08', '6'),
+(46, '2020-07-01', '2020-07-03', '4'),
+(47, '2020-07-17', '2020-07-17', '6'),
+(48, '2020-07-05', '2020-07-06', '6'),
+(49, '2020-07-08', '2020-07-09', '5'),
+(50, '2020-07-10', '2020-07-11', '6'),
+(51, '2020-07-10', '2020-07-11', '6'),
+(52, '2020-07-09', '2020-07-11', '6'),
+(53, '2020-07-03', '2020-07-04', '6'),
+(54, '2020-07-02', '2020-07-11', '6'),
+(55, '2020-07-09', '2020-07-08', '4'),
+(56, '2020-07-08', '2020-07-10', '5'),
+(57, '2020-07-16', '2020-07-17', '6'),
+(58, '2020-07-22', '2020-07-23', '5');
 
 -- --------------------------------------------------------
 
@@ -209,6 +355,42 @@ CREATE TABLE `rubro_productos` (
   `pro_estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `rubro_productos`
+--
+
+INSERT INTO `rubro_productos` (`id_rubro_productos`, `pro_titulo`, `pro_autor`, `pro_estado`) VALUES
+(1, 'web ventas delivery', 'Juan Peres', 'publicado'),
+(4, 'Gestión de Pedidos', 'MArc', 'rechazado'),
+(6, 'probando acti2', 'Wilson', 'aceptado'),
+(7, 'Arquitectura Empresarial con Togaf', 'José Mendoza', 'aceptado'),
+(9, 'web ventas delivery Version10', 'wilson|', 'aceptado'),
+(10, 'modal', 'modal autor', 'aceptado'),
+(11, 'modal', 'modal autor', 'aceptado'),
+(12, 'agregagar desde edicion', 'asdasd', 'publicado'),
+(22, 'asdasd', 'asd', 'archivado'),
+(23, 'sdfsdfsdf', 'sdfsdf', 'archivado'),
+(25, 'TESIS', 'JOSE', 'archivado'),
+(26, 'web ventas delivery6516', 'JULIO', 'aceptado'),
+(28, 'hola', 'hola', 'publicado'),
+(29, 'Sistema de Gestión de Informes Para la Universidad', 'Emmaunel-Wilson-Elmer-Roy', 'revisión'),
+(31, 'aaaa', 'aaa', 'aceptado'),
+(32, 'eee', 'ee', 'publicado'),
+(33, 'ss', 'ss', 'archivado'),
+(44, 'asdasd', 'asdasd', 'rechazado'),
+(46, 'funcional', 'EWER', 'aceptado'),
+(47, 'Diseño de Arquitectura Empresarial Usando el marco', 'Juan Molina Mendoza', 'aceptado'),
+(48, 'Demostración de que la motivación en los alumnos p', 'Carmen suarez c.', 'aceptado'),
+(49, 'Sistema de Gestión de Informes Para la Universidad', 'Marco Antonio', 'aceptado'),
+(50, 'Software', 'José Mendoza', 'archivado'),
+(51, 'web ventas delivery', 'jose', 'archivado'),
+(52, 'asdasd', 'asdas', 'publicado'),
+(53, 'aaaa', 'eeee', 'aceptado'),
+(57, 'ss', 'ss', 'aceptado'),
+(65, '11', '11', 'rechazado'),
+(66, 'web ventas delivery1222223', 'José Mendoza', 'archivado'),
+(67, 'prieba', 'asdasd', 'publicado');
+
 -- --------------------------------------------------------
 
 --
@@ -217,7 +399,7 @@ CREATE TABLE `rubro_productos` (
 
 CREATE TABLE `tipo_actividad` (
   `id_tipo_act` int(11) NOT NULL,
-  `nomb_tipo_act` varchar(20) DEFAULT NULL
+  `nomb_tipo_act` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -225,8 +407,8 @@ CREATE TABLE `tipo_actividad` (
 --
 
 INSERT INTO `tipo_actividad` (`id_tipo_act`, `nomb_tipo_act`) VALUES
-(1, 'Actividades Planific'),
-(2, 'Actividades Realizad');
+(1, 'Actividades Planificadas'),
+(2, 'Actividades Realizadas');
 
 -- --------------------------------------------------------
 
@@ -275,7 +457,12 @@ INSERT INTO `trabajador` (`id_trabajador`, `id_usu`, `nombre`, `apellido`, `dni`
 (5, 5, 'Jose Carlos', 'Ramirez Lopez', '78963528'),
 (6, 6, 'Maria', 'Gutierrez', '74741985'),
 (7, 7, 'ALVARO', 'ALVARO', '78965412'),
-(8, 8, 'Ramon ', 'Rodriguez Lopez', '74125896');
+(8, 8, 'Ramon ', 'Rodriguez Lopez', '74125896'),
+(9, 56, 'juan', 'Perez Cotrina', '96969856'),
+(10, 57, 'ALex', 'Azanza', '12345678'),
+(11, 58, 'elmer', 'Torres', '78963254'),
+(12, 59, 'emma', 'alvarez', '96985896'),
+(13, 60, 'pedro', 'perez', '98969858');
 
 -- --------------------------------------------------------
 
@@ -287,22 +474,28 @@ CREATE TABLE `usuario` (
   `id_usu` int(11) NOT NULL,
   `id_tipo_usu` int(11) DEFAULT NULL,
   `usu_nombre` varchar(20) DEFAULT NULL,
-  `usu_contra` varchar(20) DEFAULT NULL
+  `usu_contra` varchar(20) DEFAULT NULL,
+  `estado` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usu`, `id_tipo_usu`, `usu_nombre`, `usu_contra`) VALUES
-(1, 1, 'EMMAGAR', 'EMMAGAR'),
-(2, 3, 'WPUJAY', 'WPUJAY'),
-(3, 2, 'TROY', 'TROY'),
-(4, 2, 'ETORRES', 'ETORRES'),
-(5, 2, 'JCARLOS', 'JCARLOS'),
-(6, 3, 'JOSE', 'JOSE'),
-(7, 2, 'MGutierrez', 'MGutierrez'),
-(8, 2, 'RLOPEZ', 'RLOPEZ');
+INSERT INTO `usuario` (`id_usu`, `id_tipo_usu`, `usu_nombre`, `usu_contra`, `estado`) VALUES
+(1, 1, 'EMMAGAR', 'EMMAGAR', 'habilitado'),
+(2, 3, 'WPUJAY', 'WPUJAY', 'habilitado'),
+(3, 2, 'TROY', 'TROY', 'habilitado'),
+(4, 2, 'ETORRES', 'ETORRES', 'habilitado'),
+(5, 2, 'JCARLOS', 'JCARLOS', 'habilitado'),
+(6, 1, 'maria', 'maria', 'habilitado'),
+(7, 2, 'MGutierrez', 'MGutierrez', 'habilitado'),
+(8, 2, 'RLOPEZ', 'RLOPEZ', 'habilitado'),
+(56, 2, 'juan', 'JUAN123', 'habilitado'),
+(57, 2, 'alex', 'alex123', 'habilitado'),
+(58, 2, 'Elmer123', 'elmer123', 'habilitado'),
+(59, 2, 'emma', 'emmaemma', 'habilitado'),
+(60, 2, 'pedro', 'pedropedro', 'habilitado');
 
 --
 -- Índices para tablas volcadas
@@ -418,7 +611,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
 -- AUTO_INCREMENT de la tabla `area`
@@ -430,13 +623,13 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT de la tabla `colaborador`
 --
 ALTER TABLE `colaborador`
-  MODIFY `id_colaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_colaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_informe`
 --
 ALTER TABLE `detalle_informe`
-  MODIFY `id_det_inf` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_det_inf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_informe`
@@ -448,7 +641,7 @@ ALTER TABLE `estado_informe`
 -- AUTO_INCREMENT de la tabla `informe`
 --
 ALTER TABLE `informe`
-  MODIFY `id_informe` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_informe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `jefe`
@@ -460,19 +653,19 @@ ALTER TABLE `jefe`
 -- AUTO_INCREMENT de la tabla `periodo`
 --
 ALTER TABLE `periodo`
-  MODIFY `id_periodo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_periodo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `rubro`
 --
 ALTER TABLE `rubro`
-  MODIFY `id_rubro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_rubro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `rubro_productos`
 --
 ALTER TABLE `rubro_productos`
-  MODIFY `id_rubro_productos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rubro_productos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_actividad`
@@ -490,13 +683,13 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Restricciones para tablas volcadas
@@ -508,7 +701,7 @@ ALTER TABLE `usuario`
 ALTER TABLE `actividad`
   ADD CONSTRAINT `FK8` FOREIGN KEY (`id_tipo_act`) REFERENCES `tipo_actividad` (`id_tipo_act`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK9` FOREIGN KEY (`id_rubro`) REFERENCES `rubro` (`id_rubro`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_activivad_informes` FOREIGN KEY (`id_informe`) REFERENCES `informe` (`id_informe`),
+  ADD CONSTRAINT `FK_activivad_informes` FOREIGN KEY (`id_informe`) REFERENCES `informe` (`id_informe`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_activivad_rubro_productos` FOREIGN KEY (`id_rubro_productos`) REFERENCES `rubro_productos` (`id_rubro_productos`);
 
 --
@@ -528,10 +721,10 @@ ALTER TABLE `detalle_informe`
 -- Filtros para la tabla `informe`
 --
 ALTER TABLE `informe`
-  ADD CONSTRAINT `FK11` FOREIGN KEY (`id_det_inf`) REFERENCES `detalle_informe` (`id_det_inf`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK12` FOREIGN KEY (`id_colaborador`) REFERENCES `colaborador` (`id_colaborador`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK13` FOREIGN KEY (`id_estado_inf`) REFERENCES `estado_informe` (`id_estado_inf`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK15` FOREIGN KEY (`id_periodo`) REFERENCES `periodo` (`id_periodo`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK11` FOREIGN KEY (`id_det_inf`) REFERENCES `detalle_informe` (`id_det_inf`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK12` FOREIGN KEY (`id_colaborador`) REFERENCES `colaborador` (`id_colaborador`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK13` FOREIGN KEY (`id_estado_inf`) REFERENCES `estado_informe` (`id_estado_inf`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK15` FOREIGN KEY (`id_periodo`) REFERENCES `periodo` (`id_periodo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `jefe`
