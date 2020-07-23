@@ -13,6 +13,9 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
 
 // var_dump($informesConProductos);
 // var_dump($informesSinProductos);
+ 
+ $NombreTipoInf = $_SESSION['Tipoinforme'][0]['nomb_tipo_act'];
+ 
 ?>
 
 <!doctype html>
@@ -51,7 +54,7 @@ if (isset($_SESSION['lista_informes_sin_productos'])) {
             <!-- Tabla Informes -->
             <!--Ejemplo tabla con DataTables-->
             <div style="padding-bottom:20px; height:50px;text-align: center">
-                <h4>Informe de <?php echo $informesSinProductos[0]['nombre'] . "  " . $informesSinProductos[0]['apellido'] . " - " . $informesSinProductos[0]['inf_titulo_col'] ?> </h4>
+                <h4>Informe de <?php echo $informesSinProductos[0]['nombre'] . "  " . $informesSinProductos[0]['apellido'] . " - con " .$NombreTipoInf?> </h4>
             </div>
             <!-- TIENES PENSADO AVANZAR LA VISUALIZACION DE LOS INFORMES , ASI COMO EL MINI MENU DE ENVIO A RR.HH Y EL SPRITN ESTARA TERMINADO -->
             <!--Ejemplo tabla con DataTables-->

@@ -9,7 +9,7 @@ echo' <script src="../jquery/jquery-3.3.1.min.js"></script>
 
 
 require_once '../DAO/InformesDAO.php';
-
+require_once '../DAO/ActividadesDAO.php';
 
 $opciones = $_REQUEST['op'];
 switch ($opciones) {
@@ -49,12 +49,15 @@ switch ($opciones) {
             unset($_SESSION['id_det']);
             unset($_SESSION['lista_informes_con_productos']);
             unset($_SESSION['lista_informes_sin_productos']);
+            unset($_SESSION['Tipoinforme']);
             
             $_SESSION['id_det']=$_REQUEST['det_inf'];
             
             $id_informe = $_REQUEST['id_informe'];
 
             $InformesDAO = new InformesDAO();
+            $ActividadesDAO = new ActividadesDAO();
+            $_SESSION['Tipoinforme'] = $ActividadesDAO->ObtenerTipoDeInforme($id_informe);
             $_SESSION['lista_informes_sin_productos'] = $InformesDAO->ListarInformeCompleto_SinProductos($id_informe);
             $_SESSION['lista_informes_con_productos'] = $InformesDAO->ListarInformeCompleto_ConProductos($id_informe);
             echo '<script> document.location.href="../Vistas/(RRHH)_Ver_Inf_Colaborador.php";</script>';
