@@ -1,27 +1,33 @@
 <?php
 
-class ConexionBD
-{
+class ConexionBD {
 
     //AQUI TENEMOS LAS VARIABLES DE CLASE QUE VAMOS A UTILIZAR
-    private $servidor   = 'localhost';
-    private $usuario    = 'root';
-    private $password   = '';
+    // private $servidor   = 'localhost';
+//    private $usuario    = 'id14449412_root';
+    //  private $password   = '}UuAU39BK8KIU!ya';
+//    private $base_datos = 'id14449412_bdinformes';
+//    -----
+//     private $servidor   = 'localhost';
+//    private $usuario    = 'id14449922_root';
+//    private $password   = 'NKweCXdQ@%COGO7#';
+//    private $base_datos = 'id14449922_bdinformes';
+    private $servidor = 'localhost';
+    private $usuario = 'root';
+    private $password = '';
     private $base_datos = 'bdinformes';
     private $link; //VARIABLE PARA LA CONEXION
     public $res; //EL RESULTET QUE NOS DEVUELVE EL MYSQLI_QUERY
     static $_instance; //INSTANCIA COMPARTIDA DE LA CLASE ConexionBD
     public $array; //ARRAY ASCCIATIVO DE DATOS
 
-    public function __construct()
-    {
+    public function __construct() {
         //AL HACER LA PRIMERA INSTANCIA SE CREA UNA SOLA VARIABLE DE CONEXION- YA QUE EL CONSTRUCTOR ES LO
         //PRIMERO QUE SE  EJECUTA
         $this->conectar();
     }
 
-    public static function getInstance()
-    {
+    public static function getInstance() {
         if (!(self::$_instance instanceof ConexionBD)) {
             //EL IF SOLO SE EJECUTARA EN CASO NO EXISTA UNA INSTANCIA DE LA CLASE  ConexionBD
             self::$_instance = new ConexionBD();
@@ -29,35 +35,30 @@ class ConexionBD
         return self::$_instance; //NOS DEVUELVE LA INSTANCIA DEFINITIVA
     }
 
-    public function conectar()
-    {
+    public function conectar() {
         $this->link = mysqli_connect($this->servidor, $this->usuario, $this->password, $this->base_datos);
         mysqli_set_charset($this->link, "utf8"); //PARA LAS TILDES Y CARACTERES LATINOS
     }
 
-    public function desconectar()
-    {
+    public function desconectar() {
         mysqli_close($this->link);
     }
 
     //METODO PARA EJECUTAR LAS SENTENCIAS SQL SIN USAR MUCHO CODIGO
-    public function ejecutar($sql)
-    {
+    public function ejecutar($sql) {
         $this->res = mysqli_query($this->link, $sql);
         return $this->res;
     }
 
     //METODO PARA EJECUTAR LAS SENTENCIAS SQL SIN USAR MUCHO CODIGO
-    public function EjecutarConEstado($sql)
-    {
+    public function EjecutarConEstado($sql) {
         $estado = mysqli_query($this->link, $sql);
 
         return $estado;
     }
 
 //Método para obtener una fila de resultados de la sentencia sql
-    public function obtener_filas($stmt)
-    {
+    public function obtener_filas($stmt) {
 
         while ($lista = mysqli_fetch_assoc($stmt)) {
             $this->array[] = $lista;
@@ -65,8 +66,7 @@ class ConexionBD
         return $this->array;
     }
 
-    public function obtener_filas_Numericas($stmt)
-    {
+    public function obtener_filas_Numericas($stmt) {
 
         while ($lista = mysqli_fetch_row($stmt)) {
             $this->array[] = $lista;
@@ -75,28 +75,23 @@ class ConexionBD
     }
 
     //Devuelve el último id del insert introducido
-    public function Ultimo_ID()
-    {
+    public function Ultimo_ID() {
         return mysqli_insert_id($this->link);
     }
 
-    public function getLink()
-    {
+    public function getLink() {
         return $this->link;
     }
 
-    public function setLink($link)
-    {
+    public function setLink($link) {
         $this->link = $link;
     }
 
-    public function getArray()
-    {
+    public function getArray() {
         return $this->array;
     }
 
-    public function setArray($array)
-    {
+    public function setArray($array) {
         $this->array = $array;
     }
 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if (empty($_SESSION["nombre"])) {
     echo '<script> document.location.href="../index.php";</script>';

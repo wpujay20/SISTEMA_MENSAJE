@@ -91,7 +91,7 @@ class GestionDAO{
             $sql = "DELETE FROM colaborador WHERE id_trabajador = $id_trabajador2";
             $estado = $instanciacompartida->EjecutarConEstado($sql);
             
-            echo $sql;
+           // echo $sql;
 
             return $estado;
             
@@ -108,7 +108,7 @@ class GestionDAO{
             $sql = "DELETE FROM trabajador WHERE id_trabajador = $id_trabajador2";
             $estado = $instanciacompartida->EjecutarConEstado($sql);
 
-            echo $sql;
+           // echo $sql;
             return $estado;
             
         } catch (Exception $ex) {
@@ -123,7 +123,7 @@ class GestionDAO{
             $sql = "UPDATE usuario set estado='habilitado' WHERE id_usu = $id_usu";
             $estado = $instanciacompartida->EjecutarConEstado($sql);
 
-            echo $sql;
+           // echo $sql;
             return $estado;
             
         } catch (Exception $ex) {
@@ -138,7 +138,7 @@ class GestionDAO{
             $sql = "UPDATE usuario set estado='inhabilitado' WHERE id_usu = $id_usu";
             $estado = $instanciacompartida->EjecutarConEstado($sql);
 
-            echo $sql;
+           // echo $sql;
             return $estado;
             
         } catch (Exception $ex) {

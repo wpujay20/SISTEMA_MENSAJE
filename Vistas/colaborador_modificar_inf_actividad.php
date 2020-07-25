@@ -1,5 +1,6 @@
    <?php
 // include './(colaborador)_modificar_informe.php';
+ob_start();
 session_start();
      $listaRubrosSinProductos = $_SESSION['listarRubrosSinProductos'];
 ?>

@@ -28,21 +28,16 @@ class ActividadesDAO {
         //2: realizadas
 
         try {
-            $cn = mysqli_connect("localhost", "root", "", "bdinformes");
-            mysqli_set_charset($cn, "utf8");
-
-            $sql2 = "SELECT * FROM actividad as act where act.id_tipo_act=2";
-
-            $res = mysqli_query($cn, $sql2);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $lista[] = $row;
-            }
-
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "SELECT * FROM actividad as act where act.id_tipo_act=2";
+            $res = $instanciacompartida->ejecutar($sql);
+            $lista = $instanciacompartida->obtener_filas($res);
+            $instanciacompartida->setArray(null);
             return $lista;
         } catch (Exception $ex) {
-            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+            
         } finally {
-            mysqli_close($cn);
+            
         }
     }
 
@@ -99,6 +94,7 @@ class ActividadesDAO {
 
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
+         $instanciacompartida->setArray(null);
 
         return $lista;
     }
@@ -106,27 +102,23 @@ class ActividadesDAO {
     public function ListarActividadesSegunInformeProductos(ActividadesBean $ActividadBean) {
 
         try {
-            $lista = array();
 
-            $cn = mysqli_connect("localhost", "root", "", "bdinformes");
-            mysqli_set_charset($cn, "utf8");
-
-            $sql2 = " SELECT * FROM rubro_productos as pro
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "SELECT * FROM rubro_productos as pro
                         INNER JOIN actividad as act on act.id_rubro_productos=pro.id_rubro_productos
                         INNER JOIN rubro as rub on rub.id_rubro=act.id_rubro
                         where act.id_informe=$ActividadBean->id_informe";
 
-            $res = mysqli_query($cn, $sql2);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $lista[] = $row;
-            }
+            $res = $instanciacompartida->ejecutar($sql);
+            $lista = $instanciacompartida->obtener_filas($res);
+
+            $instanciacompartida->setArray(null);
 
             return $lista;
         } catch (Exception $ex) {
-
-            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
+            
         } finally {
-            mysqli_close($cn);
+            
         }
     }
 
@@ -237,7 +229,7 @@ class ActividadesDAO {
 
     //Wilson: función para editar detalle de rubro productos
 
-    public function ActualizarActividadDeRubroProducto($titulo,$autor,$estadoPro,$id_rubro_producto) {
+    public function ActualizarActividadDeRubroProducto($titulo, $autor, $estadoPro, $id_rubro_producto) {
         try {
             $instanciacompartida = ConexionBD::getInstance();
             $sql = "UPDATE rubro_productos as rub SET rub.pro_titulo = '$titulo', rub.pro_autor = '$autor', rub.pro_estado = '$estadoPro' WHERE rub.id_rubro_productos = $id_rubro_producto;";

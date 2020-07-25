@@ -1,5 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
+    ob_start();
     session_start();
 }
 $informesRRHH = null;
@@ -38,7 +39,7 @@ if (isset($_SESSION['LISTA_INFORMES_RR_HH'])) {
                 <!-- Button trigger modal -->
                 <a href="../CONTROLADOR/GestionarUsuario.php?op=1" class="btn btn-info" >Gestionar Usuario</a>
               
-                <a href="../CONTROLADOR/Registro_Login_Controlador.php?op=2" class="btn btn-info" >Registar Usuarios (Colaborador,Jefes,RR.HH)</a>
+                
                 <a href="#" class="btn btn-secondary" id="cerrar">Cerrar Sesion</a>
                 <br><br><label class="text-left"> <?php echo "<strong>Bienvenido</strong> <br>" . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . "<br>Area : " . $_SESSION['area_nombre']; ?> </label>
             </div>

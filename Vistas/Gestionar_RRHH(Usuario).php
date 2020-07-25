@@ -1,5 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
+    ob_start();
     session_start();
     $lista = $_SESSION["GESTIONAR_USUARIO"];
       
@@ -18,14 +19,11 @@ if (!isset($_SESSION)) {
 
         <!-- REQUERIDO PARA EL DATA TABLE -->
 
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
         <link rel="stylesheet" href="../datatables/main.css">  
         <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.css"/>
         <link rel="stylesheet"  type="text/css" href="../datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
-
-      <!-- REQUERIDO PARA EL EL SLIDER -->
-      <link rel="stylesheet"  type="text/css" href="../CSS/menu_mantenimientos.css">
-
 
 
     </head>
@@ -33,12 +31,7 @@ if (!isset($_SESSION)) {
     <body > 
         <header>
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+  
                
             </div>
             <br>
@@ -58,9 +51,10 @@ if (!isset($_SESSION)) {
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form name="form" method="POST" action="RegistrarUsuario.php">
+                <form style="margin:0px 0px 50px 0px" name="form" method="POST" action="RegistrarUsuario.php">
                     <div class="table-responsive">  
-                          <a href="InterfaceRRHH.php" class="btn btn-danger">Regresar Menu principal</a> <br><br>
+                          <a href="InterfaceRRHH.php" class="btn btn-secondary">Regresar Menu principal</a>
+                           <a href="../CONTROLADOR/Registro_Login_Controlador.php?op=2" class="btn btn-info" >Registar Usuarios (Colaborador,Jefes,RR.HH)</a><br><br>
                         <table   style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
@@ -94,7 +88,7 @@ if (!isset($_SESSION)) {
                                         <td><?php echo $persona['tipo_descripcion']; ?></td>
                                         
                                         <?php if($persona['estado']=='habilitado'){ ?>
-                                        <td><a class="btn btn-info" href="../CONTROLADOR/GestionarUsuario.php?op=6&usu=<?php echo $persona['id_usu']; ?>" ><?php echo $persona['estado']; ?></a></td>
+                                        <td><a class="btn btn-primary" href="../CONTROLADOR/GestionarUsuario.php?op=6&usu=<?php echo $persona['id_usu']; ?>" ><?php echo $persona['estado']; ?></a></td>
                                         <?php } else { ?>
                                             
                                          <td><a class="btn btn-danger" href="../CONTROLADOR/GestionarUsuario.php?op=7&usu=<?php echo $persona['id_usu']; ?>"  ><?php echo $persona['estado']; ?></a></td>

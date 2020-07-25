@@ -24,8 +24,9 @@ class UsuarioDAO {
 
         if ($verificar > 0) {
             session_destroy();
+            ob_start();
             session_start();
-
+            //var_dump($lista);
             $_SESSION['id_tipo_usu'] = $lista[0]['id_tipo_usu'];
             $_SESSION['id_usu'] = $lista[0]['id_usu'];
             $_SESSION['id_trabajador'] = $lista[0]['id_trabajador'];
@@ -74,26 +75,23 @@ class UsuarioDAO {
     public function ObtenerDatosDeColaborador($id_trabajador) {
 
         try {
-            $cn = mysqli_connect("localhost", "root", "", "bdinformes");
-            mysqli_set_charset($cn, "utf8");
-
-                $sql2 = "SELECT * from colaborador AS col
+            $instanciacompartida = ConexionBD::getInstance();
+            
+            $sql = "SELECT * from colaborador AS col
                          INNER JOIN area as area on col.id_area=area.id_area
                          WHERE id_trabajador=$id_trabajador";
 
-            $res = mysqli_query($cn, $sql2);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $lista[] = $row;
-            }
-
-            $_SESSION['id_colaborador'] = $lista[0]["id_colaborador"];
-            $_SESSION['id_area'] = $lista[0]["id_area"];
-            $_SESSION['area_nombre'] = $lista[0]["area_nombre"];
+            $res = $instanciacompartida->ejecutar($sql);
+            $lista = $instanciacompartida->obtener_filas($res);
             
+            $_SESSION['id_colaborador'] = $lista[1]["id_colaborador"];
+            $_SESSION['id_area'] = $lista[1]["id_area"];
+            $_SESSION['area_nombre'] = $lista[1]["area_nombre"];
+            
+            $instanciacompartida->setArray(null);
+
         } catch (Exception $ex) {
-            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
         } finally {
-            mysqli_close($cn);
         }
     }
 
@@ -101,25 +99,24 @@ class UsuarioDAO {
     public function ObtenerDatosDeJefe($id_trabajador) {
         try {
 
-            $cn = mysqli_connect("localhost", "root", "", "bdinformes");
-            mysqli_set_charset($cn, "utf8");
-
-            $sql2 = "SELECT * from jefe AS jef
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "SELECT * from jefe AS jef
                          INNER JOIN area as area on jef.id_area=area.id_area
                          WHERE id_trabajador=$id_trabajador";
 
-            $res = mysqli_query($cn, $sql2);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $lista[] = $row;
-            }
-            $_SESSION['id_jefe'] = $lista[0]["id_jefe"];
-            $_SESSION['id_area'] = $lista[0]["id_area"];
-            $_SESSION['area_nombre'] = $lista[0]["area_nombre"];
+            $res = $instanciacompartida->ejecutar($sql);
+            $lista = $instanciacompartida->obtener_filas($res);
+
+            //var_export($lista);
+            echo '<pre>' . var_export($lista, true) . '</pre>';
+            $_SESSION['id_jefe'] = $lista[1]["id_jefe"];
+            $_SESSION['id_area'] = $lista[1]["id_area"];
+            $_SESSION['area_nombre'] = $lista[1]["area_nombre"];
+            
+            $instanciacompartida->setArray(null);
             
         } catch (Exception $ex) {
-            echo $ex->getTraceAsString() . "ERROR EN LA LINEA : " . $ex->getLine() . " " . $ex->getMessage();
         } finally {
-            mysqli_close($cn);
         }
     }
 

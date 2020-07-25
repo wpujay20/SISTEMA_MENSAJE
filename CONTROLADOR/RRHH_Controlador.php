@@ -1,6 +1,7 @@
 <?php
 
 if (!isset($_SESSION)) {
+    ob_start();
     session_start();
 }
 echo' <script src="../jquery/jquery-3.3.1.min.js"></script>  

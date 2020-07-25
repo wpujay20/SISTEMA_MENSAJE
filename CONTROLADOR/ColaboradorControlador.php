@@ -1,6 +1,7 @@
 <?php
 
 if (!isset($_SESSION)) {
+    ob_start();
     session_start();
 }
 echo ' <script src="../jquery/jquery-3.3.1.min.js"></script>
@@ -322,8 +323,9 @@ switch ($opciones) {
 
                         $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
 
-                        $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
-
+                        //$estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
+                   
+                     
                         unset($_SESSION['id_informe']);
 
                         if ($estado > 0) {
@@ -351,6 +353,7 @@ switch ($opciones) {
                 $actDAO = new ActividadesDAO();
 //                $actDAO->EliminarActividadesPor_ID_informe($_SESSION['id_informe']);
                 $estado = $infDAO->EliminarInforme_por_ID($_SESSION['id_informe']);
+                var_dump($estado);
                 unset($_SESSION['id_informe']);
 //                var_dump($estado);
                 if ($estado == true) {
@@ -585,10 +588,10 @@ switch ($opciones) {
             $informesDAO = new InformesDAO();
             $objUsuarioDAO = new UsuarioDAO();
             $estado = $informesDAO->ActualizarInforme($titulo, $description, $id_informe);
-            if ($estado = 1) {
+            if ($estado == 1) {
 
                 $sub = $informesDAO->ActualizarPeriodo($fechaIni, $fechaFin, $hora, $id_periodo);
-                if ($sub = 1) {
+                if ($sub == 1) {
 //                    require '../JAVASCRIPT/(Colaborador)_InformeActualizado.js';
                     echo '<script src="../JAVASCRIPT/(Colaborador)_InformeActualizado.js"></script> ';
 

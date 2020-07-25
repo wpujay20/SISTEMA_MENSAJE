@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 if ($_SESSION['lista_informes_con_productos'] == null || !isset($_SESSION['lista_informes_con_productos'])) {

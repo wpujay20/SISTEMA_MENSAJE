@@ -1,8 +1,11 @@
 
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
+//if (!isset($_SESSION)) {
+   //ob_end_clean();
+    ob_start();
+   // session_destroy();
+ session_start();
+//}
 
 $listaAreaas= $_SESSION['Lista_Areas'];
 $listaTipos = $_SESSION['Lista_Tipos_Usuarios'];
@@ -114,6 +117,9 @@ $listaTipos = $_SESSION['Lista_Tipos_Usuarios'];
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
 
     <script type="text/javascript" src="../jquery/main.js"></script>  
+<?php 
+ob_end_flush();
 
+?>
 </body>
 </html>

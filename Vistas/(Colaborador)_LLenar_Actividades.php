@@ -1,9 +1,10 @@
 
 <?php
-// if (!isset($_SESSION)) {
-//     session_start();
-// }
-session_start();
+ if (!isset($_SESSION)) {
+        ob_start();
+        session_start();
+}
+
 if (empty($_SESSION["nombre"])) {
     echo '<script> document.location.href="../index.php";</script>';
 } else {

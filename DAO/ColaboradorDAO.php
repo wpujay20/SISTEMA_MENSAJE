@@ -62,7 +62,7 @@ class ColaboradorDAO
     {
 
         $instanciaCompartida = ConexionBD::getInstance();
-        $sql                 = "UPDATE informe SET id_estado_inf = 2 WHERE id_informe = $id_informe";
+        $sql                 = "UPDATE informe SET id_estado_inf = 2 WHERE informe.id_informe = $id_informe;";
         $estado              = $instanciaCompartida->EjecutarConEstado($sql);
 
         return $estado;

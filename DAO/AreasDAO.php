@@ -10,6 +10,7 @@ class AreasDAO {
             
           $res = $instanciacompartida->ejecutar($sql);
           $lista = $instanciacompartida->obtener_filas($res);
+          $instanciacompartida->setArray(null);
           return $lista;
         
     }

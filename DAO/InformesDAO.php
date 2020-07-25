@@ -38,7 +38,8 @@ class InformesDAO {
     public function EliminarInforme_por_ID($id_informe) {
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "DELETE FROM INFORME WHERE id_informe=$id_informe";
+       // $sql = "DELETE FROM INFORME WHERE id_informe=$id_informe";
+        $sql="DELETE FROM `informe` WHERE `informe`.`id_informe` = $id_informe";
 
         $estado = $instanciacompartida->EjecutarConEstado($sql);
 

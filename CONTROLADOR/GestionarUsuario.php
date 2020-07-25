@@ -1,6 +1,7 @@
 <?php
 
 if (!isset($_SESSION)) {
+    ob_start();
     session_start();
 }
 require_once '../DAO/GestionarUsuarioDAO.php';
@@ -219,3 +220,6 @@ switch ($opciones) {
        
 
 }
+
+
+ob_end_flush();
