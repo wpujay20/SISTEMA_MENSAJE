@@ -20,9 +20,9 @@ class RRHH_DAO {
 
          try {
             $instanciacompartida = ConexionBD::getInstance();
-            $sql = "UPDATE jefe as j inner join area as a on j.id_jefe=a.id_area inner join trabajador as tra on tra.id_trabajador=j.id_trabajador set  c.id_area =$AreasBean->id_area, "
-                  . " WHERE a.id_trabajador =$TrabajadorBean->id_trabajador;"
-                 ;
+             $sql = "UPDATE jefe as j inner join area as a on j.id_jefe=a.id_area inner join trabajador as tra on tra.id_trabajador=j.id_trabajador set  c.id_area =$AreasBean->id_area, "
+                   . " WHERE a.id_trabajador =$TrabajadorBean->id_trabajador;"
+                  ; 
 
             $estado = $instanciacompartida->EjecutarConEstado($sql);
            

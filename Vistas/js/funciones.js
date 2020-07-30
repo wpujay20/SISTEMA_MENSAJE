@@ -1,4 +1,55 @@
 
+
+
+
+function EnviarInforme(id_informe) {
+    var id_informe = id_informe;
+   
+    
+    $("document").ready(function () { 
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger',
+                padding: '3rem'
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Estas Seguro que quieres Enviar el Informe a Jefatura?',
+            text: "Esta accion no se puede remover",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, quiero hacerlo',
+            cancelButtonText: 'No, Cancelar!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {     /* En caso se eliga si quiero borraralo */ 
+                    document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=8&id_informe=" + id_informe + "";
+ 
+
+            } else if (
+                    /* En caso se eliga no quiero borraralo */
+                    result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'Tu informe no ha sido enviado',
+                        );
+
+            }
+        });
+    });
+
+
+
+}
+
+
+
+
+
 function agregaform(id_informe, id, nombre, rubro) {
 
     $('#id_informe').val(id_informe);
@@ -37,7 +88,7 @@ function ActualizarActividadesNormales() {
             url: "../CONTROLADOR/ColaboradorControlador.php?op=17",
             data: cadena,
             success: function (r) {
-                if (isBlank(r)===false) {
+                if (isBlank(r) === false) {
                     id_informe = $('#id_informe').val();
                     document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=10&id_informe=" + id_informe + "";
 
@@ -57,7 +108,7 @@ function ActualizarActividadesNormales() {
 
                 } else {
                     Swal.fire({
-                        title: "¡Error de Servidor!",                        
+                        title: "¡Error de Servidor!",
                         icon: "error",
                         padding: '1rem',
                         timer: 5000,
@@ -136,7 +187,7 @@ function ActualizarActividadesNormales2() {
             url: "../CONTROLADOR/ColaboradorControlador.php?op=18",
             data: cadena,
             success: function (r) {
-                if (isBlank(r)===false) {
+                if (isBlank(r) === false) {
 
                     id_informe = $('#id_informe').val();
                     document.location.href = "../CONTROLADOR/ColaboradorControlador.php?op=10&id_informe=" + id_informe + "";

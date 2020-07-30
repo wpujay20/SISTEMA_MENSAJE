@@ -108,7 +108,7 @@ class UsuarioDAO {
             $lista = $instanciacompartida->obtener_filas($res);
 
             //var_export($lista);
-            echo '<pre>' . var_export($lista, true) . '</pre>';
+           // echo '<pre>' . var_export($lista, true) . '</pre>';
             $_SESSION['id_jefe'] = $lista[1]["id_jefe"];
             $_SESSION['id_area'] = $lista[1]["id_area"];
             $_SESSION['area_nombre'] = $lista[1]["area_nombre"];
@@ -136,8 +136,9 @@ class UsuarioDAO {
 
          try {
             $instanciacompartida = ConexionBD::getInstance();
-            $sql = "UPDATE usuario set  id_tipo_usu =$UsuarioBean->id_tipo_usu,"
-                    . " usu_nombre='$UsuarioBean->usu_nombre', usu_contra ='$UsuarioBean->usu_contra' WHERE id_usu =$UsuarioBean->id_usu " ;
+            $sql = "UPDATE usuario set  usu_nombre='$UsuarioBean->usu_nombre', "
+                    . "usu_contra ='$UsuarioBean->usu_contra' "
+                    . "WHERE id_usu =$UsuarioBean->id_usu " ;
             
        
             $estado = $instanciacompartida->EjecutarConEstado($sql);

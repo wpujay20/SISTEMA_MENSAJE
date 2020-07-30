@@ -134,7 +134,7 @@ class RubrosDAO {
          try {
           
             $instanciacompartida = ConexionBD::getInstance();
-            $sql = "SELECT * FROM rubro";
+            $sql = "SELECT * FROM `rubro`";
 
             $res = $instanciacompartida->ejecutar($sql);
             $lista = $instanciacompartida->obtener_filas($res);

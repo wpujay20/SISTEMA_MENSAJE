@@ -3,12 +3,19 @@ if (!isset($_SESSION)) {
     ob_start();
     session_start();
 }
+if(!isset($_SESSION['id_usu'])){
+    
+    echo '<script>document.location.href="../index.php";</script>';
+}
+
+
 $informesRRHH = null;
 if (isset($_SESSION['LISTA_INFORMES_RR_HH'])) {
     $informesRRHH = $_SESSION['LISTA_INFORMES_RR_HH'];
 }
 //var_dump($informesRRHH);
 ?>
+ 
 
 <!doctype html>
 <html lang="es">
@@ -119,34 +126,7 @@ if (isset($_SESSION['LISTA_INFORMES_RR_HH'])) {
                 </div>
             </div>  
             <br>
-
-
-
-
-            <!-- Modal PARA SELCECCIONAR QUE ACTIVIDADES DESEAMOS REDACTAR -->
-            <!--            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">¿Que tipo de informe vas a redactar?</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        <center><a href="#" class="btn btn-success">Actividades Realizadas</a>
-                                            <a href="#" class="btn btn-danger">Actividades Planificadas</a></center>
-            
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            
-            
-                    </div>-->
-
-
-
+ 
 
 
 

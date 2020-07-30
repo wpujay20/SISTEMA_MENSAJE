@@ -4,6 +4,9 @@ if (!isset($_SESSION)) {
     ob_start();
     session_start();
 }
+if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
 
 $listaAreaas = $_SESSION['Lista_Areas'];
 
@@ -57,7 +60,7 @@ $listaAreaas = $_SESSION['Lista_Areas'];
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">DNI:</label>
-                        <input name="dni"  type="text" class="form-control" id="dni">
+                        <input name="dni"  type="text" max="8" class="form-control" id="dni">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre de usuario:</label>
@@ -89,7 +92,7 @@ foreach ($listaAreaas as $fila) {
                 </div>
                 <div class="modal-footer">
 
-                    <a href="../index.php" class="btn btn-secondary" >Volver</a>
+                    <a href="../CONTROLADOR/GestionarUsuario.php?op=1" class="btn btn-secondary" >Volver</a>
 
 
                     <input type="submit" value="enviar" id="boton" class="btn btn-info">

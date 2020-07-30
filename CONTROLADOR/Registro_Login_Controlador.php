@@ -31,33 +31,18 @@ switch ($opciones) {
 
     case 1: {
             //permite obtener los datos del registro de clientes
-            
-            $objGestionDAO= new GestionDAO();
+
+            $objGestionDAO = new GestionDAO();
             $objUsuarioDAO = new UsuarioDAO();
             $objUsuarioBean = new UsuarioBean();
 
             $usu_nombre = $_REQUEST['usuario'];
             $usu_contra = $_REQUEST['password'];
-           
+
             $objUsuarioBean->setUsu_nombre($usu_nombre);
             $objUsuarioBean->setUsu_contra($usu_contra);
-           /* $estado = $objGestionDAO->ValidarEstado($objUsuarioBean);
-            var_dump($estado[0]['estado']);
-            
-          if($estado[0]['estado']=='habilitado'){
-                    $usu_nombre = $_REQUEST['usuario'];
-                    $usu_contra = $_REQUEST['password'];
-           
-                    $objUsuarioBean->setUsu_nombre($usu_nombre);
-                    $objUsuarioBean->setUsu_contra($usu_contra);
-                $est=$objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
-                var_dump($est);
-           }else{
-                // echo '<script> document.location.href="../index.php";</script>';
-                echo "no puesdes ingresar";
-           }
-           */
-               $est=$objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
+
+            $est = $objUsuarioDAO->ValidarUsuarioSegunRol($objUsuarioBean);
             break;
         }
 
@@ -130,7 +115,7 @@ switch ($opciones) {
                             break;
                         }
                     case 3: {   //REGISTRAR RR.HH
-                            $estado5 = $RRHH_DAO->Registrar_RRHH($AreaBean, $TrabajadorBean);
+                           // $estado5 = $RRHH_DAO->Registrar_RRHH($AreaBean, $TrabajadorBean);
                             echo '<script src="../JAVASCRIPT/RegistarRR_HH(RRHH).js"></script> ';
                             break;
                         }
@@ -155,20 +140,20 @@ switch ($opciones) {
 
 
     case 5: { //RECOLECCION DE LOS DATOS LLEGADOS DEL REGISTRO DE COLABORADOR MULTIPLE
-            $trab_nombre        = $_REQUEST['nombre'];
-            $trab_apellido      = $_REQUEST['apellido'];
-            $trab_dni           = $_REQUEST['dni'];
-            $usu_nombre         = $_REQUEST['usuario'];
-            $usu_contra         = $_REQUEST['pass1'];
-            $area               = $_REQUEST['area'];      
-           
+            $trab_nombre = $_REQUEST['nombre'];
+            $trab_apellido = $_REQUEST['apellido'];
+            $trab_dni = $_REQUEST['dni'];
+            $usu_nombre = $_REQUEST['usuario'];
+            $usu_contra = $_REQUEST['pass1'];
+            $area = $_REQUEST['area'];
+
             $TrabajadorDAO2 = new TrabajadorDAO();
             $UsuarioDAO2 = new UsuarioDAO();
             $AreasDAO2 = new AreasDAO();
             $ColaboradorDAO2 = new ColaboradorDAO();
 
             $UsuarioBean2 = new UsuarioBean();
-            $TrabajadorBean2= new TrabajadorBean();
+            $TrabajadorBean2 = new TrabajadorBean();
             $AreaBean2 = new AreasBean();
 
 
@@ -178,21 +163,27 @@ switch ($opciones) {
             $TrabajadorBean2->setTrab_apellido($trab_apellido);
             $TrabajadorBean2->setTrab_dni($trab_dni);
             $AreaBean2->setId_area($area);
- 
-            $estado = $UsuarioDAO2->RegistrarUsuarioCOLABORADOR($UsuarioBean2); //REGISTRAMOS EL USUARIO
-            
-            if ($estado > 0) {
-                
-                $estado2 = $TrabajadorDAO2->Registrar_Trabajador($UsuarioBean2, $TrabajadorBean2); //REGISTRAMOS EL TRABAJADOR
-               
-                //REGISTRAR COLABORADOR
-                
-                $estado4 = $ColaboradorDAO2->Registrar_Colaborador($AreaBean2, $TrabajadorBean2);
-              
-                echo '<script src="../JAVASCRIPT/Colaborador_Insertado_1.js"></script> ';
 
-                
+            $estado = $UsuarioDAO2->RegistrarUsuarioCOLABORADOR($UsuarioBean2); //REGISTRAMOS EL USUARIO
+
+            if ($estado > 0) {
+
+                $estado2 = $TrabajadorDAO2->Registrar_Trabajador($UsuarioBean2, $TrabajadorBean2); //REGISTRAMOS EL TRABAJADOR
+                //REGISTRAR COLABORADOR
+
+                $estado4 = $ColaboradorDAO2->Registrar_Colaborador($AreaBean2, $TrabajadorBean2);
+
+                echo '<script src="../JAVASCRIPT/Colaborador_Insertado_1.js"></script> ';
             }
+            break;
+        }
+
+    case 6: {
+            // Lista de Trabajadores Jefes con sus Colaboradores
+            $AreasDAO = new AreasDAO();
+            $_SESSION['jefeDeCadaArea']=$AreasDAO->ListarJefesPorArea();   
+            echo '<script> document.location.href="../Vistas/(RRHH)_jefe_col_area.php";</script>';
+            
             break;
         }
 }

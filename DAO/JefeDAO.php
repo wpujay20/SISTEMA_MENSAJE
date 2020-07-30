@@ -17,13 +17,14 @@ class JefeDAO {
         return $estado;
     }
     
-    public function ActualizarJefe(AreasBean $AreasBean, TrabajadorBean $TrabajadorBean) {
+    public function ActualizarJefe(AreasBean $AreasBean,TrabajadorBean $TrabajadorBean ) {
 
          try {
            $instanciacompartida = ConexionBD::getInstance();
-            $sql = "UPDATE colaborador as c inner join trabajador as tra on tra.id_colaborador=c.id_colaborador  inner join area as a on a.id_area=c.id_area set  c.id_area =$AreasBean->id_area, "
-                  . " WHERE tra.id_trabajador =$TrabajadorBean->ID_trabajador;"
-                  ;
+//            $sql = "UPDATE colaborador as c inner join trabajador as tra on tra.id_colaborador=c.id_colaborador  inner join area as a on a.id_area=c.id_area set  c.id_area =$AreasBean->id_area, "
+//                  . " WHERE tra.id_trabajador =$TrabajadorBean->ID_trabajador;"
+//                  ;
+           $sql="UPDATE jefe SET id_area =$AreasBean->id_area WHERE jefe.id_trabajador = $TrabajadorBean->ID_trabajador";
 
             $estado = $instanciacompartida->EjecutarConEstado($sql);
            

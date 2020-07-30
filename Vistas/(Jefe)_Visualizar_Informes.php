@@ -1,6 +1,9 @@
 <?php
 ob_start();
 session_start();
+if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
 
 if ($_SESSION['lista_informes_con_productos'] == null || !isset($_SESSION['lista_informes_con_productos'])) {
     $informesConProductos = null;

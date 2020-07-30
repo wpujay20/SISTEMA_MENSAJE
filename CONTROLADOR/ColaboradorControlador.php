@@ -311,27 +311,28 @@ switch ($opciones) {
                     echo '<script src="../JAVASCRIPT/(Colaborador)_Informe_fuera_Hora.js"></script>';
                 } else {
                     //VALIDANDO 1 INFORME POR SEMANA :D
+//                    $msj = $_REQUEST['msj'];
+//                    if ($msj == 1) {
 
-                    $msj = $_REQUEST['msj'];
-                    if ($msj == 1) {
+                    $id_informe = $_REQUEST['id_informe'];
+//                        echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
+//                    } else {
 
-                        $_SESSION['id_informe'] = $_REQUEST['id_informe'];
-                        echo '<script src="../JAVASCRIPT/(Colaborador)_Enviar_informe.js"></script> ';
-                    } else {
+                    $ColaboradorDAO = new ColaboradorDAO();
 
-                        $ColaboradorDAO = new ColaboradorDAO();
+                    $estado = $ColaboradorDAO->Enviar_a_Jefatura($id_informe);
+    
+                    //$estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
+    
 
-                        $estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
+                    unset($id_informe);
 
-                        //$estado = $ColaboradorDAO->Enviar_a_Jefatura($_SESSION['id_informe']);
-                   
-                     
-                        unset($_SESSION['id_informe']);
+                    if ($estado > 0) {
 
-                        if ($estado > 0) {
-                            echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
-                        }
+                       // echo '<script> document.location.href="UsuariosControlador.php?op=1";</script>';
+                        echo '<script src="../JAVASCRIPT/(colaborador)_InformeEnviado.js"></script>';
                     }
+//                    }
                 }
             } else {
                 echo '<script src="../JAVASCRIPT/InformeDiario.js"></script>';
@@ -594,7 +595,6 @@ switch ($opciones) {
                 if ($sub == 1) {
 //                    require '../JAVASCRIPT/(Colaborador)_InformeActualizado.js';
                     echo '<script src="../JAVASCRIPT/(Colaborador)_InformeActualizado.js"></script> ';
-
                 } else {
                     echo 'no modificado! :C';
                 }

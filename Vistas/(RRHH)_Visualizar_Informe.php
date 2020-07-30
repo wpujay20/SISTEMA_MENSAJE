@@ -2,6 +2,9 @@
 ob_start();
 session_start();
 
+if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
 if (!isset($_SESSION['Inf_con_det']) || $_SESSION['Inf_con_det'] == null) {
     $informes = null;
 } else {

@@ -29,67 +29,65 @@ echo' <script src="../jquery/jquery-3.3.1.min.js"></script>
 
 $opciones = $_REQUEST['op'];
 switch ($opciones) {
-    
-      case 1: {
+
+    case 1: {
 
             //permite listar la gestion de usuarios
-            unset($_SESSION['GESTIONAR_USUARIO']); 
+            unset($_SESSION['GESTIONAR_USUARIO']);
             $objGestionDAO = new GestionDAO();
-            $_SESSION['GESTIONAR_USUARIO']= $objGestionDAO->Listar_usuarios();  
-           echo '<script> document.location.href="../Vistas/Gestionar_RRHH(Usuario).php";</script>';
-          
-            echo '<pre>' . var_export($_SESSION['GESTIONAR_USUARIO'], true) . '</pre>';
+            $_SESSION['GESTIONAR_USUARIO'] = $objGestionDAO->Listar_usuarios();
+            echo '<script> document.location.href="../Vistas/Gestionar_RRHH(Usuario).php";</script>';
+
+         //   echo '<pre>' . var_export($_SESSION['GESTIONAR_USUARIO'], true) . '</pre>';
             break;
         }
-        
-      case 2: { 
-                $objTrabajadorBean = new TrabajadorBean();
-                $objTipoUsuarioBean = new TipoUsuarioBean();
-                $objUsuarioBean = new UsuarioBean();
-                
-                
-                $objGestionDAO = new GestionDAO();
-               
-                $trab_nombre =  $_REQUEST['nombre'];
-                $trab_apellido =  $_REQUEST['apellido'];
-                $trab_dni =  $_REQUEST['dni'];
-                $tipo_nombre =  $_REQUEST['tipo_nombre'];
-                $usu_nombre =  $_REQUEST['usu_nombre'];
-                $usu_contra =  $_REQUEST['usu_contra'];
-                $tipo_descripcion = $_REQUEST['tipo_descripcion'];
 
-                
-                $objTrabajadorBean->setTrab_nombre($trab_nombre);
-                $objTrabajadorBean->setTrab_apellido($trab_apellido);
-                $objTrabajadorBean->setTrab_dni($trab_dni);
-                
-                
-                $objTipoUsuarioBean->setTipo_nombre($tipo_nombre);
-                
-                $objUsuarioBean->setUsu_nombre($usu_nombre);
-                $objUsuarioBean->setUsu_contra($usu_contra);
-                
-                $objTipoUsuarioBean->setTipo_descripcion($tipo_descripcion);
-              
-              
-               $estado = $objGestionDAO->InsertarTrabajador($objTrabajadorBean,$objUsuarioBean );
-                       
-               if($estado>0){
-                    
-                    $estado1 = $objGestionDAO->InsertarTipoUsuario($objTipoUsuarioBean );
-                    
-                      $estado2 = $objGestionDAO->InsertarUsuario($objTipoUsuarioBean, $objUsuarioBean );
-                      
-                        echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
-                 } else {
-                        echo 'error al insertar';    
-                 }
-              
-       break;
-   
-      }
-     case 3: {// MODIFICAR USUARIO
-          
+    case 2: {
+            $objTrabajadorBean = new TrabajadorBean();
+            $objTipoUsuarioBean = new TipoUsuarioBean();
+            $objUsuarioBean = new UsuarioBean();
+
+
+            $objGestionDAO = new GestionDAO();
+
+            $trab_nombre = $_REQUEST['nombre'];
+            $trab_apellido = $_REQUEST['apellido'];
+            $trab_dni = $_REQUEST['dni'];
+            $tipo_nombre = $_REQUEST['tipo_nombre'];
+            $usu_nombre = $_REQUEST['usu_nombre'];
+            $usu_contra = $_REQUEST['usu_contra'];
+            $tipo_descripcion = $_REQUEST['tipo_descripcion'];
+
+
+            $objTrabajadorBean->setTrab_nombre($trab_nombre);
+            $objTrabajadorBean->setTrab_apellido($trab_apellido);
+            $objTrabajadorBean->setTrab_dni($trab_dni);
+
+
+            $objTipoUsuarioBean->setTipo_nombre($tipo_nombre);
+
+            $objUsuarioBean->setUsu_nombre($usu_nombre);
+            $objUsuarioBean->setUsu_contra($usu_contra);
+
+            $objTipoUsuarioBean->setTipo_descripcion($tipo_descripcion);
+
+
+            $estado = $objGestionDAO->InsertarTrabajador($objTrabajadorBean, $objUsuarioBean);
+
+            if ($estado > 0) {
+
+                $estado1 = $objGestionDAO->InsertarTipoUsuario($objTipoUsuarioBean);
+
+                $estado2 = $objGestionDAO->InsertarUsuario($objTipoUsuarioBean, $objUsuarioBean);
+
+                echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
+            } else {
+                echo 'error al insertar';
+            }
+
+            break;
+        }
+    case 3: {// MODIFICAR USUARIO
             $TrabajadorDAO = new TrabajadorDAO();
             $UsuarioDAO = new UsuarioDAO();
             $ColaboradorDAO = new ColaboradorDAO();
@@ -100,8 +98,8 @@ switch ($opciones) {
             $TrabajadorBean = new TrabajadorBean();
             $AreaBean = new AreasBean();
             $TipoUsuarioBean = new TipoUsuarioBean();
-            
-           
+
+
             $id_trabajador = $_REQUEST['ID_TRABA'];
             $id_usu = $_REQUEST['id_usu'];
             $trab_nombre_nuevo = $_REQUEST['nombre'];
@@ -110,10 +108,13 @@ switch ($opciones) {
             $usu_nombre_nuevo = $_REQUEST['usu_nombre'];
             $usu_contra_nuevo = $_REQUEST['usu_contra'];
             $tipo_usu_nuevo = $_REQUEST['tipo_usu'];
-            $area_nuevo = $_REQUEST['area'];
-      
-
-
+            
+            if(!empty($_REQUEST['area'] )){
+                  $area_nuevo = $_REQUEST['area'];
+    
+                  $AreaBean->setId_area($area_nuevo);
+            } 
+    
             $TrabajadorBean->setID_trabajador($id_trabajador);
             $TrabajadorBean->setTrab_nombre($trab_nombre_nuevo);
             $TrabajadorBean->setTrab_apellido($trab_apellido_nuevo);
@@ -121,24 +122,32 @@ switch ($opciones) {
             $UsuarioBean->setId_usu($id_usu);
             $UsuarioBean->setUsu_nombre($usu_nombre_nuevo);
             $UsuarioBean->setUsu_contra($usu_contra_nuevo);
-            
-      
+
+
             $UsuarioBean->setId_tipo_usu($tipo_usu_nuevo);
-            $AreaBean->setArea_nombre($area_nuevo);
+    
             
+
+//            var_dump("id area= ". $area_nuevo. " id trabajador= ". $id_trabajador);
+//            die;
+    
+
 
 
             $estado = $UsuarioDAO->ActualizarUsuario($UsuarioBean); //REGISTRAMOS EL USUARIO
-      
 
-            if ($estado > 0) {             
+    
+
+
+            if ($estado > 0) {
                 $estado2 = $TrabajadorDAO->ActualizarTrabajo($TrabajadorBean); //REGISTRAMOS EL TRABAJADOR
 
-                switch ($tipo_usu_nuevo ) {
-                                      
+                switch ($tipo_usu_nuevo) { 
                     case 1: { //REGISTRAR JEFE
+                           
                             $estado4 = $JefeDAO->ActualizarJefe($AreaBean, $TrabajadorBean);
-                             echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
+
+                            echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
                             break;
                         }
                     case 2: {  //REGISTRAR COLABORADOR
@@ -147,78 +156,69 @@ switch ($opciones) {
                             break;
                         }
                     case 3: {   //REGISTRAR RR.HH
-                            $estado5 = $RRHH_DAO->ActualizarRRHH($AreaBean, $TrabajadorBean);
-                         echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
+                        
+                           // $estado5 = $RRHH_DAO->ActualizarRRHH($AreaBean, $TrabajadorBean);
+                            echo '<script src="../JAVASCRIPT/ModificarJefe.js"></script> ';
                             break;
                         }
                 }
-                  
-           
-               
             }
-             break;
-                
-              
+            break;
         }
 
-          
-          
-      case 4: {//ELIMIANR USUARIO
-          
-               $id_trabajador = $_REQUEST['id_trabajador'];
-               $_SESSION['id_trabajador']=$id_trabajador;
-               echo '<script src="../JAVASCRIPT/Eliminar_Usuario.js"></script>';    
-            
-       break;
-   
-       }
-       case 5: {//SI QUIERO ELIMINAR
-               $objGestionDAO = new GestionDAO();
-               
-               $id_trabajador2 = $_SESSION['id_trabajador'];
-               $estado = $objGestionDAO->ElimianrColaborador($id_trabajador2);
-             
-              var_dump($estado);
-               if($estado>0){
-                     $estado2= $objGestionDAO->ElimianrTrabajador($id_trabajador2);
-                   
-                        unset($_SESSION['ID_USU']);
-                        //echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
-                 } else {
-                        echo 'error al borrar';    
-                 }
-          
-          
-       break;
-   
-       }
-       case 6:{
-           
-            $id_usu = $_REQUEST['usu'];
-            $objGestionDAO = new GestionDAO();
-            
-            $estado = $objGestionDAO->InhabilitarUsuario($id_usu);
-            if($estado>0){
-                echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
-            }
-           
-               break;
-       }
-       
-              case 7:{
-           
-            $id_usu = $_REQUEST['usu'];
-            $objGestionDAO = new GestionDAO();
-            
-            $estado = $objGestionDAO->HabilitarUsuario($id_usu);
-            if($estado>0){
-                echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
-            }
-           
-               break;
-       }
-       
 
+
+    case 4: {//ELIMIANR USUARIO
+            $id_trabajador = $_REQUEST['id_trabajador'];
+            $_SESSION['id_trabajador'] = $id_trabajador;
+            echo '<script src="../JAVASCRIPT/Eliminar_Usuario.js"></script>';
+
+            break;
+        }
+    case 5: {//SI QUIERO ELIMINAR
+            $objGestionDAO = new GestionDAO();
+
+            $id_trabajador2 = $_SESSION['id_trabajador'];
+            $estado = $objGestionDAO->ElimianrColaborador($id_trabajador2);
+
+            var_dump($estado);
+            if ($estado > 0) {
+                $estado2 = $objGestionDAO->ElimianrTrabajador($id_trabajador2);
+
+                unset($_SESSION['ID_USU']);
+                //echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
+            } else {
+                echo 'error al borrar';
+            }
+
+
+            break;
+        }
+    case 6: {
+
+            $id_usu = $_REQUEST['usu'];
+            $objGestionDAO = new GestionDAO();
+
+            $estado = $objGestionDAO->InhabilitarUsuario($id_usu);
+            if ($estado > 0) {
+                echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
+            }
+
+            break;
+        }
+
+    case 7: {
+
+            $id_usu = $_REQUEST['usu'];
+            $objGestionDAO = new GestionDAO();
+
+            $estado = $objGestionDAO->HabilitarUsuario($id_usu);
+            if ($estado > 0) {
+                echo '<script> document.location.href="GestionarUsuario.php?op=1";</script>';
+            }
+
+            break;
+        }
 }
 
 

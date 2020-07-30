@@ -7,6 +7,13 @@ if (!isset($_SESSION["nombre"])) {
 }
 
 $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
+$mensaje=null;
+if(!empty($_SESSION['mensaje'])){
+
+$mensaje=$_SESSION['mensaje'];
+
+}
+
 ?>
 
 <!doctype html>
@@ -53,6 +60,7 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
             <div style="max-width: 1350px;" class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                         
                         <div class="table-responsive">
                             <table style="font-size: small" id="example" class="table table-striped table-bordered" style="width:100%"><thead>
                                     <tr>
@@ -93,8 +101,8 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
                                                     &id_informe=<?php echo $indice['id_informe']?>
                                                     " class="btn btn-success"> Editar </a></td>
 
-                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=<?php echo $indice['id_informe']?>" class="btn btn-primary"> Enviar </a></td>
-
+<!--                                                <td><a href="../CONTROLADOR/ColaboradorControlador.php?msj=1&op=8&id_informe=" class="btn btn-primary"> Enviar </a></td>-->
+                                                    <td><button class="btn btn-primary" onclick="EnviarInforme('<?php echo $indice['id_informe']?>')">Enviar </button></td>
 
                                                 <?php } else { echo "<td></td><td></td><td></td>";}?>
                                                 </tr>
@@ -153,6 +161,6 @@ $informesColb = $_SESSION['LISTA_INFORMES_COLABORADOR'];
         <script type="text/javascript" src="../datatables/datatables.min.js"></script>
 
         <script type="text/javascript" src="../jquery/main.js"></script>
-
+        <script src="js/funciones.js" type="text/javascript"></script>
     </body>
 </html>

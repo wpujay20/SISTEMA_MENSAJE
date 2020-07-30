@@ -26,8 +26,13 @@ class InformesDAO {
         unset($_SESSION['id_ultimo_informe']);
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "INSERT INTO informe (id_colaborador, id_estado_inf, id_periodo, inf_titulo_col, inf_descripcion)
-                VALUES ($InformesBean->id_colaborador,$InformesBean->id_estado_inf,$InformesBean->id_periodo,'$InformesBean->inf_titulo_col','$InformesBean->inf_descripcion');";
+        $sql = "INSERT INTO informe (id_colaborador, id_estado_inf, id_periodo, inf_titulo_col, inf_descripcion,inf_fecha)
+                VALUES (
+                $InformesBean->id_colaborador,"
+                . "$InformesBean->id_estado_inf,"
+                . "$InformesBean->id_periodo,'"
+                . "$InformesBean->inf_titulo_col','"
+                . "$InformesBean->inf_descripcion',NOW());";
 
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         $_SESSION['id_ultimo_informe'] = $instanciacompartida->Ultimo_ID();

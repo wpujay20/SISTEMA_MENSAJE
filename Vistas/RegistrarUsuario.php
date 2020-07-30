@@ -6,6 +6,9 @@
    // session_destroy();
  session_start();
 //}
+ if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
 
 $listaAreaas= $_SESSION['Lista_Areas'];
 $listaTipos = $_SESSION['Lista_Tipos_Usuarios'];
@@ -102,8 +105,8 @@ $listaTipos = $_SESSION['Lista_Tipos_Usuarios'];
                 </div>
                 <div class="modal-footer">
 
-                    <a href="../Vistas/InterfaceRRHH.php" class="btn btn-secondary" >Volver</a>
-                    
+                      <a href="../CONTROLADOR/GestionarUsuario.php?op=1" class="btn btn-secondary" >Volver</a>
+
                    
                     <input type="submit" value="enviar" id="boton" class="btn btn-success">
                 </div>

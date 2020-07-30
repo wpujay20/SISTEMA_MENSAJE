@@ -4,6 +4,9 @@ if (!isset($_SESSION)) {
     ob_start();
     session_start();
 }
+if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
 
 //$id_informe = $_REQUEST['id_informe'];
 ?>

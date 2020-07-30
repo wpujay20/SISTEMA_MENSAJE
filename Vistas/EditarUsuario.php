@@ -1,5 +1,10 @@
 
 <?php
+session_start();
+if (!isset($_SESSION["nombre"])) {
+    echo '<script> document.location.href="../index.php";</script>';
+}
+
 require_once '../DAO/GestionarUsuarioDAO.php';
 require_once '../DAO/AreasDAO.php';
 require_once '../DAO/TiposUsuarioDAO.php';
@@ -12,8 +17,8 @@ require_once '../DAO/TiposUsuarioDAO.php';
             $usu_nombre = $_REQUEST['usu_nombre'];
             $usu_contra = $_REQUEST['usu_contra']; 
             $tipo_nombre = $_REQUEST['tipo_nombre'];
-        
-
+            $idTipousu=$_REQUEST['idTipoUsu'];
+             
 $objGestionDAO = new GestionDAO();
 $objAreasDAO = new AreasDAO();
 $objTipoUsuarioDAO = new TipoUsuarioDAO();
@@ -22,6 +27,19 @@ $lista = $objGestionDAO->Listar_usuarios();
 $listaAreaas = $objAreasDAO->ListarAreas();
 $listaTipos = $objTipoUsuarioDAO->ListarTipos_Usuarios();
 
+
+if($idTipousu == 1){
+    // area del jefe
+    $areaJefe=$objAreasDAO->ListarAreaPorID($id_trabajador);
+    $area=$areaJefe[0]['area_nombre'];
+    
+}else{
+    if($idTipousu==2){
+        //area del colaborador
+        $areaColaborador = $objAreasDAO->ListarAreaPorIDCol($id_trabajador);
+        $area=$areaColaborador[0]['area_nombre'];
+    }
+}
 
 ?>
 <html lang="es">
@@ -49,11 +67,10 @@ $listaTipos = $objTipoUsuarioDAO->ListarTipos_Usuarios();
         <script src="../js/ValidarFormularios.js"></script>
 
 
-
     </head> 
     <body>
 
-        <form name="formInsertar" id="" method="post" action="../CONTROLADOR/GestionarUsuario.php?op=3&ID_TRABA=<?php echo $id_trabajador;?>&id_usu=<?php echo $id_usu;?>" >
+        <form name="formInsertar" id="" method="post" action="../CONTROLADOR/GestionarUsuario.php?op=3&ID_TRABA=<?php echo $id_trabajador;?>&id_usu=<?php echo $id_usu;?>&tipo_usu=<?php echo $idTipousu ?>" >
 
 
 
@@ -66,11 +83,11 @@ $listaTipos = $objTipoUsuarioDAO->ListarTipos_Usuarios();
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" name="nombre"  placeholder="Nombre del usuario" value= "<?php echo $trab_nombre ?>">
+                        <input type="text" class="form-control" name="nombre"  placeholder="Nombre del usuario" value= "<?php echo $trab_nombre ?>" required="">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido"  placeholder="Apellido del usuario" value= "<?php echo $trab_apellido ?>">
+                        <input type="text" class="form-control" name="apellido"  placeholder="Apellido del usuario" value= "<?php echo $trab_apellido ?>"  required="">
                     </div>
                          <div class="form-group">
                         <label for="recipient-name" class="col-form-label">DNI:</label>
@@ -79,39 +96,40 @@ $listaTipos = $objTipoUsuarioDAO->ListarTipos_Usuarios();
    
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre de usuario:</label>
-                        <input type="text" class="form-control" name="usu_nombre"  placeholder="Nombre Usuario" value= "<?php echo $usu_nombre ?>">
+                        <input type="text" class="form-control" name="usu_nombre" min="8" placeholder="Nombre Usuario" value= "<?php echo $usu_nombre ?>"  required="">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Contraseña</label>
-                        <input type="text" class="form-control" name="usu_contra"  placeholder="Contraseña" value= "<?php echo $usu_contra ?>">
+                        <input type="text" class="form-control" name="usu_contra"  placeholder="Contraseña" value= "<?php echo $usu_contra ?>"  required="">
                     </div>
-                 
-             
-                             <div class="form-group" >
-                        <label>Seleccione Tipo de Usuario</label>
-                        <select class="form-control" name="tipo_usu"  >
-                            <?php
-                            foreach ($listaTipos as $fila) {
-
-                                echo "<option value='" . $fila['id_tipo_usu'] . "'>" . $fila['tipo_nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>  
+                   <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tipo de Usuario</label>
+                        <input type="text" class="form-control" name=""   readonly="" value="<?php echo $tipo_nombre?>">
+                    </div>
+                                         
+                    <?php 
+                    if($idTipousu == 3){
+                        
+                    }else{
+                    ?>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Área Actual</label>
+                        <input type="text" class="form-control" name=""   readonly="" value="<?php echo $area  ?>" >
+                    </div>
+                     
                     <div class="form-group" >
-                        <label>Seleccione Area al que pertenece</label>
-                        <select class="form-control" name="area" >
+                        <label>Seleccione Área al que quiere cambiar</label>
+                        <select class="form-control" name="area"  required="" >    
+                            <option> </option>
                             <?php
                             foreach ($listaAreaas as $fila) {
-
+                                 
                                 echo "<option value='" . $fila['id_area'] . "'>" . $fila['area_nombre'] . "</option>";
                             }
                             ?>
                         </select>
                     </div>
-
-                  
-
+                    <?php } ?>
 
                 </div>
                 <div class="modal-footer">
